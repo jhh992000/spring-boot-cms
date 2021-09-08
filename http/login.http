@@ -1,0 +1,7 @@
+POST {{spring-boot-cms}}/login
+Content-Type: application/json
+
+{
+  "username": "jhh992000@gmail.com",
+  "password": "1234"
+}

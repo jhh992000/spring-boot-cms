@@ -1,0 +1,10 @@
+GET {{spring-boot-cms}}/api/account/myinfo
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMTIwNzAzNn0.3uQjSr2k5eB1n3MPCHbuGva1RXWNOdu5tJeItRbSvP9-OspExZdjWnlo9_yfdH1lZaYMevIsNLCGlW4WVFx3IQ
+
+###z
+GET {{spring-boot-cms}}/api/account/user-feature
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMTIwNzAzNn0.3uQjSr2k5eB1n3MPCHbuGva1RXWNOdu5tJeItRbSvP9-OspExZdjWnlo9_yfdH1lZaYMevIsNLCGlW4WVFx3IQ
+
+###
+GET {{spring-boot-cms}}/api/account/admin-feature
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMTIwNzAzNn0.3uQjSr2k5eB1n3MPCHbuGva1RXWNOdu5tJeItRbSvP9-OspExZdjWnlo9_yfdH1lZaYMevIsNLCGlW4WVFx3IQ
