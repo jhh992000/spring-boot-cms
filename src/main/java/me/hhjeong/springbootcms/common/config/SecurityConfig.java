@@ -2,7 +2,7 @@ package me.hhjeong.springbootcms.common.config;
 
 import me.hhjeong.springbootcms.common.security.filter.CustomAuthenticationProcessingFilter;
 import me.hhjeong.springbootcms.common.security.handler.CustomAuthenticationSuccessHandler;
-import me.hhjeong.springbootcms.common.security.jwt.JwtSecurityConfig;
+import me.hhjeong.springbootcms.common.security.jwt.JwtFilter;
 import me.hhjeong.springbootcms.common.security.jwt.TokenProvider;
 import me.hhjeong.springbootcms.common.security.provider.CustomAuthenticationProvider;
 import org.springframework.http.HttpMethod;
@@ -78,9 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
 
-            //커스텀 인증필터 추가
             .addFilterBefore(customAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
-            .apply(jwtSecurityConfig());
+            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     protected CustomAuthenticationProcessingFilter customAuthenticationProcessingFilter() throws Exception {
@@ -89,9 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
-    //TODO - 별도로 설정을 왜 빼는것인지? 바로 addFilterBefore 해도 될듯?
-    private JwtSecurityConfig jwtSecurityConfig() {
-        return new JwtSecurityConfig(tokenProvider);
+    protected JwtFilter jwtFilter() {
+        return new JwtFilter(tokenProvider);
     }
 
 }
