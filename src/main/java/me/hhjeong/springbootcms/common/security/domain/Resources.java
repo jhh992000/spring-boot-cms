@@ -1,15 +1,20 @@
 package me.hhjeong.springbootcms.common.security.domain;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Resources {
 
     @Id
@@ -29,18 +34,24 @@ public class Resources {
     @Column(name = "resource_type")
     private String resourceType;
 
+    @CreatedDate
+    @Column(name = "create_time", nullable = false)
+    private LocalDateTime createTime;
+
     @OneToMany(mappedBy = "resources", cascade = CascadeType.ALL)
     private Set<RoleResources> roleResources = new HashSet<>();
 
     protected Resources() {
     }
 
-    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, Set<RoleResources> roleResources) {
+    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime,
+        Set<RoleResources> roleResources) {
         this.id = id;
         this.resourceName = resourceName;
         this.httpMethod = httpMethod;
         this.orderNum = orderNum;
         this.resourceType = resourceType;
+        this.createTime = createTime;
         this.roleResources = roleResources;
     }
 
@@ -62,6 +73,10 @@ public class Resources {
 
     public String getResourceType() {
         return resourceType;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
     public Set<RoleResources> getRoleResources() {
