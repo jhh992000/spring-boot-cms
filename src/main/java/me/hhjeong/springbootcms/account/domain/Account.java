@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.account.domain;
 
 import java.util.Set;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,6 +29,7 @@ public class Account extends BaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id"), foreignKey = @ForeignKey(name = "fk_account_role"))
     @Enumerated(EnumType.STRING)
+    @Column(name = "role_name")
     private Set<AccountRole> roles;
 
     protected Account() {
