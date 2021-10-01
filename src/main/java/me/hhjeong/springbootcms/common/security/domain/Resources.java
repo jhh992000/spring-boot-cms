@@ -23,16 +23,16 @@ public class Resources {
     @Column(name = "resource_id")
     private Long id;
 
-    @Column(name = "resource_name")
+    @Column(name = "resource_name", nullable = false)
     private String resourceName;
 
-    @Column(name = "http_method")
+    @Column(name = "http_method", nullable = false)
     private String httpMethod;
 
-    @Column(name = "order_num")
+    @Column(name = "order_num", nullable = false)
     private int orderNum;
 
-    @Column(name = "resource_type")
+    @Column(name = "resource_type", nullable = false)
     private String resourceType;
 
     @CreatedDate
