@@ -40,9 +40,9 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        HttpServletRequest request = ((FilterInvocation) object).getRequest();
 
         if (requestMap != null) {
+            HttpServletRequest request = ((FilterInvocation) object).getRequest();
             for (Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
                 RequestMatcher matcher = entry.getKey();
 
@@ -53,6 +53,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
             }
         }
 
+        //요청URL에 대한 권한설정이 없는경우 권한심사를 하지 않는다. (접근허용)
         return null;
     }
 
