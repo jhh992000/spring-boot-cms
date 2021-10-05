@@ -1,10 +1,10 @@
 package me.hhjeong.springbootcms.common.config;
 
 import java.util.Arrays;
-import java.util.List;
 import me.hhjeong.springbootcms.common.metadatasource.UrlFilterInvocationSecurityMetadataSource;
 import me.hhjeong.springbootcms.common.security.factory.UrlResourcesMapFactoryBean;
 import me.hhjeong.springbootcms.common.security.filter.CustomAuthenticationProcessingFilter;
+import me.hhjeong.springbootcms.common.security.filter.PermitAllFilter;
 import me.hhjeong.springbootcms.common.security.handler.CustomAuthenticationSuccessHandler;
 import me.hhjeong.springbootcms.common.security.jwt.JwtFilter;
 import me.hhjeong.springbootcms.common.security.jwt.TokenProvider;
@@ -12,8 +12,6 @@ import me.hhjeong.springbootcms.common.security.provider.CustomAuthenticationPro
 import me.hhjeong.springbootcms.common.security.service.SecurityResourceService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -34,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomAuthenticationProvider provider;
     private final TokenProvider tokenProvider;
     private final SecurityResourceService securityResourceService;
+
+    private final String[] permitAllResources = { "/", "/login" };
 
     public SecurityConfig(
         CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler,
@@ -113,12 +113,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception {
-        FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
-        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());   // URL방식의 권한정보 설정
-        filterSecurityInterceptor.setAccessDecisionManager(new AffirmativeBased(Arrays.asList(new RoleVoter()))); // AccessDecisionManager 설정
-        filterSecurityInterceptor.setAuthenticationManager(super.authenticationManagerBean());
-        return filterSecurityInterceptor;
+    public PermitAllFilter customFilterSecurityInterceptor() throws Exception {
+        PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResources);
+        permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());   // URL방식의 권한정보 설정
+        permitAllFilter.setAccessDecisionManager(new AffirmativeBased(Arrays.asList(new RoleVoter()))); // AccessDecisionManager 설정
+        permitAllFilter.setAuthenticationManager(super.authenticationManagerBean());
+        return permitAllFilter;
     }
 
     @Bean
