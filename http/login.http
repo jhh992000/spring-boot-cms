@@ -1,4 +1,4 @@
-POST {{spring-boot-cms}}/login
+POST {{host}}/login
 Content-Type: application/json
 
 {
