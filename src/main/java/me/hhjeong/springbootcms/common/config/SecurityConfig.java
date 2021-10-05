@@ -1,17 +1,29 @@
 package me.hhjeong.springbootcms.common.config;
 
+import java.util.Arrays;
+import java.util.List;
+import me.hhjeong.springbootcms.common.metadatasource.UrlFilterInvocationSecurityMetadataSource;
+import me.hhjeong.springbootcms.common.security.factory.UrlResourcesMapFactoryBean;
 import me.hhjeong.springbootcms.common.security.filter.CustomAuthenticationProcessingFilter;
 import me.hhjeong.springbootcms.common.security.handler.CustomAuthenticationSuccessHandler;
 import me.hhjeong.springbootcms.common.security.jwt.JwtFilter;
 import me.hhjeong.springbootcms.common.security.jwt.TokenProvider;
 import me.hhjeong.springbootcms.common.security.provider.CustomAuthenticationProvider;
+import me.hhjeong.springbootcms.common.security.service.SecurityResourceService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -21,12 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationProvider provider;
     private final TokenProvider tokenProvider;
+    private final SecurityResourceService securityResourceService;
 
-    public SecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler, CustomAuthenticationProvider provider,
-        TokenProvider tokenProvider) {
+    public SecurityConfig(
+        CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler,
+        CustomAuthenticationProvider provider,
+        TokenProvider tokenProvider,
+        SecurityResourceService securityResourceService
+    ) {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
         this.provider = provider;
         this.tokenProvider = tokenProvider;
+        this.securityResourceService = securityResourceService;
     }
 
     @Override
@@ -69,17 +87,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin().disable()
 
             .headers().frameOptions().disable()
-
+            /*
             .and()
             .authorizeRequests()
             .antMatchers("/api/account").hasAuthority("ROLE_USER")
             .antMatchers("/api/account/user-feature").hasAuthority("ROLE_USER")
             .antMatchers("/api/account/admin-feature").hasAuthority("ROLE_ADMIN")
             .anyRequest().authenticated()
+            */
             .and()
 
             .addFilterBefore(customAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }
 
     protected CustomAuthenticationProcessingFilter customAuthenticationProcessingFilter() throws Exception {
@@ -90,6 +110,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected JwtFilter jwtFilter() {
         return new JwtFilter(tokenProvider);
+    }
+
+    private AccessDecisionManager affirmativeBased() {
+        AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters());
+        return affirmativeBased;
+    }
+
+    private List<AccessDecisionVoter<? extends Object>> getAccessDecisionVoters() {
+        return Arrays.asList(new RoleVoter());
+    }
+
+    @Bean
+    public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception {
+        FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
+        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());   // 권한정보 셋팅
+        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased());
+        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());    // 인증매니저
+        return filterSecurityInterceptor;
+    }
+
+    private UrlResourcesMapFactoryBean urlResourcesMapFactoryBean() {
+        UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
+        urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
+        return urlResourcesMapFactoryBean;
+    }
+
+    @Bean
+    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() throws Exception {
+        return new UrlFilterInvocationSecurityMetadataSource(urlResourcesMapFactoryBean().getObject());
     }
 
 }
