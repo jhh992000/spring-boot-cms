@@ -12,26 +12,47 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+/**
+ * 권한정보를 조회하는 클래스 (URL 방식의 인가 프로세스)
+ */
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-    private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap = new LinkedHashMap<>();
+    /**
+     * key : 요청URL, value : 권한리스트
+     */
+    private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap;
 
+    /**
+     * 생성자를 통해 매핑정보를 주입받는다.
+     *
+     * @param resourcesMap
+     */
     public UrlFilterInvocationSecurityMetadataSource(LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourcesMap) {
         this.requestMap = resourcesMap;
     }
 
+    /**
+     * 사용자가 접근하고자 하는 URL 자원에 대한 권한 정보 추출
+     *
+     * @param object
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         HttpServletRequest request = ((FilterInvocation) object).getRequest();
 
-        if(requestMap != null) {
-            for(Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
+        if (requestMap != null) {
+            for (Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
                 RequestMatcher matcher = entry.getKey();
-                if(matcher.matches(request)) {
-                    return entry.getValue();
+
+                //권한목록이 존재할 경우
+                if (matcher.matches(request)) {
+                    return entry.getValue(); // AccessDecisionManager 에 권한목록이 전달된다.
                 }
             }
         }
+
         return null;
     }
 
@@ -39,7 +60,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         Set<ConfigAttribute> allAttributes = new HashSet<>();
 
-        for(Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
+        for (Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
             allAttributes.addAll(entry.getValue());
         }
         return allAttributes;

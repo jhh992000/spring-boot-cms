@@ -112,33 +112,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtFilter(tokenProvider);
     }
 
-    private AccessDecisionManager affirmativeBased() {
-        AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters());
-        return affirmativeBased;
-    }
-
-    private List<AccessDecisionVoter<? extends Object>> getAccessDecisionVoters() {
-        return Arrays.asList(new RoleVoter());
-    }
-
     @Bean
     public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception {
         FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
-        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());   // 권한정보 셋팅
-        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased());
-        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());    // 인증매니저
+        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());   // URL방식의 권한정보 설정
+        filterSecurityInterceptor.setAccessDecisionManager(new AffirmativeBased(Arrays.asList(new RoleVoter()))); // AccessDecisionManager 설정
+        filterSecurityInterceptor.setAuthenticationManager(super.authenticationManagerBean());
         return filterSecurityInterceptor;
     }
 
-    private UrlResourcesMapFactoryBean urlResourcesMapFactoryBean() {
-        UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
-        urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
-        return urlResourcesMapFactoryBean;
-    }
-
     @Bean
-    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() throws Exception {
-        return new UrlFilterInvocationSecurityMetadataSource(urlResourcesMapFactoryBean().getObject());
+    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() {
+        return new UrlFilterInvocationSecurityMetadataSource(new UrlResourcesMapFactoryBean(securityResourceService).getObject());
     }
 
 }
