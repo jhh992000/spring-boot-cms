@@ -1,7 +1,7 @@
 package me.hhjeong.springbootcms.account.domain;
 
 public enum AccountRole {
-    ADMIN("ROLE_ADMIN"), USER("ROLE_USER");
+    ADMIN("ROLE_ADMIN"), MANAGER("ROLE_MANAGER"), USER("ROLE_USER");
 
     private String roleName;
 
