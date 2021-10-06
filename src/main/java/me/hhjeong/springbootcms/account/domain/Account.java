@@ -38,6 +38,10 @@ public class Account extends BaseEntity {
     protected Account() {
     }
 
+    public Account(String username, String password) {
+        this(null, username, password, null);
+    }
+
     public Account(Long id, String username, String password, Set<AccountRole> roles) {
         this.id = id;
         this.username = username;
