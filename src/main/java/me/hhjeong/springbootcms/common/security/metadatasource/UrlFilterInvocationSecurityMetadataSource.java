@@ -1,4 +1,4 @@
-package me.hhjeong.springbootcms.common.metadatasource;
+package me.hhjeong.springbootcms.common.security.metadatasource;
 
 import java.util.Collection;
 import java.util.HashSet;
