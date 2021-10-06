@@ -39,12 +39,11 @@ public class Role {
     protected Role() {
     }
 
-    public Role(Long id, String roleName, String roleDesc, LocalDateTime createTime, Set<RoleResources> roleResources) {
+    public Role(Long id, String roleName, String roleDesc, LocalDateTime createTime) {
         this.id = id;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
         this.createTime = createTime;
-        this.roleResources = roleResources;
     }
 
     public Long getId() {

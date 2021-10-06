@@ -45,15 +45,13 @@ public class Resources {
     protected Resources() {
     }
 
-    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime,
-        Set<RoleResources> roleResources) {
+    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime) {
         this.id = id;
         this.resourceName = resourceName;
         this.httpMethod = httpMethod;
         this.orderNum = orderNum;
         this.resourceType = resourceType;
         this.createTime = createTime;
-        this.roleResources = roleResources;
     }
 
     public Long getId() {
