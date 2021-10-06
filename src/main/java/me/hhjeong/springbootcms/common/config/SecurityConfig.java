@@ -1,7 +1,7 @@
 package me.hhjeong.springbootcms.common.config;
 
 import java.util.Arrays;
-import me.hhjeong.springbootcms.common.metadatasource.UrlFilterInvocationSecurityMetadataSource;
+import me.hhjeong.springbootcms.common.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
 import me.hhjeong.springbootcms.common.security.factory.UrlResourcesMapFactoryBean;
 import me.hhjeong.springbootcms.common.security.filter.CustomAuthenticationProcessingFilter;
 import me.hhjeong.springbootcms.common.security.filter.PermitAllFilter;
@@ -27,7 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String DEFAULT_FILTER_PROCESSES_URL = "/login";
+    public static final String CUSTOM_DEFAULT_FILTER_PROCESSES_URL = "/login";
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationProvider provider;
     private final TokenProvider tokenProvider;
@@ -103,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected CustomAuthenticationProcessingFilter customAuthenticationProcessingFilter() throws Exception {
-        CustomAuthenticationProcessingFilter filter = new CustomAuthenticationProcessingFilter(DEFAULT_FILTER_PROCESSES_URL, customAuthenticationSuccessHandler, null);
+        CustomAuthenticationProcessingFilter filter = new CustomAuthenticationProcessingFilter(CUSTOM_DEFAULT_FILTER_PROCESSES_URL, customAuthenticationSuccessHandler, null);
         filter.setAuthenticationManager(super.authenticationManagerBean());
         return filter;
     }
@@ -123,7 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() {
-        return new UrlFilterInvocationSecurityMetadataSource(new UrlResourcesMapFactoryBean(securityResourceService).getObject());
+        return new UrlFilterInvocationSecurityMetadataSource(new UrlResourcesMapFactoryBean(securityResourceService).getObject(), securityResourceService);
     }
 
 }
