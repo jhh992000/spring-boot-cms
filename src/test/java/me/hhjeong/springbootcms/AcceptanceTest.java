@@ -56,10 +56,15 @@ public abstract class AcceptanceTest {
             .then().log().all().extract();
     }
 
-    public static ExtractableResponse<Response> post(Object params, String uri, String accessToken) {
+    public static ExtractableResponse<Response> post(Object params, String uri, String bearerToken) {
         return RestAssured
             .given().log().all()
-            .auth().oauth2(accessToken)
+            .headers("Authorization",
+                "Bearer " + bearerToken,
+                "Content-Type",
+                MediaType.APPLICATION_JSON_VALUE,
+                "Accept",
+                MediaType.APPLICATION_JSON_VALUE)
             .body(params)
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().post(uri)
@@ -75,10 +80,15 @@ public abstract class AcceptanceTest {
             .then().log().all().extract();
     }
 
-    public static ExtractableResponse<Response> put(Object params, String uri, String accessToken) {
+    public static ExtractableResponse<Response> put(Object params, String uri, String bearerToken) {
         return RestAssured
             .given().log().all()
-            .auth().oauth2(accessToken)
+            .headers("Authorization",
+                "Bearer " + bearerToken,
+                "Content-Type",
+                MediaType.APPLICATION_JSON_VALUE,
+                "Accept",
+                MediaType.APPLICATION_JSON_VALUE)
             .body(params)
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().put(uri)
@@ -93,9 +103,14 @@ public abstract class AcceptanceTest {
             .extract();
     }
 
-    public static ExtractableResponse<Response> delete(String uri, String accessToken) {
+    public static ExtractableResponse<Response> delete(String uri, String bearerToken) {
         return RestAssured.given().log().all()
-            .auth().oauth2(accessToken)
+            .headers("Authorization",
+                "Bearer " + bearerToken,
+                "Content-Type",
+                MediaType.APPLICATION_JSON_VALUE,
+                "Accept",
+                MediaType.APPLICATION_JSON_VALUE)
             .when().delete(uri)
             .then().log().all()
             .extract();
