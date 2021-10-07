@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class RoleResources {
 
     @Id
@@ -33,17 +35,5 @@ public class RoleResources {
         this.id = id;
         this.role = role;
         this.resources = resources;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public Resources getResources() {
-        return resources;
     }
 }

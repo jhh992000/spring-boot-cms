@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Getter
 public class Role {
 
     @Id
@@ -44,25 +46,5 @@ public class Role {
         this.roleName = roleName;
         this.roleDesc = roleDesc;
         this.createTime = createTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public String getRoleDesc() {
-        return roleDesc;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Set<RoleResources> getRoleResources() {
-        return roleResources;
     }
 }

@@ -13,9 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import lombok.Getter;
 import me.hhjeong.springbootcms.common.domain.BaseEntity;
 
 @Entity
+@Getter
 public class Account extends BaseEntity {
 
     @Id
@@ -47,21 +49,5 @@ public class Account extends BaseEntity {
         this.username = username;
         this.password = password;
         this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Set<AccountRole> getRoles() {
-        return roles;
     }
 }

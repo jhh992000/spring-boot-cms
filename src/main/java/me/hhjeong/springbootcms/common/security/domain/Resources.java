@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Getter
 public class Resources {
 
     @Id
@@ -52,33 +54,5 @@ public class Resources {
         this.orderNum = orderNum;
         this.resourceType = resourceType;
         this.createTime = createTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getResourceName() {
-        return resourceName;
-    }
-
-    public String getHttpMethod() {
-        return httpMethod;
-    }
-
-    public int getOrderNum() {
-        return orderNum;
-    }
-
-    public String getResourceType() {
-        return resourceType;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Set<RoleResources> getRoleResources() {
-        return roleResources;
     }
 }
