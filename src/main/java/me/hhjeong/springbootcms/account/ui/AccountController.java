@@ -1,11 +1,10 @@
 package me.hhjeong.springbootcms.account.ui;
 
 import java.net.URI;
+import javax.validation.Valid;
 import me.hhjeong.springbootcms.account.application.AccountService;
-import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.dto.AccountRequest;
 import me.hhjeong.springbootcms.account.dto.AccountResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +28,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountResponse> createAccount(@RequestBody AccountRequest request) {
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest request) {
         AccountResponse account = accountService.createAccount(request);
         return ResponseEntity.created(URI.create("/api/account/" + account.getId())).build();
     }
