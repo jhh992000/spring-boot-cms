@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.account.ui;
 
 import java.net.URI;
 import me.hhjeong.springbootcms.account.application.AccountService;
+import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.dto.AccountRequest;
 import me.hhjeong.springbootcms.account.dto.AccountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
