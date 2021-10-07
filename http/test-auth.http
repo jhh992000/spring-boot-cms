@@ -1,10 +1,19 @@
 GET {{host}}/api/account/myinfo
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMzUwNDc2OH0.WhCUYLLJxEib2agpiooj3hAR5P-6BKn0I7bDA5J8JCvJXEvgm9Z1WTfci4n1e_19WMIuM6VkkNEWk2bt4t9adA
+Authorization: Bearer {{token}}
 
-###z
+###
 GET {{host}}/api/account/user-feature
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMzUwNDc2OH0.WhCUYLLJxEib2agpiooj3hAR5P-6BKn0I7bDA5J8JCvJXEvgm9Z1WTfci4n1e_19WMIuM6VkkNEWk2bt4t9adA
+Authorization: Bearer {{token}}
 
 ###
 GET {{host}}/api/account/admin-feature
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqaGg5OTIwMDBAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMzUwNDc2OH0.WhCUYLLJxEib2agpiooj3hAR5P-6BKn0I7bDA5J8JCvJXEvgm9Z1WTfci4n1e_19WMIuM6VkkNEWk2bt4t9adA
+Authorization: Bearer {{token}}
+
+###
+GET {{host}}/api/site/list
+Authorization: Bearer {{token}}
+
+###
+GET {{host}}/
+Authorization: Bearer {{token}}
+
