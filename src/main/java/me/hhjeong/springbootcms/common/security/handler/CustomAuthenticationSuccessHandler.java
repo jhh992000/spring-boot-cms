@@ -5,10 +5,11 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import me.hhjeong.springbootcms.common.security.dto.TokenDto;
+import me.hhjeong.springbootcms.common.security.dto.TokenResponse;
 import me.hhjeong.springbootcms.common.security.jwt.TokenProvider;
 import me.hhjeong.springbootcms.common.security.token.PostAuthorizationToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -19,10 +20,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+    public static final String REFRESH_TOKEN_PREFIX = "REFRESH_TOKEN_";
     @Autowired
     private TokenProvider tokenProvider;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -31,17 +35,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String accessToken = tokenProvider.createToken(userDetails);
         String refreshToken = tokenProvider.createRefreshToken(userDetails);
 
-        processResponse(response, writeDto(accessToken, refreshToken));
+        String key = REFRESH_TOKEN_PREFIX + userDetails.getUsername();
+        redisTemplate.opsForValue().set(key, refreshToken);
+
+        processResponse(response, new TokenResponse(accessToken, refreshToken));
     }
 
-    private TokenDto writeDto(String accessToken, String refreshToken) {
-        return new TokenDto(accessToken, refreshToken);
-    }
-
-    private void processResponse(HttpServletResponse res, TokenDto dto) throws IOException {
+    private void processResponse(HttpServletResponse res, TokenResponse tokenResponse) throws IOException {
         res.setContentType(MediaType.APPLICATION_JSON_VALUE);
         res.setStatus(HttpStatus.OK.value());
-        res.getWriter().write(objectMapper.writeValueAsString(dto));
+        res.getWriter().write(objectMapper.writeValueAsString(tokenResponse));
     }
 
 }
