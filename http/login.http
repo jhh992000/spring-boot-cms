@@ -5,3 +5,11 @@ Content-Type: application/json
   "username": "jhh992000@gmail.com",
   "password": "1234"
 }
+
+###
+POST {{host}}/api/refreshToken
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
