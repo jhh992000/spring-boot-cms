@@ -34,17 +34,17 @@ public class TokenProvider implements InitializingBean {
 
     private final String base64Secret;
     private final long tokenValidityInMilliseconds;
-    private final long tokenValidityInMillisecondsForRememberMe;
+    private final long tokenValidityInMillisecondsForRefresh;
 
     private Key key;
 
     public TokenProvider(
         @Value("${jwt.base64-secret}") String base64Secret,
         @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds,
-        @Value("${jwt.token-validity-in-seconds-for-remember-me}") long tokenValidityInSecondsForRememberMe) {
+        @Value("${jwt.token-validity-in-seconds-for-refresh}") long tokenValidityInSecondsForRefresh) {
         this.base64Secret = base64Secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
-        this.tokenValidityInMillisecondsForRememberMe = tokenValidityInSecondsForRememberMe * 1000;
+        this.tokenValidityInMillisecondsForRefresh = tokenValidityInSecondsForRefresh * 1000;
     }
 
     @Override
@@ -53,29 +53,25 @@ public class TokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-
     public String createToken(UserDetails userDetails) {
-        return this.createToken(userDetails, false);
+        return this.createToken(userDetails, this.tokenValidityInMilliseconds);
     }
 
-    public String createToken(UserDetails userDetails, boolean rememberMe) {
+    public String createRefreshToken(UserDetails userDetails) {
+        return this.createToken(userDetails, this.tokenValidityInMillisecondsForRefresh);
+    }
+
+    public String createToken(UserDetails userDetails, long expireTime) {
         String authorities = userDetails.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
-
-        long now = (new Date()).getTime();
-        Date validity;
-        if (rememberMe) {
-            validity = new Date(now + this.tokenValidityInMillisecondsForRememberMe);
-        } else {
-            validity = new Date(now + this.tokenValidityInMilliseconds);
-        }
 
         return Jwts.builder()
             .setSubject(userDetails.getUsername())
             .claim(AUTHORITIES_KEY, authorities)
             .signWith(key, SignatureAlgorithm.HS512)
-            .setExpiration(validity)
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + expireTime))
             .compact();
     }
 

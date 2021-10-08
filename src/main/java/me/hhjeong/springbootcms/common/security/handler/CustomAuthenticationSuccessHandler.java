@@ -28,13 +28,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         PostAuthorizationToken token = (PostAuthorizationToken) authentication;
         UserDetails userDetails = (UserDetails) token.getPrincipal();
-        String tokenString = tokenProvider.createToken(userDetails);
+        String accessToken = tokenProvider.createToken(userDetails);
+        String refreshToken = tokenProvider.createRefreshToken(userDetails);
 
-        processResponse(response, writeDto(tokenString));
+        processResponse(response, writeDto(accessToken, refreshToken));
     }
 
-    private TokenDto writeDto(String token) {
-        return new TokenDto(token);
+    private TokenDto writeDto(String accessToken, String refreshToken) {
+        return new TokenDto(accessToken, refreshToken);
     }
 
     private void processResponse(HttpServletResponse res, TokenDto dto) throws IOException {

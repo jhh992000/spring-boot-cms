@@ -4,17 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TokenDto {
 
-    @JsonProperty("token")
-    private String token;
+    @JsonProperty("accessToken")
+    private String accessToken;
+
+    @JsonProperty("refreshToken")
+    private String refreshToken;
 
     public TokenDto() {
     }
 
-    public TokenDto(String token) {
-        this.token = token;
+    public TokenDto(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
-    public String getToken() {
-        return token;
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
     }
 }
