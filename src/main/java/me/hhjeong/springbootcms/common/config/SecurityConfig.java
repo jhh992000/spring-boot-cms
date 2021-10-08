@@ -30,21 +30,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String CUSTOM_DEFAULT_FILTER_PROCESSES_URL = "/login";
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationProvider provider;
-    private final TokenProvider tokenProvider;
     private final SecurityResourceService securityResourceService;
+    private final JwtFilter jwtFilter;
 
     private final String[] permitAllResources = { "/", "/login" };
 
     public SecurityConfig(
         CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler,
         CustomAuthenticationProvider provider,
-        TokenProvider tokenProvider,
-        SecurityResourceService securityResourceService
+        SecurityResourceService securityResourceService,
+        JwtFilter jwtFilter
     ) {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
         this.provider = provider;
-        this.tokenProvider = tokenProvider;
         this.securityResourceService = securityResourceService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
 
             .addFilterBefore(customAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }
 
@@ -106,10 +106,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CustomAuthenticationProcessingFilter filter = new CustomAuthenticationProcessingFilter(CUSTOM_DEFAULT_FILTER_PROCESSES_URL, customAuthenticationSuccessHandler, null);
         filter.setAuthenticationManager(super.authenticationManagerBean());
         return filter;
-    }
-
-    protected JwtFilter jwtFilter() {
-        return new JwtFilter(tokenProvider);
     }
 
     @Bean
