@@ -44,12 +44,14 @@ public class JwtController {
         String savedRefreshToken = redisTemplate.opsForValue().get(key);
 
         //refreshToken 2차 검증 (redis에 저장된 토큰)
-        if (!tokenProvider.validateToken(savedRefreshToken)) {
+        if (savedRefreshToken == null || !clientRefreshToken.equals(savedRefreshToken)) {
             throw new ApiException(ExceptionEnum.SECURITY_02);
         }
 
         String accessToken = tokenProvider.createToken(userDetails);
         String refreshToken = tokenProvider.createRefreshToken(userDetails);
+
+        redisTemplate.opsForValue().set(key, refreshToken);
 
         TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
         logger.debug("tokenDto : {}", tokenResponse);
