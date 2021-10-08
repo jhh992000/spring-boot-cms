@@ -50,4 +50,9 @@ public class Account extends BaseEntity {
         this.password = password;
         this.roles = roles;
     }
+
+    public void update(Account account) {
+        this.username = account.username;
+        this.password = account.password;
+    }
 }
