@@ -1,19 +1,19 @@
 GET {{host}}/api/account/myinfo
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{host}}/api/account/user-feature
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{host}}/api/account/admin-feature
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{host}}/api/site/list
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{host}}/
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 
