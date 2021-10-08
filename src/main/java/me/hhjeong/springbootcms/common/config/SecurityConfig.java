@@ -1,13 +1,15 @@
 package me.hhjeong.springbootcms.common.config;
 
 import java.util.Arrays;
-import me.hhjeong.springbootcms.common.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
+import lombok.AllArgsConstructor;
 import me.hhjeong.springbootcms.common.security.factory.UrlResourcesMapFactoryBean;
 import me.hhjeong.springbootcms.common.security.filter.CustomAuthenticationProcessingFilter;
 import me.hhjeong.springbootcms.common.security.filter.PermitAllFilter;
+import me.hhjeong.springbootcms.common.security.handler.CustomAccessDeniedHandler;
+import me.hhjeong.springbootcms.common.security.handler.CustomAuthenticationEntryPoint;
 import me.hhjeong.springbootcms.common.security.handler.CustomAuthenticationSuccessHandler;
 import me.hhjeong.springbootcms.common.security.jwt.JwtFilter;
-import me.hhjeong.springbootcms.common.security.jwt.TokenProvider;
+import me.hhjeong.springbootcms.common.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
 import me.hhjeong.springbootcms.common.security.provider.CustomAuthenticationProvider;
 import me.hhjeong.springbootcms.common.security.service.SecurityResourceService;
 import org.springframework.context.annotation.Bean;
@@ -25,27 +27,18 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String CUSTOM_DEFAULT_FILTER_PROCESSES_URL = "/login";
+    private static final String[] permitAllResources = {"/", "/login"};
+
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationProvider provider;
     private final SecurityResourceService securityResourceService;
     private final JwtFilter jwtFilter;
-
-    private final String[] permitAllResources = { "/", "/login" };
-
-    public SecurityConfig(
-        CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler,
-        CustomAuthenticationProvider provider,
-        SecurityResourceService securityResourceService,
-        JwtFilter jwtFilter
-    ) {
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-        this.provider = provider;
-        this.securityResourceService = securityResourceService;
-        this.jwtFilter = jwtFilter;
-    }
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -95,6 +88,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/admin-feature").hasAuthority("ROLE_ADMIN")
             .anyRequest().authenticated()
             */
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(customAuthenticationEntryPoint)
+            .accessDeniedHandler(customAccessDeniedHandler)
             .and()
 
             .addFilterBefore(customAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)

@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.common.response;
 
 import java.nio.file.AccessDeniedException;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,6 +17,7 @@ public class ApiExceptionAdvice {
         return ResponseEntity
             .status(e.getError().getStatus())
             .body(ApiExceptionEntity.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .errorCode(e.getError().getCode())
                 .errorMessage(e.getError().getMessage())
                 .build());
@@ -27,6 +29,7 @@ public class ApiExceptionAdvice {
         return ResponseEntity
             .status(ExceptionEnum.RUNTIME_EXCEPTION.getStatus())
             .body(ApiExceptionEntity.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .errorCode(ExceptionEnum.RUNTIME_EXCEPTION.getCode())
                 .errorMessage(e.getMessage())
                 .build());
@@ -38,6 +41,7 @@ public class ApiExceptionAdvice {
         return ResponseEntity
             .status(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getStatus())
             .body(ApiExceptionEntity.builder()
+                .status(HttpStatus.FORBIDDEN)
                 .errorCode(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getCode())
                 .errorMessage(e.getMessage())
                 .build());
@@ -49,6 +53,7 @@ public class ApiExceptionAdvice {
         return ResponseEntity
             .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
             .body(ApiExceptionEntity.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
                 .errorMessage(e.getMessage())
                 .build());
