@@ -76,7 +76,7 @@ public class AccountAcceptanceTest extends AcceptancePerClassTest {
     @Test
     void 사용자계정_인수테스트() {
         ExtractableResponse<Response> 로그인_인증_응답 = 관리자_로그인_요청(username, password);
-        String token = 로그인_인증_응답.response().jsonPath().getString("token");
+        String token = 로그인_인증_응답.response().jsonPath().getString("accessToken");
 
         ExtractableResponse<Response> 계정_등록_응답 = 계정_등록_요청(token, "jhh992000@gmail.com", "1234");
         assertResponseCode(계정_등록_응답, HttpStatus.CREATED);
