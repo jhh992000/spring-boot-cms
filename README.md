@@ -19,7 +19,7 @@
 - 인증
     - [x] Spring Security 설정
     - [x] JWT 인증 구현
-    - [ ] refresh token 구현
+    - [x] refresh token 구현
 - 인가
     - [x] 인가 처리 DB 연동
 - 인증 및 인가 테스트
