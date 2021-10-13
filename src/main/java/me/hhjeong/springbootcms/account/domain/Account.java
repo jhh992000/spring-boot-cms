@@ -41,11 +41,10 @@ public class Account extends BaseEntity {
     }
 
     public Account(String username, String password) {
-        this(null, username, password, null);
+        this(username, password, null);
     }
 
-    public Account(Long id, String username, String password, Set<AccountRole> roles) {
-        this.id = id;
+    public Account(String username, String password, Set<AccountRole> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;

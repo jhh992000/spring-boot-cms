@@ -88,7 +88,7 @@ public class SecurityTest extends AcceptancePerClassTest {
         //사용자등록
         Set<AccountRole> roles = new HashSet<>();
         roles.add(AccountRole.USER);
-        Account account = new Account(1L, "jhh992000@gmail.com", passwordEncoder.encode("1234"), roles);
+        Account account = new Account(username, passwordEncoder.encode(password), roles);
         accountRepository.save(account);
     }
 
@@ -96,25 +96,25 @@ public class SecurityTest extends AcceptancePerClassTest {
     void 로그인시_JWT_토큰_발급() {
         ExtractableResponse<Response> 로그인_인증_응답 = 로그인_요청(username, password);
 
-        String token = 로그인_인증_응답.response().jsonPath().getString("token");
-        assertThat(token).isNotEmpty();
+        String accessToken = 로그인_인증_응답.response().jsonPath().getString("accessToken");
+        assertThat(accessToken).isNotEmpty();
     }
 
     @Test
     void 로그인_후_권한이_있는_리소스_요청() {
         ExtractableResponse<Response> 로그인_인증_응답 = 로그인_요청(username, password);
-        String token = 로그인_인증_응답.response().jsonPath().getString("token");
+        String accessToken = 로그인_인증_응답.response().jsonPath().getString("accessToken");
 
-        ExtractableResponse<Response> response = get("/api/account/user-feature", token);
+        ExtractableResponse<Response> response = get("/api/account/user-feature", accessToken);
         assertResponseCode(response, HttpStatus.OK);
     }
 
     @Test
     void 로그인_후_권한이_없는_리소스_요청() {
         ExtractableResponse<Response> 로그인_인증_응답 = 로그인_요청(username, password);
-        String token = 로그인_인증_응답.response().jsonPath().getString("token");
+        String accessToken = 로그인_인증_응답.response().jsonPath().getString("accessToken");
 
-        ExtractableResponse<Response> response = get("/api/account/admin-feature", token);
+        ExtractableResponse<Response> response = get("/api/account/admin-feature", accessToken);
         assertResponseCode(response, HttpStatus.FORBIDDEN);
     }
 
