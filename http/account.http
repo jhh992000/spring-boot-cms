@@ -1,13 +1,13 @@
 ### 계정생성
 POST {{host}}/api/account
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-  "username": "test@gmail.com",
-  "password": "1111"
+  "username": "test2@gmail.com",
+  "password": "1234"
 }
 
 ### 계정목록 조회
 GET {{host}}/api/account
-Authorization: Bearer {{token}}
+Authorization: Bearer {{accessToken}}
