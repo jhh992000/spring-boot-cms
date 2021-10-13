@@ -10,6 +10,7 @@ import me.hhjeong.springbootcms.account.dto.UpdateAccountRequest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,15 +22,21 @@ public class AccountService {
     public static final int LATEST_ACCOUNT_SIZE = 5;
 
     private AccountRepository accountRepository;
+    private PasswordEncoder passwordEncoder;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-
     public AccountResponse createAccount(CreateAccountRequest request) {
-        Account account = accountRepository.save(request.toAccount());
-        return AccountResponse.of(account);
+        Account newAccount = makeNewAccount(request);
+        return AccountResponse.of(accountRepository.save(newAccount));
+    }
+
+    private Account makeNewAccount(CreateAccountRequest request) {
+        String encodePassword = passwordEncoder.encode(request.getPassword());
+        return new Account(request.getUsername(), encodePassword);
     }
 
     @Transactional(readOnly = true)

@@ -4,7 +4,6 @@ import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.hhjeong.springbootcms.account.domain.Account;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +15,4 @@ public class CreateAccountRequest {
 
     @NotEmpty
     private String password;
-
-    public Account toAccount() {
-        return new Account(username, password);
-    }
 }
