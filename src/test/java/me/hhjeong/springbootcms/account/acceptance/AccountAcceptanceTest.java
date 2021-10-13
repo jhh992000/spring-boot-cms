@@ -69,7 +69,7 @@ public class AccountAcceptanceTest extends AcceptancePerClassTest {
         //사용자등록
         Set<AccountRole> roles = new HashSet<>();
         roles.add(AccountRole.ADMIN);
-        Account account = new Account(1L, username, passwordEncoder.encode(password), roles);
+        Account account = new Account(username, passwordEncoder.encode(password), roles);
         accountRepository.save(account);
     }
 
@@ -95,6 +95,30 @@ public class AccountAcceptanceTest extends AcceptancePerClassTest {
         ExtractableResponse<Response> 계정_삭제_응답 = 계정_삭제_요청(token, id);
         assertResponseCode(계정_삭제_응답, HttpStatus.NO_CONTENT);
 
+    }
+
+    @Test
+    void 토큰_갱신하기() {
+        ExtractableResponse<Response> 로그인_인증_응답 = 로그인_요청(username, password);
+        String refreshToken = 로그인_인증_응답.response().jsonPath().getString("refreshToken");
+
+        ExtractableResponse<Response> 계정_등록_응답 = 토큰_갱신_요청(refreshToken);
+        assertResponseCode(계정_등록_응답, HttpStatus.OK);
+    }
+
+    private ExtractableResponse<Response> 토큰_갱신_요청(String refreshToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("refreshToken", refreshToken);
+
+        return post(params, "/api/refreshToken", refreshToken);
+    }
+
+    private ExtractableResponse<Response> 로그인_요청(String username, String password) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+
+        return post(params, CUSTOM_DEFAULT_FILTER_PROCESSES_URL);
     }
 
     private ExtractableResponse<Response> 계정_삭제_요청(String token, Long id) {
