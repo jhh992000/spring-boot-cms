@@ -36,7 +36,7 @@ public class AccountIdValidator implements ConstraintValidator<AccountId, String
         return true;
     }
 
-    private void addConstraintViolation(ConstraintValidatorContext context, String message) {
+    protected void addConstraintViolation(ConstraintValidatorContext context, String message) {
         context.disableDefaultConstraintViolation();
         context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
     }
