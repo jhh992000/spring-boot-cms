@@ -26,11 +26,16 @@ public class AccountIdValidatorTest {
 
     @Test
     void ID입력값이_유효함() {
+        assertThat(validator.isValid("abcde", ctx)).isTrue();
+        assertThat(validator.isValid("abcde", ctx)).isTrue();
+    }
+
+    @Test
+    void ID입력값이_유효하지_않음() {
         willDoNothing().given(ctx).disableDefaultConstraintViolation();
         given(ctx.buildConstraintViolationWithTemplate(any())).willReturn(builder);
         given(builder.addConstraintViolation()).willReturn(ctx);
 
-        assertThat(validator.isValid("abcde", ctx)).isTrue();
         assertThat(validator.isValid("1abcd", ctx)).isFalse();
         assertThat(validator.isValid("abcdef123!", ctx)).isFalse();
     }
@@ -58,10 +63,10 @@ public class AccountIdValidatorTest {
     }
 
     @Test
-    void ID가_5바이트_이상_15바이트_이내인지_체크() {
-        assertThat(validator.isMinMaxRange("abcd", 5, 10)).isFalse();
-        assertThat(validator.isMinMaxRange("abcde", 5, 10)).isTrue();
-        assertThat(validator.isMinMaxRange("abcdeefghij", 5, 10)).isFalse();
+    void ID의_길이가_범위_이내인지_체크() {
+        assertThat(validator.withinRange(5, 10, "abcd")).isFalse();
+        assertThat(validator.withinRange(5, 10, "abcde")).isTrue();
+        assertThat(validator.withinRange(5, 10, "abcdeefghij")).isFalse();
     }
 
 }
