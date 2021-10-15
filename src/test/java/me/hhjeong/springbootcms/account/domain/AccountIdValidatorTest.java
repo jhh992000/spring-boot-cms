@@ -26,8 +26,8 @@ public class AccountIdValidatorTest {
 
     @Test
     void ID입력값이_유효함() {
-        assertThat(validator.isValid("abcde", ctx)).isTrue();
-        assertThat(validator.isValid("abcde", ctx)).isTrue();
+        assertThat(validator.isValid("abcde@test.com", ctx)).isTrue();
+        assertThat(validator.isValid("jhh992000@gmail.com", ctx)).isTrue();
     }
 
     @Test

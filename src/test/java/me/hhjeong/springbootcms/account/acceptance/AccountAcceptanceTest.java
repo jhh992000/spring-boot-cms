@@ -32,7 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AccountAcceptanceTest extends AcceptancePerClassTest {
 
     private static final String username = "admin@gmail.com";
-    private static final String password = "1234";
+    private static final String password = "P@ssword1";
 
 
     @Autowired
@@ -78,12 +78,12 @@ public class AccountAcceptanceTest extends AcceptancePerClassTest {
         ExtractableResponse<Response> 로그인_인증_응답 = 관리자_로그인_요청(username, password);
         String token = 로그인_인증_응답.response().jsonPath().getString("accessToken");
 
-        ExtractableResponse<Response> 계정_등록_응답 = 계정_등록_요청(token, "jhh992000@gmail.com", "1234");
+        ExtractableResponse<Response> 계정_등록_응답 = 계정_등록_요청(token, "jhh992000@gmail.com", "P@ssword1");
         assertResponseCode(계정_등록_응답, HttpStatus.CREATED);
 
         Long id = Long.parseLong(계정_등록_응답.header("Location").split("/")[3]);
 
-        ExtractableResponse<Response> 계정_수정_응답 = 계정_수정_요청(token, id, "hhjeong@test.com", "1111");
+        ExtractableResponse<Response> 계정_수정_응답 = 계정_수정_요청(token, id, "hhjeong@test.com", "P@ssword2!");
         assertResponseCode(계정_수정_응답, HttpStatus.OK);
 
         ExtractableResponse<Response> 계정_목록_조회_응답 = 계정목록_조회_요청(token);
