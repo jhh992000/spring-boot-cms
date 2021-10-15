@@ -2,17 +2,22 @@ package me.hhjeong.springbootcms.common.response;
 
 import java.nio.file.AccessDeniedException;
 import javax.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ApiExceptionAdvice {
 
+    private static final Logger logger = LoggerFactory.getLogger(ApiExceptionAdvice.class);
+
     @ExceptionHandler({ApiException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final ApiException e) {
-        //e.printStackTrace();
+        logger.error(e.getMessage());
 
         return ResponseEntity
             .status(e.getError().getStatus())
@@ -25,7 +30,8 @@ public class ApiExceptionAdvice {
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final RuntimeException e) {
-        e.printStackTrace();
+        logger.error(e.getMessage());
+
         return ResponseEntity
             .status(ExceptionEnum.RUNTIME_EXCEPTION.getStatus())
             .body(ApiExceptionEntity.builder()
@@ -37,7 +43,8 @@ public class ApiExceptionAdvice {
 
     @ExceptionHandler({AccessDeniedException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final AccessDeniedException e) {
-        e.printStackTrace();
+        logger.error(e.getMessage());
+
         return ResponseEntity
             .status(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getStatus())
             .body(ApiExceptionEntity.builder()
@@ -49,7 +56,8 @@ public class ApiExceptionAdvice {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final Exception e) {
-        e.printStackTrace();
+        logger.error(e.getMessage());
+
         return ResponseEntity
             .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
             .body(ApiExceptionEntity.builder()
@@ -58,4 +66,19 @@ public class ApiExceptionAdvice {
                 .errorMessage(e.getMessage())
                 .build());
     }
+
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public ResponseEntity<ApiExceptionEntity> methodArgumentNotValidExceptionHandler(HttpServletRequest request, final MethodArgumentNotValidException e) {
+        logger.error(e.getMessage());
+
+        return ResponseEntity
+            .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
+            .body(ApiExceptionEntity.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
+                .errorMessage(e.getAllErrors().get(0).getDefaultMessage())
+                .build());
+    }
+
 }
