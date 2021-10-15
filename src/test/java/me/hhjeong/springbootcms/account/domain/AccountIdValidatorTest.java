@@ -47,19 +47,11 @@ public class AccountIdValidatorTest {
     }
 
     @Test
-    void ID는_영문으로_시작() {
-        assertThat(validator.isFirstLetterAlphabet("abc")).isTrue();
-        assertThat(validator.isFirstLetterAlphabet("123")).isFalse();
-        assertThat(validator.isFirstLetterAlphabet("!@#")).isFalse();
-    }
-
-    @Test
-    void ID가_영문과_숫자로만_이루어져_있는지_체크() {
-        assertThat(validator.isMixAlphabetAndNumber("abc")).isTrue();
-        assertThat(validator.isMixAlphabetAndNumber("abc123")).isTrue();
-        assertThat(validator.isMixAlphabetAndNumber("abcd!")).isFalse();
-        assertThat(validator.isMixAlphabetAndNumber("abcd#ef$")).isFalse();
-        assertThat(validator.isMixAlphabetAndNumber("테스트아이디")).isFalse();
+    void ID는_이메일패턴이어야_함() {
+        assertThat(validator.isEmailPattern("abc@abc.com")).isTrue();
+        assertThat(validator.isEmailPattern("jhh992000@gmail.com")).isTrue();
+        assertThat(validator.isEmailPattern("abcdefg")).isFalse();
+        assertThat(validator.isEmailPattern("aaabbbccc!@#")).isFalse();
     }
 
     @Test

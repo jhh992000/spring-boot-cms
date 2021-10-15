@@ -6,14 +6,12 @@ import javax.validation.ConstraintValidatorContext;
 
 public class AccountIdValidator implements ConstraintValidator<AccountId, String> {
 
-    private static final Pattern patternFirstLetterAlphabet = Pattern.compile("^[a-zA-Z].*");
-    private static final Pattern patternMixAlphabetAndNumber = Pattern.compile("^[a-zA-Z]+[_a-zA-Z0-9]*$");
+    private static final Pattern PATTERN_EMAIL = Pattern.compile("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$");
     public static final String PLEASE_ENTER_YOUR_ID = "ID를 입력해주세요.";
-    public static final String ID_MUST_START_WITH_AN_ALPHABET = "ID는 알파벳으로 시작해야 합니다.";
-    public static final String ID_MUST_USE_ALPHABET_AND_NUMBER = "ID는 영문과 숫자만 입력가능합니다.";
+    public static final String ID_MUST_EMAIL = "ID는 이메일형식으로 입력하셔야 합니다.";
     public static final String ID_INPUT_RANGE = "ID는 %d~%d 이내로 입력해주세요.";
-    public static final int ID_MIN = 5;
-    public static final int ID_MAX = 10;
+    public static final int ID_MIN = 3;
+    public static final int ID_MAX = 320;
 
     @Override
     public boolean isValid(String id, ConstraintValidatorContext ctx) {
@@ -21,12 +19,8 @@ public class AccountIdValidator implements ConstraintValidator<AccountId, String
             addConstraintViolation(ctx, PLEASE_ENTER_YOUR_ID);
             return false;
         }
-        if (!isFirstLetterAlphabet(id)) {
-            addConstraintViolation(ctx, ID_MUST_START_WITH_AN_ALPHABET);
-            return false;
-        }
-        if (!isMixAlphabetAndNumber(id)) {
-            addConstraintViolation(ctx, ID_MUST_USE_ALPHABET_AND_NUMBER);
+        if (!isEmailPattern(id)) {
+            addConstraintViolation(ctx, ID_MUST_EMAIL);
             return false;
         }
         if (!withinRange(ID_MIN, ID_MAX, id)) {
@@ -45,12 +39,8 @@ public class AccountIdValidator implements ConstraintValidator<AccountId, String
         return id == null || id.isEmpty();
     }
 
-    public boolean isFirstLetterAlphabet(String id) {
-        return patternFirstLetterAlphabet.matcher(id).find();
-    }
-
-    public boolean isMixAlphabetAndNumber(String id) {
-        return patternMixAlphabetAndNumber.matcher(id).find();
+    public boolean isEmailPattern(String id) {
+        return PATTERN_EMAIL.matcher(id).find();
     }
 
     public boolean withinRange(int min, int max, String id) {
