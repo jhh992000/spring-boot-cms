@@ -6,9 +6,9 @@ import javax.validation.ConstraintValidatorContext;
 
 public class AccountPasswordValidator implements ConstraintValidator<AccountPassword, String> {
 
-    private static final Pattern patternUpperAlphabet = Pattern.compile(".*[A-Z].*");
-    private static final Pattern patternLowerAlphabet = Pattern.compile(".*[a-z].*");
-    private static final Pattern patternNumeric = Pattern.compile(".*\\d.*");
+    private static final Pattern PATTERN_UPPER_ALPHABET = Pattern.compile(".*[A-Z].*");
+    private static final Pattern PATTERN_LOWER_ALPHABET = Pattern.compile(".*[a-z].*");
+    private static final Pattern PATTERN_NUMERIC = Pattern.compile(".*\\d.*");
     private static final Pattern patternSpecialCharacters = Pattern.compile(".*[`~!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*");
     public static final String PLEASE_ENTER_YOUR_PASSWORD = "비밀번호를 입력해주세요.";
     public static final String PASSWORD_MUST_INCLUDE_LOWERCASE_LETTERS = "비밀번호는 영소문자를 포함해야 합니다.";
@@ -58,15 +58,15 @@ public class AccountPasswordValidator implements ConstraintValidator<AccountPass
     }
 
     public boolean hasLowerCaseLetters(String password) {
-        return patternLowerAlphabet.matcher(password).find();
+        return PATTERN_LOWER_ALPHABET.matcher(password).find();
     }
 
     public boolean hasUpperCaseLetters(String password) {
-        return patternUpperAlphabet.matcher(password).find();
+        return PATTERN_UPPER_ALPHABET.matcher(password).find();
     }
 
     public boolean hasNumerics(String password) {
-        return patternNumeric.matcher(password).find();
+        return PATTERN_NUMERIC.matcher(password).find();
     }
 
     public boolean hasSpecialCharacters(String password) {
