@@ -46,11 +46,4 @@ public class Role {
         this.roleDesc = roleDesc;
         this.createTime = createTime;
     }
-
-    public Role(Long id, String roleName, String roleDesc, LocalDateTime createTime) {
-        this.id = id;
-        this.roleName = roleName;
-        this.roleDesc = roleDesc;
-        this.createTime = createTime;
-    }
 }

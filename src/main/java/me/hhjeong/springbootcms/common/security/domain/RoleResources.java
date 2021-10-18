@@ -35,10 +35,4 @@ public class RoleResources {
         this.role = role;
         this.resources = resources;
     }
-
-    public RoleResources(Long id, Role role, Resources resources) {
-        this.id = id;
-        this.role = role;
-        this.resources = resources;
-    }
 }
