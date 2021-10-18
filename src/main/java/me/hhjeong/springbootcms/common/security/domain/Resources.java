@@ -47,6 +47,14 @@ public class Resources {
     protected Resources() {
     }
 
+    public Resources(String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime) {
+        this.resourceName = resourceName;
+        this.httpMethod = httpMethod;
+        this.orderNum = orderNum;
+        this.resourceType = resourceType;
+        this.createTime = createTime;
+    }
+
     public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime) {
         this.id = id;
         this.resourceName = resourceName;
