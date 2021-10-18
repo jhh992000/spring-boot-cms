@@ -51,30 +51,30 @@ public class SecurityTest extends AcceptancePerClassTest {
     void setup() {
 
         //롤 등록
-        Role roleAdmin = new Role(1L, "ROLE_ADMIN", "전체관리자", LocalDateTime.now());
-        Role roleManager = new Role(2L, "ROLE_MANAGER", "내부관리자", LocalDateTime.now());
-        Role roleUser = new Role(3L, "ROLE_USER", "일반사용자", LocalDateTime.now());
+        Role roleAdmin = new Role("ROLE_ADMIN", "전체관리자", LocalDateTime.now());
+        Role roleManager = new Role("ROLE_MANAGER", "내부관리자", LocalDateTime.now());
+        Role roleUser = new Role("ROLE_USER", "일반사용자", LocalDateTime.now());
         roleRepository.save(roleAdmin);
         roleRepository.save(roleManager);
         roleRepository.save(roleUser);
 
         //리소스 등록
-        Resources resourcesAllAdmin = new Resources(1L, "/api/admin/**", "", 0, "url", LocalDateTime.now());
-        Resources resourcesAccount = new Resources(2L, "/api/account", "", 1, "url", LocalDateTime.now());
-        Resources resourcesUserFeature = new Resources(3L, "/api/account/user-feature", "", 2, "url", LocalDateTime.now());
-        Resources resourcesAdminFeature = new Resources(4L, "/api/account/admin-feature", "", 3, "url", LocalDateTime.now());
+        Resources resourcesAllAdmin = new Resources("/api/admin/**", "", 0, "url", LocalDateTime.now());
+        Resources resourcesAccount = new Resources("/api/account", "", 1, "url", LocalDateTime.now());
+        Resources resourcesUserFeature = new Resources("/api/account/user-feature", "", 2, "url", LocalDateTime.now());
+        Resources resourcesAdminFeature = new Resources("/api/account/admin-feature", "", 3, "url", LocalDateTime.now());
         resourcesRepository.save(resourcesAllAdmin);
         resourcesRepository.save(resourcesAccount);
         resourcesRepository.save(resourcesUserFeature);
         resourcesRepository.save(resourcesAdminFeature);
 
         //롤리소스 등록
-        RoleResources roleResources1 = new RoleResources(1L, roleAdmin, resourcesAllAdmin);
-        RoleResources roleResources2 = new RoleResources(2L, roleAdmin, resourcesAdminFeature);
-        RoleResources roleResources3 = new RoleResources(3L, roleManager, resourcesAllAdmin);
-        RoleResources roleResources4 = new RoleResources(4L, roleManager, resourcesAdminFeature);
-        RoleResources roleResources5 = new RoleResources(5L, roleUser, resourcesAccount);
-        RoleResources roleResources6 = new RoleResources(6L, roleUser, resourcesUserFeature);
+        RoleResources roleResources1 = new RoleResources(roleAdmin, resourcesAllAdmin);
+        RoleResources roleResources2 = new RoleResources(roleAdmin, resourcesAdminFeature);
+        RoleResources roleResources3 = new RoleResources(roleManager, resourcesAllAdmin);
+        RoleResources roleResources4 = new RoleResources(roleManager, resourcesAdminFeature);
+        RoleResources roleResources5 = new RoleResources(roleUser, resourcesAccount);
+        RoleResources roleResources6 = new RoleResources(roleUser, resourcesUserFeature);
         roleResourcesRepository.save(roleResources1);
         roleResourcesRepository.save(roleResources2);
         roleResourcesRepository.save(roleResources3);
@@ -116,6 +116,22 @@ public class SecurityTest extends AcceptancePerClassTest {
 
         ExtractableResponse<Response> response = get("/api/account/admin-feature", accessToken);
         assertResponseCode(response, HttpStatus.FORBIDDEN);
+    }
+
+    @Test
+    void 토큰_갱신하기() {
+        ExtractableResponse<Response> 로그인_인증_응답 = 로그인_요청(username, password);
+        String refreshToken = 로그인_인증_응답.response().jsonPath().getString("refreshToken");
+
+        ExtractableResponse<Response> 계정_등록_응답 = 토큰_갱신_요청(refreshToken);
+        assertResponseCode(계정_등록_응답, HttpStatus.OK);
+    }
+
+    private ExtractableResponse<Response> 토큰_갱신_요청(String refreshToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("refreshToken", refreshToken);
+
+        return post(params, "/api/refreshToken", refreshToken);
     }
 
     private ExtractableResponse<Response> 로그인_요청(String username, String password) {
