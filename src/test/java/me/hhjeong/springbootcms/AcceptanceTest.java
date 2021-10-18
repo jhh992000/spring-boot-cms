@@ -24,7 +24,7 @@ public abstract class AcceptanceTest {
     @Autowired
     protected DatabaseCleanup databaseCleanup;
 
-    public abstract void setUp();
+    public abstract void init();
 
 
     public static ExtractableResponse<Response> get(String uri) {

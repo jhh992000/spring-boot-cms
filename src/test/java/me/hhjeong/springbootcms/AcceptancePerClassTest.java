@@ -8,7 +8,7 @@ import org.junit.jupiter.api.TestInstance;
 public abstract class AcceptancePerClassTest extends AcceptanceTest {
 
     @BeforeAll
-    public void setUp() {
+    public void init() {
         RestAssured.port = port;
         databaseCleanup.execute();
     }
