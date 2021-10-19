@@ -42,4 +42,12 @@ public class Site extends BaseEntity {
         this.useLoginLock = useLoginLock;
         this.countOfLoginFail = countOfLoginFail;
     }
+
+    public void update(Site site) {
+        this.name = site.name;
+        this.enabled = site.enabled;
+        this.alias = site.alias;
+        this.useLoginLock = site.useLoginLock;
+        this.countOfLoginFail = site.countOfLoginFail;
+    }
 }

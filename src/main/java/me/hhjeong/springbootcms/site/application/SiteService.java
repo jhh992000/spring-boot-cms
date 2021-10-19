@@ -6,6 +6,7 @@ import me.hhjeong.springbootcms.site.domain.Site;
 import me.hhjeong.springbootcms.site.domain.SiteRepository;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
 import me.hhjeong.springbootcms.site.dto.SiteResponse;
+import me.hhjeong.springbootcms.site.dto.UpdateSiteRequest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -45,5 +46,22 @@ public class SiteService {
     public SiteResponse createSite(CreateSiteRequest request) {
         Site site = siteRepository.save(request.toSite());
         return SiteResponse.of(site);
+    }
+
+    public Site findById(Long id) {
+        return siteRepository.findById(id)
+            .orElseThrow(RuntimeException::new);
+    }
+
+    public void updateSite(Long id, UpdateSiteRequest request) {
+        Site site = siteRepository.findById(id)
+            .orElseThrow(RuntimeException::new);
+
+        site.update(request.toSite());
+
+    }
+
+    public void deleteSite(Long id) {
+        siteRepository.deleteById(id);
     }
 }
