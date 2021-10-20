@@ -1,5 +1,8 @@
 package me.hhjeong.springbootcms.account.application;
 
+import static me.hhjeong.springbootcms.common.base.BaseConstants.PAGE_SIZE;
+import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import me.hhjeong.springbootcms.account.domain.Account;
@@ -17,9 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AccountService {
-
-    public static final int START_PAGE_NO = 0;
-    public static final int LATEST_ACCOUNT_SIZE = 5;
 
     private AccountRepository accountRepository;
     private PasswordEncoder passwordEncoder;
@@ -41,7 +41,7 @@ public class AccountService {
 
     @Transactional(readOnly = true)
     public List<AccountResponse> findAccounts(Long lastAccountId) {
-        Pageable pageable = PageRequest.of(START_PAGE_NO, LATEST_ACCOUNT_SIZE, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(START_PAGE_NO, PAGE_SIZE, Sort.by("id").descending());
 
         if (lastAccountId == null) {
             lastAccountId = accountRepository.findFirstByOrderByIdDesc()
