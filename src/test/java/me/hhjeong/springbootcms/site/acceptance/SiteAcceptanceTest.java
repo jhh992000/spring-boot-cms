@@ -41,27 +41,27 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
     }
 
     private ExtractableResponse<Response> 사이트_삭제_요청(Long id) {
-        return delete("/api/site/" + id);
+        return delete("/api/sites/" + id);
     }
 
     private ExtractableResponse<Response> 사이트_조회_요청(Long id) {
-        return get("/api/site/" + id);
+        return get("/api/sites/" + id);
     }
 
     private ExtractableResponse<Response> 사이트_수정_요청(Long id, UpdateSiteRequest updateSiteRequest) {
         Map<String, String> params = objectMapper.convertValue(updateSiteRequest, Map.class);
 
-        return put(params, "/api/site/" + id);
+        return put(params, "/api/sites/" + id);
     }
 
     public ExtractableResponse<Response> 사이트_생성_요청(CreateSiteRequest createSiteRequest) {
         Map<String, String> params = objectMapper.convertValue(createSiteRequest, Map.class);
 
-        return post(params, "/api/site");
+        return post(params, "/api/sites");
     }
 
 
     private ExtractableResponse<Response> 사이트목록_조회_요청() {
-        return get("/api/site");
+        return get("/api/sites");
     }
 }

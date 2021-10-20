@@ -30,6 +30,9 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'javax.json:javax.json-api:1.1.4'
+    implementation 'org.apache.johnzon:johnzon-core:1.2.14'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'

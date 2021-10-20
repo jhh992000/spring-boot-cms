@@ -1,12 +1,21 @@
 package me.hhjeong.springbootcms.site.application;
 
+import static me.hhjeong.springbootcms.common.base.BaseConstants.PAGE_SIZE;
+import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.json.JsonPatch;
+import javax.json.JsonStructure;
+import javax.json.JsonValue;
 import me.hhjeong.springbootcms.site.domain.Site;
 import me.hhjeong.springbootcms.site.domain.SiteRepository;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
 import me.hhjeong.springbootcms.site.dto.SiteResponse;
 import me.hhjeong.springbootcms.site.dto.UpdateSiteRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,18 +26,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SiteService {
 
-    public static final int START_PAGE_NO = 0;
-    public static final int LATEST_ACCOUNT_SIZE = 5;
+    private static final Logger logger = LoggerFactory.getLogger(SiteService.class);
 
     private SiteRepository siteRepository;
+    private ObjectMapper objectMapper;
 
-    public SiteService(SiteRepository siteRepository) {
+    public SiteService(SiteRepository siteRepository, ObjectMapper objectMapper) {
         this.siteRepository = siteRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Transactional(readOnly = true)
     public List<SiteResponse> findSites(Long lastSiteId) {
-        Pageable pageable = PageRequest.of(START_PAGE_NO, LATEST_ACCOUNT_SIZE, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(START_PAGE_NO, PAGE_SIZE, Sort.by("id").descending());
 
         if (lastSiteId == null) {
             lastSiteId = siteRepository.findFirstByOrderByIdDesc()
@@ -53,15 +63,28 @@ public class SiteService {
             .orElseThrow(RuntimeException::new);
     }
 
-    public void updateSite(Long id, UpdateSiteRequest request) {
-        Site site = siteRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
-
-        site.update(request.toSite());
-
+    public Site replace(Long id, UpdateSiteRequest request) {
+        return siteRepository.findById(id)
+            .map(site -> {
+                site.update(request.toSite());
+                return site;
+            })
+            .orElseGet(() -> {
+                Site newSite = request.toSite(id);
+                return siteRepository.save(newSite);
+            });
     }
 
     public void deleteSite(Long id) {
         siteRepository.deleteById(id);
+    }
+
+    public Site patch(Long id, JsonPatch patchDocument) {
+        Site originalSite = findById(id);
+        JsonStructure target = objectMapper.convertValue(originalSite, JsonStructure.class);
+        JsonValue patchedSite = patchDocument.apply(target);
+        Site modifiedSite = objectMapper.convertValue(patchedSite, Site.class);
+        logger.debug("modified site {}", modifiedSite);
+        return modifiedSite;
     }
 }

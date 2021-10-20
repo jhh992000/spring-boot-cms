@@ -19,4 +19,8 @@ public class UpdateSiteRequest {
     public Site toSite() {
         return new Site(name, enabled, alias, useLoginLock, countOfLoginFail);
     }
+
+    public Site toSite(Long id) {
+        return new Site(id, name, enabled, alias, useLoginLock, countOfLoginFail);
+    }
 }
