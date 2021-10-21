@@ -6,14 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.hhjeong.springbootcms.common.domain.BaseEntity;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode
+@DynamicUpdate
 public class Site extends BaseEntity {
 
     @Id
@@ -49,5 +55,9 @@ public class Site extends BaseEntity {
         this.alias = site.alias;
         this.useLoginLock = site.useLoginLock;
         this.countOfLoginFail = site.countOfLoginFail;
+    }
+
+    public void updateEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
