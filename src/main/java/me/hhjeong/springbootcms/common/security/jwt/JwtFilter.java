@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             logger.debug("인증 객체 저장 '{}', uri: {}", authentication.getName(), requestURI);
         } else {
-            logger.debug("유효한 JWT 토큰을 찾을 수 없습니다, uri: {}", requestURI);
+            logger.debug("요청헤더에 JWT 토큰이 없습니다. uri: {}", requestURI);
         }
 
         filterChain.doFilter(request, response);
