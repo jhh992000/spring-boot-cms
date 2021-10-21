@@ -95,6 +95,30 @@ public abstract class AcceptanceTest {
             .then().log().all().extract();
     }
 
+    public static ExtractableResponse<Response> patch(Object object, String uri) {
+        return RestAssured
+            .given().log().all()
+            .body(object)
+            .contentType("application/json-patch+json")
+            .when().patch(uri)
+            .then().log().all().extract();
+    }
+
+    public static ExtractableResponse<Response> patch(Object object, String uri, String bearerToken) {
+        return RestAssured
+            .given().log().all()
+            .headers("Authorization",
+                "Bearer " + bearerToken,
+                "Content-Type",
+                MediaType.APPLICATION_JSON_VALUE,
+                "Accept",
+                MediaType.APPLICATION_JSON_VALUE)
+            .body(object)
+            .contentType("application/json-patch+json")
+            .when().patch(uri)
+            .then().log().all().extract();
+    }
+
     public static ExtractableResponse<Response> delete(String uri) {
         return RestAssured.given().log().all()
             .when()
