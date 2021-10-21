@@ -34,9 +34,8 @@ public class SiteController {
     @PostMapping
     public ResponseEntity<SiteResponse> createSite(@RequestBody @Valid CreateSiteRequest request) {
         SiteResponse siteResponse = siteService.createSite(request);
-        return ResponseEntity.created(URI.create("/api/site/" + siteResponse.getId())).build();
+        return ResponseEntity.created(URI.create("/api/sites/" + siteResponse.getId())).build();
     }
-
 
     @GetMapping
     public ResponseEntity<List<SiteResponse>> getSiteList(@RequestParam(name = "id", required = false) Long id) {
