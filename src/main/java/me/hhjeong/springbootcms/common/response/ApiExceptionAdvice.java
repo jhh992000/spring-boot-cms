@@ -18,6 +18,7 @@ public class ApiExceptionAdvice {
     @ExceptionHandler({ApiException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final ApiException e) {
         logger.error(e.getMessage());
+        pringStackTrace(e);
 
         return ResponseEntity
             .status(e.getError().getStatus())
@@ -31,6 +32,7 @@ public class ApiExceptionAdvice {
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final RuntimeException e) {
         logger.error(e.getMessage());
+        pringStackTrace(e);
 
         return ResponseEntity
             .status(ExceptionEnum.RUNTIME_EXCEPTION.getStatus())
@@ -44,6 +46,7 @@ public class ApiExceptionAdvice {
     @ExceptionHandler({AccessDeniedException.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final AccessDeniedException e) {
         logger.error(e.getMessage());
+        pringStackTrace(e);
 
         return ResponseEntity
             .status(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getStatus())
@@ -57,6 +60,7 @@ public class ApiExceptionAdvice {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final Exception e) {
         logger.error(e.getMessage());
+        pringStackTrace(e);
 
         return ResponseEntity
             .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
@@ -71,6 +75,7 @@ public class ApiExceptionAdvice {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<ApiExceptionEntity> methodArgumentNotValidExceptionHandler(HttpServletRequest request, final MethodArgumentNotValidException e) {
         logger.error(e.getMessage());
+        pringStackTrace(e);
 
         return ResponseEntity
             .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
@@ -79,6 +84,12 @@ public class ApiExceptionAdvice {
                 .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
                 .errorMessage(e.getAllErrors().get(0).getDefaultMessage())
                 .build());
+    }
+
+    private void pringStackTrace(Exception e) {
+        if (logger.isDebugEnabled()) {
+            e.printStackTrace();
+        }
     }
 
 }
