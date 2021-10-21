@@ -10,7 +10,7 @@ GET {{host}}/api/account/admin-feature
 Authorization: Bearer {{accessToken}}
 
 ###
-GET {{host}}/api/site/list
+GET {{host}}/api/sites
 Authorization: Bearer {{accessToken}}
 
 ###
