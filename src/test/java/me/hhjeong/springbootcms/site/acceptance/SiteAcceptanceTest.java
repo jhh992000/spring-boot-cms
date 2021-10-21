@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import me.hhjeong.springbootcms.AcceptancePerClassTest;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
@@ -30,6 +33,11 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
         ExtractableResponse<Response> 사이트_수정_응답 = 사이트_수정_요청(id, updateSiteRequest);
         assertResponseCode(사이트_수정_응답, HttpStatus.OK);
 
+        ExtractableResponse<Response> 사이트_활성여부_변경_응답 = 사이트_활성여부_변경_요청(id, false);
+        assertThat(사이트_활성여부_변경_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(사이트_활성여부_변경_응답.jsonPath().getBoolean("enabled")).isFalse();
+        assertThat(사이트_활성여부_변경_응답.jsonPath().getString("alias")).isEqualTo("jp");
+
         ExtractableResponse<Response> 사이트_목록_조회_응답 = 사이트목록_조회_요청();
         assertThat(사이트_목록_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
 
@@ -52,6 +60,23 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
         Map<String, String> params = objectMapper.convertValue(updateSiteRequest, Map.class);
 
         return put(params, "/api/sites/" + id);
+    }
+
+    private ExtractableResponse<Response> 사이트_활성여부_변경_요청(Long id, boolean enabled) {
+        Map<String, String> params1 = new HashMap<>();
+        params1.put("op", "replace");
+        params1.put("path", "/enabled");
+        params1.put("value", String.valueOf(enabled));
+
+        Map<String, String> params2 = new HashMap<>();
+        params2.put("op", "replace");
+        params2.put("path", "/alias");
+        params2.put("value", "jp");
+
+        List<Map<String, String>> list = new ArrayList<>();
+        list.add(params1);
+        list.add(params2);
+        return patch(list, "/api/sites/" + id);
     }
 
     public ExtractableResponse<Response> 사이트_생성_요청(CreateSiteRequest createSiteRequest) {

@@ -84,7 +84,10 @@ public class SiteService {
         JsonStructure target = objectMapper.convertValue(originalSite, JsonStructure.class);
         JsonValue patchedSite = patchDocument.apply(target);
         Site modifiedSite = objectMapper.convertValue(patchedSite, Site.class);
-        logger.debug("modified site {}", modifiedSite);
+
+        originalSite.update(modifiedSite);
+
+        logger.debug("modified site : {}", modifiedSite);
         return modifiedSite;
     }
 }
