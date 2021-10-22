@@ -56,8 +56,4 @@ public class Site extends BaseEntity {
         this.useLoginLock = site.useLoginLock;
         this.countOfLoginFail = site.countOfLoginFail;
     }
-
-    public void updateEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 }
