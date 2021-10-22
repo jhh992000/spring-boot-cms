@@ -57,7 +57,7 @@ public class SiteController {
 
     @PatchMapping(value = "/{id}", consumes = "application/json-patch+json")
     public ResponseEntity<SiteResponse> patchSite(@PathVariable Long id, @RequestBody JsonPatch patchDocument) {
-        Site site = siteService.patch(id, patchDocument);
+        Site site = siteService.patchSite(id, patchDocument);
         return ResponseEntity.ok().body(SiteResponse.of(site));
     }
 

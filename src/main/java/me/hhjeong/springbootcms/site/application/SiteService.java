@@ -79,15 +79,17 @@ public class SiteService {
         siteRepository.deleteById(id);
     }
 
-    public Site patch(Long id, JsonPatch patchDocument) {
+    public Site patchSite(Long id, JsonPatch jsonPatch) {
         Site originalSite = findById(id);
-        JsonStructure target = objectMapper.convertValue(originalSite, JsonStructure.class);
-        JsonValue patchedSite = patchDocument.apply(target);
-        Site modifiedSite = objectMapper.convertValue(patchedSite, Site.class);
-
+        Site modifiedSite = mergeSite(originalSite, jsonPatch);
         originalSite.update(modifiedSite);
-
         logger.debug("modified site : {}", modifiedSite);
         return modifiedSite;
+    }
+
+    private Site mergeSite(Site originalSite, JsonPatch jsonPatch) {
+        JsonStructure target = objectMapper.convertValue(originalSite, JsonStructure.class);
+        JsonValue patchedSite = jsonPatch.apply(target);
+        return objectMapper.convertValue(patchedSite, Site.class);
     }
 }
