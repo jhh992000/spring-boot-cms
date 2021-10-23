@@ -13,6 +13,7 @@
 - Mysql 5.7
 - Flyway
 - jUnit5, RestAssured
+- Vue
 
 ### Admin 기능 목록
 
