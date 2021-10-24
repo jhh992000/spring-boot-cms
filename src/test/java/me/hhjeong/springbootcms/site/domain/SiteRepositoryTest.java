@@ -11,6 +11,8 @@ public class SiteRepositoryTest extends AcceptancePerMethodTest {
 
     @Autowired
     private SiteRepository siteRepository;
+    @Autowired
+    private SiteQueryRepository siteQueryRepository;
 
     @Test
     void querydsl_사이트명으로_조회() {
@@ -26,7 +28,7 @@ public class SiteRepositoryTest extends AcceptancePerMethodTest {
         siteRepository.save(site);
 
         //when
-        List<Site> sites = siteRepository.findByName("국문홈페이지");
+        List<Site> sites = siteQueryRepository.findByName("국문홈페이지");
 
         //then
         assertThat(sites).hasSize(1);

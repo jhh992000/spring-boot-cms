@@ -5,9 +5,11 @@ import static me.hhjeong.springbootcms.site.domain.QSite.site;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
-public class SiteRepositoryImpl implements SiteRepositoryCustom {
+@Repository
+public class SiteQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
@@ -17,4 +19,5 @@ public class SiteRepositoryImpl implements SiteRepositoryCustom {
             .where(site.name.eq(name))
             .fetch();
     }
+
 }
