@@ -7,13 +7,10 @@ import me.hhjeong.springbootcms.AcceptancePerMethodTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SiteRepositorySupportTest extends AcceptancePerMethodTest {
+public class SiteRepositoryTest extends AcceptancePerMethodTest {
 
     @Autowired
     private SiteRepository siteRepository;
-
-    @Autowired
-    private SiteRepositorySupport siteRepositorySupport;
 
     @Test
     void querydsl_사이트명으로_조회() {
@@ -29,7 +26,7 @@ public class SiteRepositorySupportTest extends AcceptancePerMethodTest {
         siteRepository.save(site);
 
         //when
-        List<Site> sites = siteRepositorySupport.findByName("국문홈페이지");
+        List<Site> sites = siteRepository.findByName("국문홈페이지");
 
         //then
         assertThat(sites).hasSize(1);
