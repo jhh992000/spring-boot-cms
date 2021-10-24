@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,7 @@ public class Site extends BaseEntity {
     @Column(nullable = false)
     private int countOfLoginFail;
 
+    @Builder
     public Site(String name, boolean enabled, String alias, boolean useLoginLock, int countOfLoginFail) {
         this.name = name;
         this.enabled = enabled;
