@@ -57,7 +57,7 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
     }
 
     private ExtractableResponse<Response> 사이트_수정_요청(Long id, UpdateSiteRequest updateSiteRequest) {
-        Map<String, String> params = objectMapper.convertValue(updateSiteRequest, Map.class);
+        Map params = objectMapper.convertValue(updateSiteRequest, Map.class);
 
         return put(params, "/api/sites/" + id);
     }
@@ -80,7 +80,7 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
     }
 
     public ExtractableResponse<Response> 사이트_생성_요청(CreateSiteRequest createSiteRequest) {
-        Map<String, String> params = objectMapper.convertValue(createSiteRequest, Map.class);
+        Map params = objectMapper.convertValue(createSiteRequest, Map.class);
 
         return post(params, "/api/sites");
     }

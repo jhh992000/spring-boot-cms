@@ -41,13 +41,13 @@ public class RoleAcceptanceTest extends AcceptancePerClassTest {
     }
 
     private ExtractableResponse<Response> 롤_생성_요청(CreateRoleRequest createRoleRequest) {
-        Map<String, String> params = objectMapper.convertValue(createRoleRequest, Map.class);
+        Map params = objectMapper.convertValue(createRoleRequest, Map.class);
 
         return post(params, "/api/roles");
     }
 
     private ExtractableResponse<Response> 롤_수정_요청(Long id, UpdateRoleRequest updateRoleRequest) {
-        Map<String, String> params = objectMapper.convertValue(updateRoleRequest, Map.class);
+        Map params = objectMapper.convertValue(updateRoleRequest, Map.class);
 
         return put(params, "/api/roles/" + id);
     }
