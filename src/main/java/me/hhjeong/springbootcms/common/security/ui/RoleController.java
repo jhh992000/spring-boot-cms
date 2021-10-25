@@ -20,7 +20,7 @@ public class RoleController {
     private final RoleService roleService;
 
     @PostMapping
-    public ResponseEntity<RoleResponse> createSite(@RequestBody @Valid CreateRoleRequest request) {
+    public ResponseEntity<RoleResponse> createRole(@RequestBody @Valid CreateRoleRequest request) {
         RoleResponse roleResponse = roleService.createRole(request);
         return ResponseEntity.created(URI.create("/api/roles/" + roleResponse.getId())).build();
     }
