@@ -42,12 +42,27 @@ public class Role {
     }
 
     public Role(String roleName, String roleDesc) {
-        this(roleName, roleDesc, LocalDateTime.now());
+        this(null, roleName, roleDesc, LocalDateTime.now());
+    }
+
+    public Role(Long id, String roleName, String roleDesc) {
+        this(id, roleName, roleDesc, LocalDateTime.now());
     }
 
     public Role(String roleName, String roleDesc, LocalDateTime createTime) {
+        this(null, roleName, roleDesc, createTime);
+    }
+
+    public Role(Long id, String roleName, String roleDesc, LocalDateTime createTime) {
+        this.id = id;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
         this.createTime = createTime;
+    }
+
+    public void update(Role role) {
+        this.roleName = role.getRoleName();
+        this.roleDesc = role.getRoleDesc();
+        this.createTime = role.getCreateTime();
     }
 }

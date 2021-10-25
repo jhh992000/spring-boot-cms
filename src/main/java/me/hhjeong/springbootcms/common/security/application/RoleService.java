@@ -1,12 +1,21 @@
 package me.hhjeong.springbootcms.common.security.application;
 
+import static me.hhjeong.springbootcms.common.base.BaseConstants.PAGE_SIZE;
+import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
+
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.common.security.domain.Role;
 import me.hhjeong.springbootcms.common.security.domain.RoleRepository;
 import me.hhjeong.springbootcms.common.security.dto.CreateRoleRequest;
 import me.hhjeong.springbootcms.common.security.dto.RoleResponse;
+import me.hhjeong.springbootcms.common.security.dto.UpdateRoleRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +34,43 @@ public class RoleService {
         return RoleResponse.of(role);
     }
 
-    //L
+    @Transactional(readOnly = true)
+    public List<RoleResponse> findRoles(Long lastRoleId) {
+        Pageable pageable = PageRequest.of(START_PAGE_NO, PAGE_SIZE, Sort.by("id").descending());
 
-    //R
+        if (lastRoleId == null) {
+            lastRoleId = roleRepository.findFirstByOrderByIdDesc()
+                .map(Role::getId)
+                .orElse(0L);
+        }
 
-    //U
+        List<Role> roles = roleRepository.findLatest(lastRoleId, pageable);
 
-    //D
+        return roles.stream()
+            .map(role -> RoleResponse.of(role))
+            .collect(Collectors.toList());
+    }
+
+
+    public Role findById(Long id) {
+        return roleRepository.findById(id)
+            .orElseThrow(RuntimeException::new);
+    }
+
+    public Role replace(Long id, UpdateRoleRequest request) {
+        return roleRepository.findById(id)
+            .map(role -> {
+                role.update(request.toRole());
+                return role;
+            })
+            .orElseGet(() -> {
+                Role newRole = request.toRole(id);
+                return roleRepository.save(newRole);
+            });
+    }
+
+    public void deleteRole(Long id) {
+        roleRepository.deleteById(id);
+    }
 
 }
