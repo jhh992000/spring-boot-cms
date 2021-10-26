@@ -41,6 +41,10 @@ public class Role {
     protected Role() {
     }
 
+    public Role(Long id) {
+        this.id = id;
+    }
+
     public Role(String roleName, String roleDesc) {
         this(null, roleName, roleDesc, LocalDateTime.now());
     }

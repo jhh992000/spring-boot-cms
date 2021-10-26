@@ -31,6 +31,11 @@ public class RoleResources {
     protected RoleResources() {
     }
 
+    public RoleResources(Long roleId, Long resourceId) {
+        this.role = new Role(roleId);
+        this.resources = new Resources(resourceId);
+    }
+
     public RoleResources(Role role, Resources resources) {
         this.role = role;
         this.resources = resources;

@@ -47,11 +47,36 @@ public class Resources {
     protected Resources() {
     }
 
+    public Resources(Long id) {
+        this.id = id;
+    }
+
+    public Resources(String resourceName, String httpMethod, int orderNum, String resourceType) {
+        this(null, resourceName, httpMethod, orderNum, resourceType, LocalDateTime.now());
+    }
+
+    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType) {
+        this(id, resourceName, httpMethod, orderNum, resourceType, LocalDateTime.now());
+    }
+
     public Resources(String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime) {
+        this(null, resourceName, httpMethod, orderNum, resourceType, createTime);
+    }
+
+    public Resources(Long id, String resourceName, String httpMethod, int orderNum, String resourceType, LocalDateTime createTime) {
+        this.id = id;
         this.resourceName = resourceName;
         this.httpMethod = httpMethod;
         this.orderNum = orderNum;
         this.resourceType = resourceType;
         this.createTime = createTime;
+    }
+
+    public void update(Resources resources) {
+        this.resourceName = resources.getResourceName();
+        this.httpMethod = resources.getHttpMethod();
+        this.orderNum = resources.getOrderNum();
+        this.resourceType = resources.getResourceType();
+        this.createTime = resources.getCreateTime();
     }
 }
