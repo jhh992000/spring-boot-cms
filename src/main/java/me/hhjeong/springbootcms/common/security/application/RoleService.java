@@ -28,7 +28,6 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
-    //C
     public RoleResponse createRole(CreateRoleRequest createRoleRequest) {
         Role role = roleRepository.save(createRoleRequest.toRole());
         return RoleResponse.of(role);
