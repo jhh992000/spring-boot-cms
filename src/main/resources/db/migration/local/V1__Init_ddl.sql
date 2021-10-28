@@ -14,7 +14,6 @@ CREATE TABLE `account_roles` (
     CONSTRAINT `fk_account_role` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `role` (
     `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
     `role_name` varchar(255) NOT NULL,
@@ -42,4 +41,16 @@ CREATE TABLE `role_resources` (
     KEY `fk_role_resources_role` (`role_id`),
     CONSTRAINT `fk_role_resources_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`resource_id`),
     CONSTRAINT `fk_role_resources_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `site` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `enabled` bit(1) NOT NULL,
+    `alias` varchar(255) NOT NULL,
+    `use_login_lock` bit(1) NOT NULL,
+    `count_of_login_fail` int(11) NOT NULL,
+    `created_date` datetime DEFAULT NULL,
+    `modified_date` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
