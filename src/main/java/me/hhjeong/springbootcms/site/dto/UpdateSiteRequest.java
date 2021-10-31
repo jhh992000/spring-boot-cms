@@ -17,10 +17,23 @@ public class UpdateSiteRequest {
     private int countOfLoginFail;
 
     public Site toSite() {
-        return new Site(name, enabled, alias, useLoginLock, countOfLoginFail);
+        return Site.builder()
+            .name(name)
+            .enabled(enabled)
+            .alias(alias)
+            .useLoginLock(useLoginLock)
+            .countOfLoginFail(countOfLoginFail)
+            .build();
     }
 
     public Site toSite(Long id) {
-        return new Site(id, name, enabled, alias, useLoginLock, countOfLoginFail);
+        return Site.builder()
+            .id(id)
+            .name(name)
+            .enabled(enabled)
+            .alias(alias)
+            .useLoginLock(useLoginLock)
+            .countOfLoginFail(countOfLoginFail)
+            .build();
     }
 }

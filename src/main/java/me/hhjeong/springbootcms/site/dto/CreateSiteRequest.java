@@ -24,6 +24,12 @@ public class CreateSiteRequest {
     private int countOfLoginFail;
 
     public Site toSite() {
-        return new Site(name, enabled, alias, useLoginLock, countOfLoginFail);
+        return Site.builder()
+            .name(name)
+            .enabled(enabled)
+            .alias(alias)
+            .useLoginLock(useLoginLock)
+            .countOfLoginFail(countOfLoginFail)
+            .build();
     }
 }

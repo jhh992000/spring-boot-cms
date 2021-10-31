@@ -21,6 +21,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @ToString(callSuper = true)
 @EqualsAndHashCode
 @DynamicUpdate
+@Builder
 public class Site extends BaseEntity {
 
     @Id
@@ -41,15 +42,6 @@ public class Site extends BaseEntity {
 
     @Column(nullable = false)
     private int countOfLoginFail;
-
-    @Builder
-    public Site(String name, boolean enabled, String alias, boolean useLoginLock, int countOfLoginFail) {
-        this.name = name;
-        this.enabled = enabled;
-        this.alias = alias;
-        this.useLoginLock = useLoginLock;
-        this.countOfLoginFail = countOfLoginFail;
-    }
 
     public void update(Site site) {
         this.name = site.name;

@@ -9,32 +9,27 @@ import java.util.stream.Collectors;
 import javax.json.JsonPatch;
 import javax.json.JsonStructure;
 import javax.json.JsonValue;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.hhjeong.springbootcms.site.domain.Site;
 import me.hhjeong.springbootcms.site.domain.SiteRepository;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
 import me.hhjeong.springbootcms.site.dto.SiteResponse;
 import me.hhjeong.springbootcms.site.dto.UpdateSiteRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class SiteService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SiteService.class);
-
-    private SiteRepository siteRepository;
-    private ObjectMapper objectMapper;
-
-    public SiteService(SiteRepository siteRepository, ObjectMapper objectMapper) {
-        this.siteRepository = siteRepository;
-        this.objectMapper = objectMapper;
-    }
+    private final SiteRepository siteRepository;
+    private final ObjectMapper objectMapper;
 
     @Transactional(readOnly = true)
     public List<SiteResponse> findSites(Long lastSiteId) {
@@ -83,7 +78,7 @@ public class SiteService {
         Site originalSite = findById(id);
         Site modifiedSite = mergeSite(originalSite, jsonPatch);
         originalSite.update(modifiedSite);
-        logger.debug("modified site : {}", modifiedSite);
+        log.debug("modified site : {}", modifiedSite);
         return modifiedSite;
     }
 

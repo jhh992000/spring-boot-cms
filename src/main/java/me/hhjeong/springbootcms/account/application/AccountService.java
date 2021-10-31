@@ -5,6 +5,7 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.domain.AccountRepository;
 import me.hhjeong.springbootcms.account.dto.AccountResponse;
@@ -19,15 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class AccountService {
 
-    private AccountRepository accountRepository;
-    private PasswordEncoder passwordEncoder;
-
-    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
-        this.accountRepository = accountRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public AccountResponse createAccount(CreateAccountRequest request) {
         Account newAccount = makeNewAccount(request);
