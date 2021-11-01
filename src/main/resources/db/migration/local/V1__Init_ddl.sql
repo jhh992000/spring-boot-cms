@@ -52,5 +52,24 @@ CREATE TABLE `site` (
     `count_of_login_fail` int(11) NOT NULL,
     `created_datetime` datetime DEFAULT NULL,
     `modified_datetime` datetime DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_site_alias` (`alias`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `menu` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `site_id` bigint(20) NOT NULL,
+    `parent_id` bigint(20),
+    `list_order` bigint(20) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `description` varchar(255) DEFAULT NULL,
+    `open_type` varchar(255) NOT NULL,
+    `hide` bit(1) NOT NULL,
+    `enable` bit(1) NOT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_menu_site` (`site_id`),
+    CONSTRAINT `fk_menu_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
+    CONSTRAINT `fk_menu` FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
