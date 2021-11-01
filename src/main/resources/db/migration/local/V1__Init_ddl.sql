@@ -2,8 +2,8 @@ CREATE TABLE `account` (
     `account_id` bigint(20) NOT NULL AUTO_INCREMENT,
     `password` varchar(255) NOT NULL,
     `username` varchar(255) NOT NULL,
-    `created_date` datetime DEFAULT NULL,
-    `modified_date` datetime DEFAULT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`account_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -50,7 +50,7 @@ CREATE TABLE `site` (
     `alias` varchar(255) NOT NULL,
     `use_login_lock` bit(1) NOT NULL,
     `count_of_login_fail` int(11) NOT NULL,
-    `created_date` datetime DEFAULT NULL,
-    `modified_date` datetime DEFAULT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

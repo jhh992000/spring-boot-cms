@@ -11,11 +11,8 @@ CREATE TABLE `menu` (
     `open_type` varchar(255) NOT NULL,
     `hide` bit(1) NOT NULL,
     `enable` bit(1) NOT NULL,
-    `content_id` bigint(20) DEFAULT NULL,
-    `board_id` bigint(20) DEFAULT NULL,
-    `program_id` varchar(255) DEFAULT NULL,
-    `created_date` datetime DEFAULT NULL,
-    `modified_date` datetime DEFAULT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `fk_menu_site` (`site_id`),
 CONSTRAINT `fk_menu_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`)
