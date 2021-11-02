@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
-import javax.persistence.metamodel.SingularAttribute;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.ActiveProfiles;
@@ -30,11 +29,7 @@ public class DatabaseCleanup implements InitializingBean {
         tablePrimaryKeys = entityManager.getMetamodel().getEntities().stream()
             .filter(e -> e.getJavaType().getAnnotation(Entity.class) != null)
             .map(e -> {
-                SingularAttribute<?, ?> id = e.getId(e.getIdType().getJavaType());
                 String pkColumnName = getPKColumnName(e.getJavaType());
-                if (pkColumnName == null) {
-                    pkColumnName = id.getName();
-                }
                 return new TablePrimaryKey(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, e.getName()), pkColumnName);
             })
             .collect(Collectors.toList());
@@ -45,12 +40,24 @@ public class DatabaseCleanup implements InitializingBean {
         entityManager.flush();
         entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate();
 
-        for (TablePrimaryKey tablePrimaryKey : tablePrimaryKeys) {
-            entityManager.createNativeQuery("TRUNCATE TABLE " + tablePrimaryKey.getTableName()).executeUpdate();
-            entityManager.createNativeQuery("ALTER TABLE " + tablePrimaryKey.getTableName() + " ALTER COLUMN " + tablePrimaryKey.getPrimaryKey() + " RESTART WITH 1").executeUpdate();
-        }
+        truncateTables();
+        initPrimaryKeys();
 
         entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
+    }
+
+    private void truncateTables() {
+        for (TablePrimaryKey tablePrimaryKey : tablePrimaryKeys) {
+            entityManager.createNativeQuery("TRUNCATE TABLE " + tablePrimaryKey.getTableName()).executeUpdate();
+        }
+    }
+
+    private void initPrimaryKeys() {
+        tablePrimaryKeys.stream()
+            .filter(tablePrimaryKey -> tablePrimaryKey.getPrimaryKey() != null)
+            .forEach(tablePrimaryKey -> {
+                entityManager.createNativeQuery("ALTER TABLE " + tablePrimaryKey.getTableName() + " ALTER COLUMN " + tablePrimaryKey.getPrimaryKey() + " RESTART WITH 1").executeUpdate();
+            });
     }
 
     private String getPKColumnName(Class<?> pojo) {
