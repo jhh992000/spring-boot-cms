@@ -25,4 +25,8 @@ public class UpdateAccountRequest {
         return new Account(username, password);
     }
 
+    public Account toAccount(Long id) {
+        return new Account(id, username, password);
+    }
+
 }

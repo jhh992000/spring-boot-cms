@@ -49,23 +49,28 @@ public class AccountService {
         List<Account> accounts = accountRepository.findLatest(lastAccountId, pageable);
 
         return accounts.stream()
-            .map(account -> AccountResponse.of(account))
+            .map(AccountResponse::of)
             .collect(Collectors.toList());
     }
 
-    public void updateAccount(Long id, UpdateAccountRequest request) {
-        Account account = accountRepository.findById(id)
+    public Account findAccount(Long id) {
+        return accountRepository.findById(id)
             .orElseThrow(RuntimeException::new);
+    }
 
-        account.update(request.toAccount());
+    public Account replaceAccount(Long id, UpdateAccountRequest request) {
+        return accountRepository.findById(id)
+            .map(account -> {
+                account.update(request.toAccount());
+                return account;
+            })
+            .orElseGet(() -> {
+                Account newAccount = request.toAccount(id);
+                return accountRepository.save(newAccount);
+            });
     }
 
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
-    }
-
-    public Account findById(Long id) {
-        return accountRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
     }
 }

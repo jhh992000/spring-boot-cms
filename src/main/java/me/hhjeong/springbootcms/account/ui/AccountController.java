@@ -35,32 +35,31 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountResponse> create(@RequestBody @Valid CreateAccountRequest request) {
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid CreateAccountRequest request) {
         AccountResponse account = accountService.createAccount(request);
         return ResponseEntity.created(URI.create("/api/account/" + account.getId())).build();
     }
 
     @GetMapping
-    public ResponseEntity<List<AccountResponse>> list(@RequestParam(name = "id", required = false) Long id) {
-        List<AccountResponse> accounts = accountService.findAccounts(id);
+    public ResponseEntity<List<AccountResponse>> findAccounts(@RequestParam(name = "id", required = false) Long lastId) {
+        List<AccountResponse> accounts = accountService.findAccounts(lastId);
         return ResponseEntity.ok().body(accounts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountResponse> findAccountById(@PathVariable Long id) {
-        Account account = accountService.findById(id);
+    public ResponseEntity<AccountResponse> findAccount(@PathVariable Long id) {
+        Account account = accountService.findAccount(id);
         return ResponseEntity.ok().body(AccountResponse.of(account));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AccountResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateAccountRequest request) {
-        accountService.updateAccount(id, request);
-        Account account = accountService.findById(id);
+    public ResponseEntity<AccountResponse> replaceAccount(@PathVariable Long id, @RequestBody @Valid UpdateAccountRequest request) {
+        Account account = accountService.replaceAccount(id, request);
         return ResponseEntity.ok().body(AccountResponse.of(account));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity deleteAccount(@PathVariable Long id) {
         accountService.deleteAccount(id);
         return ResponseEntity.noContent().build();
     }

@@ -38,14 +38,14 @@ public class SiteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SiteResponse>> getSiteList(@RequestParam(name = "id", required = false) Long id) {
-        List<SiteResponse> sites = siteService.findSites(id);
+    public ResponseEntity<List<SiteResponse>> findSites(@RequestParam(name = "id", required = false) Long lastId) {
+        List<SiteResponse> sites = siteService.findSites(lastId);
         return ResponseEntity.ok().body(sites);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SiteResponse> getSite(@PathVariable Long id) {
-        Site site = siteService.findById(id);
+    public ResponseEntity<SiteResponse> findSite(@PathVariable Long id) {
+        Site site = siteService.findSite(id);
         return ResponseEntity.ok().body(SiteResponse.of(site));
     }
 

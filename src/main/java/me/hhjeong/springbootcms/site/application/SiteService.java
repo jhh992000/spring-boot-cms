@@ -44,7 +44,7 @@ public class SiteService {
         List<Site> sites = siteRepository.findLatest(lastSiteId, pageable);
 
         return sites.stream()
-            .map(site -> SiteResponse.of(site))
+            .map(SiteResponse::of)
             .collect(Collectors.toList());
     }
 
@@ -53,7 +53,7 @@ public class SiteService {
         return SiteResponse.of(site);
     }
 
-    public Site findById(Long id) {
+    public Site findSite(Long id) {
         return siteRepository.findById(id)
             .orElseThrow(RuntimeException::new);
     }
@@ -75,7 +75,7 @@ public class SiteService {
     }
 
     public Site patchSite(Long id, JsonPatch jsonPatch) {
-        Site originalSite = findById(id);
+        Site originalSite = findSite(id);
         Site modifiedSite = mergeSite(originalSite, jsonPatch);
         originalSite.update(modifiedSite);
         log.debug("modified site : {}", modifiedSite);
