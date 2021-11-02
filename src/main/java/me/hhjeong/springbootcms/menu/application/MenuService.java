@@ -1,8 +1,5 @@
 package me.hhjeong.springbootcms.menu.application;
 
-import static me.hhjeong.springbootcms.common.base.BaseConstants.PAGE_SIZE;
-import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +13,6 @@ import me.hhjeong.springbootcms.menu.domain.MenuRepository;
 import me.hhjeong.springbootcms.menu.dto.CreateMenuRequest;
 import me.hhjeong.springbootcms.menu.dto.MenuResponse;
 import me.hhjeong.springbootcms.menu.dto.UpdateMenuRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +37,7 @@ public class MenuService {
         return MenuResponse.of(menu);
     }
 
-    public Menu findById(Long id) {
+    public Menu findMenu(Long id) {
         return menuRepository.findById(id)
             .orElseThrow(RuntimeException::new);
     }
@@ -66,7 +59,7 @@ public class MenuService {
     }
 
     public Menu patchMenu(Long id, JsonPatch jsonPatch) {
-        Menu originalMenu = findById(id);
+        Menu originalMenu = findMenu(id);
         Menu modifiedMenu = mergeMenu(originalMenu, jsonPatch);
         originalMenu.update(modifiedMenu);
         log.debug("modified menu : {}", modifiedMenu);
