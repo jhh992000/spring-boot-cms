@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.List;
 import javax.json.JsonPatch;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import me.hhjeong.springbootcms.menu.application.MenuService;
+import me.hhjeong.springbootcms.menu.dto.MenuResponse;
 import me.hhjeong.springbootcms.site.application.SiteService;
 import me.hhjeong.springbootcms.site.domain.Site;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
@@ -22,14 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/sites")
 public class SiteController {
 
-    private SiteService siteService;
-
-    public SiteController(SiteService siteService) {
-        this.siteService = siteService;
-    }
+    private final SiteService siteService;
+    private final MenuService menuService;
 
     @PostMapping
     public ResponseEntity<SiteResponse> createSite(@RequestBody @Valid CreateSiteRequest request) {
@@ -41,6 +42,12 @@ public class SiteController {
     public ResponseEntity<List<SiteResponse>> findSites(@RequestParam(name = "id", required = false) Long lastId) {
         List<SiteResponse> sites = siteService.findSites(lastId);
         return ResponseEntity.ok().body(sites);
+    }
+
+    @GetMapping("/{id}/menus")
+    public ResponseEntity<List<MenuResponse>> findSiteMenus(@PathVariable Long id) {
+        List<MenuResponse> menus = menuService.findMenus(id);
+        return ResponseEntity.ok().body(menus);
     }
 
     @GetMapping("/{id}")
