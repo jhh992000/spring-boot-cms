@@ -2,7 +2,9 @@ package me.hhjeong.springbootcms.menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +13,8 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -33,6 +37,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @EqualsAndHashCode
 @DynamicUpdate
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "dtype")
 public class Menu extends BaseEntity {
 
     @Id
@@ -41,6 +47,7 @@ public class Menu extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "site_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_site"), nullable = false)
+    @ToString.Exclude
     private Site site;
 
     @Column(name = "name", nullable = false)
@@ -66,7 +73,8 @@ public class Menu extends BaseEntity {
     @Column(name = "enable", nullable = false)
     private Boolean enable;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<Menu> children = new ArrayList<>();
 
     public Menu(Long id) {
@@ -101,5 +109,14 @@ public class Menu extends BaseEntity {
             return null;
         }
         return parent.getId();
+    }
+
+    public void addChildren(Menu menu) {
+        children.add(menu);
+        menu.toParent(this);
+    }
+
+    private void toParent(Menu menu) {
+        parent = menu;
     }
 }
