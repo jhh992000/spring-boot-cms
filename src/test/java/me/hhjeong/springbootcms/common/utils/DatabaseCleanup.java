@@ -76,15 +76,29 @@ public class DatabaseCleanup implements InitializingBean {
                     column = (Column) a;
                 }
             }
-            if (id != null && column != null) {
-                name = column.name();
+            if (id != null) {
+                if (column != null) {
+                    name = column.name();
+                } else {
+                    name = camelToSnake(f.getName(), false);
+                }
                 break;
             }
         }
-        if (name == null && pojo.getSuperclass() != Object.class) {
-            name = getPKColumnName(pojo.getSuperclass());
-        }
         return name;
+    }
+
+    public static String camelToSnake(String camel, boolean upper) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char c : camel.toCharArray()) {
+            char nc = upper ? Character.toUpperCase(c) : Character.toLowerCase(c);
+            if (Character.isUpperCase(c)) {
+                stringBuilder.append('_').append(nc);
+            } else {
+                stringBuilder.append(nc);
+            }
+        }
+        return stringBuilder.toString();
     }
 
 }
