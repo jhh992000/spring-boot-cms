@@ -66,7 +66,11 @@ public class MenuResponse {
     }
 
     private static List<MenuResponse> findChildrens(Menu menu) {
-        return menu.getChildren().stream()
+        List<Menu> children = menu.getChildren();
+        if (children == null) {
+            return null;
+        }
+        return children.stream()
             .map(MenuResponse::of)
             .collect(Collectors.toList());
     }

@@ -12,6 +12,7 @@ import java.util.Map;
 import me.hhjeong.springbootcms.AcceptancePerClassTest;
 import me.hhjeong.springbootcms.site.dto.CreateSiteRequest;
 import me.hhjeong.springbootcms.site.dto.UpdateSiteRequest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,7 +85,6 @@ public class SiteAcceptanceTest extends AcceptancePerClassTest {
 
         return post(params, "/api/sites");
     }
-
 
     private ExtractableResponse<Response> 사이트목록_조회_요청() {
         return get("/api/sites");

@@ -9,10 +9,13 @@ import javax.json.JsonValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.hhjeong.springbootcms.menu.domain.Menu;
+import me.hhjeong.springbootcms.menu.domain.MenuQueryRepository;
 import me.hhjeong.springbootcms.menu.domain.MenuRepository;
 import me.hhjeong.springbootcms.menu.dto.CreateMenuRequest;
 import me.hhjeong.springbootcms.menu.dto.MenuResponse;
 import me.hhjeong.springbootcms.menu.dto.UpdateMenuRequest;
+import me.hhjeong.springbootcms.site.domain.Site;
+import me.hhjeong.springbootcms.site.domain.SiteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,19 +25,25 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MenuService {
 
+    private final SiteRepository siteRepository;
     private final MenuRepository menuRepository;
+    private final MenuQueryRepository menuQueryRepository;
     private final ObjectMapper objectMapper;
 
-    public List<MenuResponse> findMenus() {
-        final List<Menu> menus = menuRepository.findAll();
+    public MenuResponse createMenu(CreateMenuRequest request) {
+        List<Site> all = siteRepository.findAll();
+        for (Site site : all) {
+            System.out.println("site.getId():"+site.getId());
+        }
+        Menu menu = menuRepository.save(request.toMenu());
+        return MenuResponse.of(menu);
+    }
+
+    public List<MenuResponse> findMenus(Long siteId) {
+        final List<Menu> menus = menuQueryRepository.findMenus(siteId);
         return menus.stream()
             .map(MenuResponse::of)
             .collect(Collectors.toList());
-    }
-
-    public MenuResponse createMenu(CreateMenuRequest request) {
-        Menu menu = menuRepository.save(request.toMenu());
-        return MenuResponse.of(menu);
     }
 
     public Menu findMenu(Long id) {
@@ -42,7 +51,7 @@ public class MenuService {
             .orElseThrow(RuntimeException::new);
     }
 
-    public Menu replace(Long id, UpdateMenuRequest request) {
+    public Menu replaceMenu(Long id, UpdateMenuRequest request) {
         return menuRepository.findById(id)
             .map(menu -> {
                 menu.update(request.toMenu());
@@ -52,10 +61,6 @@ public class MenuService {
                 Menu newMenu = request.toMenu(id);
                 return menuRepository.save(newMenu);
             });
-    }
-
-    public void deleteMenu(Long id) {
-        menuRepository.deleteById(id);
     }
 
     public Menu patchMenu(Long id, JsonPatch jsonPatch) {
@@ -70,6 +75,10 @@ public class MenuService {
         JsonStructure target = objectMapper.convertValue(originalMenu, JsonStructure.class);
         JsonValue patchedMenu = jsonPatch.apply(target);
         return objectMapper.convertValue(patchedMenu, Menu.class);
+    }
+
+    public void deleteMenu(Long id) {
+        menuRepository.deleteById(id);
     }
 
 }

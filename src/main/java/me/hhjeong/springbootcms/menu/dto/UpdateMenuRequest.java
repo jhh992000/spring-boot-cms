@@ -15,26 +15,26 @@ import me.hhjeong.springbootcms.site.domain.Site;
 public class UpdateMenuRequest {
 
     @NotNull
-    public Long siteId;
+    private Long siteId;
 
-    public Long parentId;
+    private Long parentId;
 
     @NotNull
-    public Long listOrder;
+    private Long listOrder;
 
     @NotEmpty
-    public String name;
+    private String name;
 
-    public String description;
-
-    @NotEmpty
-    public MenuOpenType openType;
+    private String description;
 
     @NotNull
-    public Boolean hide;
+    private MenuOpenType openType;
 
     @NotNull
-    public Boolean enable;
+    private Boolean hide;
+
+    @NotNull
+    private Boolean enable;
 
     public Menu toMenu() {
         return Menu.builder()

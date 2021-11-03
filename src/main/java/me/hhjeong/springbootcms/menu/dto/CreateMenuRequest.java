@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.hhjeong.springbootcms.menu.domain.Menu;
 import me.hhjeong.springbootcms.menu.domain.MenuOpenType;
 import me.hhjeong.springbootcms.site.domain.Site;
@@ -12,34 +13,35 @@ import me.hhjeong.springbootcms.site.domain.Site;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CreateMenuRequest {
 
     @NotNull
-    public Long siteId;
+    private Long siteId;
 
-    public Long parentId;
+    private Long parentId;
 
     @NotNull
-    public Long listOrder;
+    private Long listOrder;
 
     @NotEmpty
-    public String name;
+    private String name;
 
-    public String description;
-
-    @NotEmpty
-    public MenuOpenType openType;
+    private String description;
 
     @NotNull
-    public Boolean hide;
+    private MenuOpenType openType;
 
     @NotNull
-    public Boolean enable;
+    private Boolean hide;
+
+    @NotNull
+    private Boolean enable;
 
     public Menu toMenu() {
         return Menu.builder()
             .site(new Site(siteId))
-            .parent(new Menu(parentId))
+            .parent(parentId != null ? new Menu(parentId) : null)
             .listOrder(listOrder)
             .name(name)
             .description(description)
