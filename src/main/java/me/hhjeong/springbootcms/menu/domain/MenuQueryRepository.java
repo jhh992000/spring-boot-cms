@@ -1,7 +1,5 @@
 package me.hhjeong.springbootcms.menu.domain;
 
-import static me.hhjeong.springbootcms.menu.domain.QMenu.menu;
-
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +12,16 @@ public class MenuQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<Menu> findMenus(Long siteId) {
+        QMenu parent = new QMenu("parent");
+        QMenu child = new QMenu("child");
         return queryFactory
-            .selectFrom(menu)
+            .selectFrom(parent).distinct()
+            .leftJoin(parent.children, child).fetchJoin()
             .where(
-                menu.site.id.eq(siteId)
-                    .and(menu.parent.isNull())
+                parent.site.id.eq(siteId)
+                    .and(parent.parent.isNull())
             )
+            .orderBy(parent.listOrder.asc(), child.listOrder.asc())
             .fetch();
     }
 
