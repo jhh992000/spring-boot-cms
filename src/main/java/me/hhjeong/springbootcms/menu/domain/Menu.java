@@ -55,6 +55,7 @@ public class Menu extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
+    @ToString.Exclude
     private Menu parent;
 
     @Column(name = "list_order", nullable = false)
