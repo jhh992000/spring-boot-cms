@@ -63,6 +63,8 @@ public class MenuAcceptanceTest extends AcceptancePerClassTest {
         List<MenuResponse> menuResponses = menuService.findMenus(site.getId());
         assertThat(menuResponses).hasSize(3);
         assertThat(menuResponses.get(0).getChildren()).hasSize(2);
+        assertThat(menuResponses.get(0).getChildren().get(0).getListOrder()).isEqualTo(1);
+        assertThat(menuResponses.get(0).getChildren().get(1).getListOrder()).isEqualTo(2);
     }
 
     @Test
