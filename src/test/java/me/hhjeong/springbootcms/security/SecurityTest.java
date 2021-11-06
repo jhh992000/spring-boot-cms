@@ -51,18 +51,18 @@ public class SecurityTest extends AcceptancePerClassTest {
     void setup() {
 
         //롤 등록
-        Role roleAdmin = new Role("ROLE_ADMIN", "전체관리자", LocalDateTime.now());
-        Role roleManager = new Role("ROLE_MANAGER", "내부관리자", LocalDateTime.now());
-        Role roleUser = new Role("ROLE_USER", "일반사용자", LocalDateTime.now());
+        Role roleAdmin = new Role("ROLE_ADMIN", "전체관리자", 1L);
+        Role roleManager = new Role("ROLE_MANAGER", "내부관리자", 2L);
+        Role roleUser = new Role("ROLE_USER", "일반사용자", 3L);
         roleRepository.save(roleAdmin);
         roleRepository.save(roleManager);
         roleRepository.save(roleUser);
 
         //리소스 등록
-        Resources resourcesAllAdmin = new Resources("/api/admin/**", "", 0, "url", LocalDateTime.now());
-        Resources resourcesAccount = new Resources("/api/account", "", 1, "url", LocalDateTime.now());
-        Resources resourcesUserFeature = new Resources("/api/account/user-feature", "", 2, "url", LocalDateTime.now());
-        Resources resourcesAdminFeature = new Resources("/api/account/admin-feature", "", 3, "url", LocalDateTime.now());
+        Resources resourcesAllAdmin = new Resources("/api/admin/**", "", 0, "url");
+        Resources resourcesAccount = new Resources("/api/account", "", 1, "url");
+        Resources resourcesUserFeature = new Resources("/api/account/user-feature", "", 2, "url");
+        Resources resourcesAdminFeature = new Resources("/api/account/admin-feature", "", 3, "url");
         resourcesRepository.save(resourcesAllAdmin);
         resourcesRepository.save(resourcesAccount);
         resourcesRepository.save(resourcesUserFeature);

@@ -18,7 +18,9 @@ CREATE TABLE `role` (
     `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
     `role_name` varchar(255) NOT NULL,
     `role_desc` varchar(255) DEFAULT NULL,
-    `create_time` datetime NOT NULL,
+    `list_order` bigint(20) NOT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -28,7 +30,8 @@ CREATE TABLE `resources` (
     `http_method` varchar(255) NULL,
     `order_num` int(11) NOT NULL,
     `resource_type` varchar(255) NOT NULL,
-    `create_time` datetime NOT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`resource_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

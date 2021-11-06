@@ -22,7 +22,7 @@ public class RoleResourcesAcceptanceTest extends AcceptancePerClassTest {
     @Test
     void 롤_리소스_인수테스트() {
 
-        CreateRoleRequest createRoleRequest = new CreateRoleRequest("전체관리자", "전체관리자");
+        CreateRoleRequest createRoleRequest = new CreateRoleRequest("전체관리자", "전체관리자", 1L);
         ExtractableResponse<Response> 롤_등록_응답 = 롤_생성_요청(createRoleRequest);
         assertResponseCode(롤_등록_응답, HttpStatus.CREATED);
 

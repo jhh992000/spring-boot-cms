@@ -13,8 +13,9 @@ public class CreateRoleRequest {
 
     private String roleName;
     private String roleDesc;
+    private Long listOrder;
 
     public Role toRole() {
-        return new Role(roleName, roleDesc);
+        return new Role(roleName, roleDesc, listOrder);
     }
 }

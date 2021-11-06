@@ -12,13 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Getter;
+import me.hhjeong.springbootcms.common.domain.BaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
-public class Role {
+public class Role extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,8 @@ public class Role {
     @Column(name = "role_desc")
     private String roleDesc;
 
-    @CreatedDate
-    @Column(name = "create_time", nullable = false)
-    private LocalDateTime createTime;
+    @Column(name = "list_order", nullable = false)
+    private Long listOrder;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<RoleResources> roleResources = new LinkedHashSet<>();
@@ -45,28 +44,20 @@ public class Role {
         this.id = id;
     }
 
-    public Role(String roleName, String roleDesc) {
-        this(null, roleName, roleDesc, LocalDateTime.now());
+    public Role(String roleName, String roleDesc, Long listOrder) {
+        this(null, roleName, roleDesc, listOrder);
     }
 
-    public Role(Long id, String roleName, String roleDesc) {
-        this(id, roleName, roleDesc, LocalDateTime.now());
-    }
-
-    public Role(String roleName, String roleDesc, LocalDateTime createTime) {
-        this(null, roleName, roleDesc, createTime);
-    }
-
-    public Role(Long id, String roleName, String roleDesc, LocalDateTime createTime) {
+    public Role(Long id, String roleName, String roleDesc, Long listOrder) {
         this.id = id;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
-        this.createTime = createTime;
+        this.listOrder = listOrder;
     }
 
     public void update(Role role) {
         this.roleName = role.getRoleName();
         this.roleDesc = role.getRoleDesc();
-        this.createTime = role.getCreateTime();
+        this.listOrder = role.getListOrder();
     }
 }

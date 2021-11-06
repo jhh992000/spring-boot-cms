@@ -20,13 +20,13 @@ public class RoleAcceptanceTest extends AcceptancePerClassTest {
 
     @Test
     void 롤_인수테스트() {
-        CreateRoleRequest createRoleRequest = new CreateRoleRequest("전체관리자", "전체관리자");
+        CreateRoleRequest createRoleRequest = new CreateRoleRequest("전체관리자", "전체관리자", 1L);
         ExtractableResponse<Response> 롤_등록_응답 = 롤_생성_요청(createRoleRequest);
         assertResponseCode(롤_등록_응답, HttpStatus.CREATED);
 
         Long id = Long.parseLong(롤_등록_응답.header("Location").split("/")[3]);
 
-        UpdateRoleRequest updateRoleRequest = new UpdateRoleRequest("내부관리자", "내부관리자");
+        UpdateRoleRequest updateRoleRequest = new UpdateRoleRequest("내부관리자", "내부관리자", 2L);
         ExtractableResponse<Response> 롤_수정_응답 = 롤_수정_요청(id, updateRoleRequest);
         assertResponseCode(롤_수정_응답, HttpStatus.OK);
 

@@ -13,12 +13,13 @@ public class UpdateRoleRequest {
 
     private String roleName;
     private String roleDesc;
+    private Long listOrder;
 
     public Role toRole() {
-        return new Role(roleName, roleDesc);
+        return new Role(roleName, roleDesc, listOrder);
     }
 
     public Role toRole(Long id) {
-        return new Role(id, roleName, roleDesc);
+        return new Role(id, roleName, roleDesc, listOrder);
     }
 }

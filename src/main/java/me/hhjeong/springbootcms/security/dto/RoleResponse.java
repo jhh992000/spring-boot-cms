@@ -29,7 +29,6 @@ public class RoleResponse {
             .id(role.getId())
             .roleName(role.getRoleName())
             .roleDesc(role.getRoleDesc())
-            .createTime(role.getCreateTime())
             .build();
     }
 }
