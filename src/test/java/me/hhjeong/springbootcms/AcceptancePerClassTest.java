@@ -1,7 +1,7 @@
 package me.hhjeong.springbootcms;
 
 import io.restassured.RestAssured;
-import me.hhjeong.springbootcms.common.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
+import me.hhjeong.springbootcms.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
