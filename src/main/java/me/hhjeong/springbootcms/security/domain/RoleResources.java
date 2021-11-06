@@ -21,11 +21,11 @@ public class RoleResources {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "fk_role_resources_role"), nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_role_resources_role"), nullable = false)
     private Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_id", foreignKey = @ForeignKey(name = "fk_role_resources_resource"), nullable = false)
+    @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_role_resources_resource"), nullable = false)
     private Resources resources;
 
     protected RoleResources() {

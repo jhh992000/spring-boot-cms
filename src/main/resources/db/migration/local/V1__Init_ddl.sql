@@ -15,24 +15,24 @@ CREATE TABLE `account_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `role` (
-    `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `role_name` varchar(255) NOT NULL,
     `role_desc` varchar(255) DEFAULT NULL,
     `list_order` bigint(20) NOT NULL,
     `created_datetime` datetime DEFAULT NULL,
     `modified_datetime` datetime DEFAULT NULL,
-    PRIMARY KEY (`role_id`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `resources` (
-    `resource_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `resource_name` varchar(255) NOT NULL,
     `http_method` varchar(255) NULL,
     `order_num` int(11) NOT NULL,
     `resource_type` varchar(255) NOT NULL,
     `created_datetime` datetime DEFAULT NULL,
     `modified_datetime` datetime DEFAULT NULL,
-    PRIMARY KEY (`resource_id`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `role_resources` (
@@ -42,8 +42,8 @@ CREATE TABLE `role_resources` (
     PRIMARY KEY (`role_resource_id`),
     KEY `fk_role_resources_resource` (`resource_id`),
     KEY `fk_role_resources_role` (`role_id`),
-    CONSTRAINT `fk_role_resources_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`resource_id`),
-    CONSTRAINT `fk_role_resources_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+    CONSTRAINT `fk_role_resources_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`),
+    CONSTRAINT `fk_role_resources_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `site` (
@@ -75,4 +75,20 @@ CREATE TABLE `menu` (
     KEY `fk_menu_site` (`site_id`),
     CONSTRAINT `fk_menu_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
     CONSTRAINT `fk_menu` FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `role_menu` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_id` bigint(20) NOT NULL,
+    `site_id` bigint(20) NOT NULL,
+    `menu_id` bigint(20) NOT NULL,
+    `created_datetime` datetime DEFAULT NULL,
+    `modified_datetime` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_role_menu_menu` (`menu_id`),
+    KEY `fk_role_menu_role` (`role_id`),
+    KEY `fk_role_menu_site` (`site_id`),
+    CONSTRAINT `fk_role_menu_menu` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+    CONSTRAINT `fk_role_menu_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+    CONSTRAINT `fk_role_menu_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
