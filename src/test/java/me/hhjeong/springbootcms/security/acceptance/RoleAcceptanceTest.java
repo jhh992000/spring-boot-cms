@@ -1,6 +1,7 @@
 package me.hhjeong.springbootcms.security.acceptance;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.ExtractableResponse;
@@ -9,6 +10,7 @@ import java.util.Map;
 import me.hhjeong.springbootcms.AcceptancePerClassTest;
 import me.hhjeong.springbootcms.security.dto.CreateRoleRequest;
 import me.hhjeong.springbootcms.security.dto.UpdateRoleRequest;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
