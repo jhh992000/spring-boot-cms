@@ -1,6 +1,5 @@
 package me.hhjeong.springbootcms.menu.application;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +20,22 @@ public class RoleMenuService {
     private final RoleMenuRepository roleMenuRepository;
 
     public List<RoleMenuResponse> saveRoleMenus(Long roleId, Long siteId, List<SaveRoleMenuRequest> requests) {
-        List<RoleMenu> roleMenus = requests.stream()
+        List<RoleMenu> roleMenus = roleMenuRepository.findByRoleIdAndSiteId(roleId, siteId);
+
+        List<RoleMenu> requestRoleMenus = requests.stream()
             .map(req -> req.toRoleMenu(roleId, siteId))
             .collect(Collectors.toList());
+
+        mergeRoleMenus(roleMenus, requestRoleMenus);
 
         roleMenuRepository.saveAll(roleMenus);
 
         return RoleMenuResponse.ofList(roleMenus);
+    }
+
+    protected void mergeRoleMenus(List<RoleMenu> roleMenus, List<RoleMenu> requestRoleMenus) {
+        requestRoleMenus.removeAll(roleMenus);
+        roleMenus.addAll(requestRoleMenus);
     }
 
     public void deleteByRoleIdAndSiteId(Long roleId, Long siteId) {
