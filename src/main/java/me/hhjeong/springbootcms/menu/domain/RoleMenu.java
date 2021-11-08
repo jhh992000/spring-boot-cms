@@ -1,5 +1,6 @@
 package me.hhjeong.springbootcms.menu.domain;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -10,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -23,8 +23,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
-@EqualsAndHashCode
 @DynamicUpdate
 @Builder
 public class RoleMenu extends BaseEntity {
@@ -48,4 +46,36 @@ public class RoleMenu extends BaseEntity {
     @ToString.Exclude
     private Menu menu;
 
+    public RoleMenu(Long roleId, Long siteId, Long menuId) {
+        this.role = new Role(roleId);
+        this.site = new Site(siteId);
+        this.menu = new Menu(menuId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        RoleMenu roleMenu = (RoleMenu) o;
+        return Objects.equals(role, roleMenu.role) && Objects.equals(site, roleMenu.site) && Objects.equals(menu, roleMenu.menu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, role, site, menu);
+    }
+
+    @Override
+    public String toString() {
+        return "RoleMenu{" +
+            "id=" + id +
+            ", role=" + role.getId() +
+            ", site=" + site.getId() +
+            ", menu=" + menu.getId() +
+            '}';
+    }
 }
