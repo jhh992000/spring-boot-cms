@@ -14,7 +14,6 @@ import me.hhjeong.springbootcms.menu.domain.MenuRepository;
 import me.hhjeong.springbootcms.menu.dto.CreateMenuRequest;
 import me.hhjeong.springbootcms.menu.dto.MenuResponse;
 import me.hhjeong.springbootcms.menu.dto.UpdateMenuRequest;
-import me.hhjeong.springbootcms.site.domain.Site;
 import me.hhjeong.springbootcms.site.domain.SiteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +30,6 @@ public class MenuService {
     private final ObjectMapper objectMapper;
 
     public MenuResponse createMenu(CreateMenuRequest request) {
-        List<Site> all = siteRepository.findAll();
-        for (Site site : all) {
-            System.out.println("site.getId():"+site.getId());
-        }
         Menu menu = menuRepository.save(request.toMenu());
         return MenuResponse.of(menu);
     }
