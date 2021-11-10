@@ -1,5 +1,6 @@
 package me.hhjeong.springbootcms.menu.domain;
 
+import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import lombok.AccessLevel;
@@ -17,7 +18,30 @@ public class ContentMenu extends Menu {
     private Long contentId;
 
     public ContentMenu(Long contentId, Menu menu) {
-        super(menu.getSite(), menu.getParent(), menu.getListOrder(), menu.getName(), menu.getDescription(), menu.getOpenType(), menu.getHide(), menu.getEnable());
+        builder()
+            .site(menu.getSite())
+            .parent(menu.getParent())
+            .listOrder(menu.getListOrder())
+            .description(menu.getDescription())
+            .openType(menu.getOpenType())
+            .hide(menu.getHide())
+            .enable(menu.getEnable())
+            .build();
+
         this.contentId = contentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!super.equals(o)) {
+            return false;
+        }
+        ContentMenu contentMenu = (ContentMenu) o;
+        return Objects.equals(contentId, contentMenu.contentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.getId(), contentId);
     }
 }
