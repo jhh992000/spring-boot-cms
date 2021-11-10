@@ -45,19 +45,72 @@ public class MenuAcceptanceTest extends AcceptancePerClassTest {
             .build();
         siteRepository.save(site);
 
-        Menu menu1 = new Menu(site, null, 1L, "1. 메뉴", "", MenuOpenType.CURRENT, false, true);
-        Menu menu1_1 = new Menu(site, null, 1L, "1-1. 메뉴", "", MenuOpenType.CURRENT, false, true);
-        Menu menu1_2 = new Menu(site, null, 2L, "1-2. 메뉴", "", MenuOpenType.CURRENT, false, true);
+
+        //public Menu(Long siteId, Long parentId, Long listOrder, String name, String description, MenuOpenType openType, Boolean hide, Boolean enable) {
+
+        Menu menu1 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(1L)
+            .name("1. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
+
+        Menu menu1_1 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(1L)
+            .name("1-1. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
+
+        Menu menu1_2 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(2L)
+            .name("1-2. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
         menu1.addChildren(menu1_1);
         menu1.addChildren(menu1_2);
         menuRepository.save(menu1);
 
-        Menu menu2 = new Menu(site, null, 2L, "2. 메뉴", "", MenuOpenType.CURRENT, false, true);
-        Menu menu2_1 = new Menu(site, null, 1L, "2-1. 메뉴", "", MenuOpenType.CURRENT, false, true);
+        Menu menu2 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(2L)
+            .name("2. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
+        Menu menu2_1 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(1L)
+            .name("2-1. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
         menu2.addChildren(menu2_1);
         menuRepository.save(menu2);
 
-        Menu menu3 = new Menu(site, null, 3L, "3. 메뉴", "", MenuOpenType.CURRENT, false, true);
+        Menu menu3 = Menu.builder()
+            .site(site)
+            .parent(null)
+            .listOrder(3L)
+            .name("3. 메뉴")
+            .openType(MenuOpenType.CURRENT)
+            .hide(false)
+            .enable(true)
+            .build();
         menuRepository.save(menu3);
 
         List<MenuResponse> menuResponses = menuService.findMenus(site.getId());
