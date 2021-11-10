@@ -4,13 +4,13 @@ public enum MenuOpenType {
 
     CURRENT("C"), NEW("N");
 
-    private String menuOpenType;
+    private final String typeCode;
 
-    MenuOpenType(String menuOpenType) {
-        this.menuOpenType = menuOpenType;
+    MenuOpenType(String typeCode) {
+        this.typeCode = typeCode;
     }
 
-    public String getMenuOpenType() {
-        return menuOpenType;
+    public String getTypeCode() {
+        return typeCode;
     }
 }
