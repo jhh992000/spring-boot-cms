@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -68,7 +69,7 @@ public class MenuResponse {
     private static List<MenuResponse> findChildrens(Menu menu) {
         List<Menu> children = menu.getChildren();
         if (children == null) {
-            return null;
+            return new ArrayList<>();
         }
         return children.stream()
             .map(MenuResponse::of)
