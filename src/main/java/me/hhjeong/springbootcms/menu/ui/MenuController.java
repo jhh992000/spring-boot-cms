@@ -1,7 +1,6 @@
 package me.hhjeong.springbootcms.menu.ui;
 
 import java.net.URI;
-import java.util.List;
 import javax.json.JsonPatch;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +52,7 @@ public class MenuController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteMenu(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMenu(@PathVariable Long id) {
         menuService.deleteMenu(id);
         return ResponseEntity.noContent().build();
     }
