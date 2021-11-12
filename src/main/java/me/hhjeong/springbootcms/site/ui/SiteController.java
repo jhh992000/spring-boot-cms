@@ -69,7 +69,7 @@ public class SiteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteSite(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSite(@PathVariable Long id) {
         siteService.deleteSite(id);
         return ResponseEntity.noContent().build();
     }
