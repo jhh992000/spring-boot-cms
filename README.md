@@ -13,7 +13,7 @@
 - Mysql 5.7
 - Flyway
 - jUnit5, RestAssured
-- Vue
+- Nuxt.js
 
 ## Admin
 
