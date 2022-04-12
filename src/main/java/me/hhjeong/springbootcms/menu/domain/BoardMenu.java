@@ -1,12 +1,12 @@
 package me.hhjeong.springbootcms.menu.domain;
 
-import java.util.Objects;
+import lombok.*;
+import me.hhjeong.springbootcms.site.domain.Site;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
@@ -17,17 +17,9 @@ public class BoardMenu extends Menu {
 
     private Long boardId;
 
-    public BoardMenu(Long boardId, Menu menu) {
-        builder()
-            .site(menu.getSite())
-            .parent(menu.getParent())
-            .listOrder(menu.getListOrder())
-            .description(menu.getDescription())
-            .openType(menu.getOpenType())
-            .hide(menu.getHide())
-            .enable(menu.getEnable())
-            .build();
-
+    @Builder
+    public BoardMenu(Long id, Site site, String name, Menu parent, Long listOrder, String description, MenuOpenType openType, Boolean hide, Boolean enable, List<Menu> children, Long boardId) {
+        super(id, site, name, parent, listOrder, description, openType, hide, enable, children);
         this.boardId = boardId;
     }
 
