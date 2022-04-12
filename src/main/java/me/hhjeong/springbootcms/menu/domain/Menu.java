@@ -61,6 +61,18 @@ public class Menu extends BaseEntity {
         this.id = id;
     }
 
+    public Menu(Long id, Site site, String name, Menu parent, Long listOrder, String description, MenuOpenType openType, Boolean hide, Boolean enable) {
+        this.id = id;
+        this.site = site;
+        this.name = name;
+        this.parent = parent;
+        this.listOrder = listOrder;
+        this.description = description;
+        this.openType = openType;
+        this.hide = hide;
+        this.enable = enable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

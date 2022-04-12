@@ -49,21 +49,21 @@ public class MenuAcceptanceTest extends AcceptancePerClassTest {
 
         //public Menu(Long siteId, Long parentId, Long listOrder, String name, String description, MenuOpenType openType, Boolean hide, Boolean enable) {
 
-        Menu menu1 = new Menu(null, site, "1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true, null);
-        Menu menu1_1 = new Menu(null, site, "1-1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true, null);
-        Menu menu1_2 = new Menu(null, site, "1-2. 메뉴", null, 2L, null, MenuOpenType.CURRENT, false, true, null);
+        Menu menu1 = new Menu(null, site, "1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true);
+        Menu menu1_1 = new Menu(null, site, "1-1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true);
+        Menu menu1_2 = new Menu(null, site, "1-2. 메뉴", null, 2L, null, MenuOpenType.CURRENT, false, true);
 
         menu1.addChildren(menu1_1);
         menu1.addChildren(menu1_2);
         menuRepository.save(menu1);
 
-        Menu menu2 = new Menu(null, site, "2. 메뉴", null, 2L, null, MenuOpenType.CURRENT, false, true, null);
-        Menu menu2_1 = new Menu(null, site, "2-1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true, null);
+        Menu menu2 = new Menu(null, site, "2. 메뉴", null, 2L, null, MenuOpenType.CURRENT, false, true);
+        Menu menu2_1 = new Menu(null, site, "2-1. 메뉴", null, 1L, null, MenuOpenType.CURRENT, false, true);
 
         menu2.addChildren(menu2_1);
         menuRepository.save(menu2);
 
-        Menu menu3 = new Menu(null, site, "3. 메뉴", null, 3L, null, MenuOpenType.CURRENT, false, true, null);
+        Menu menu3 = new Menu(null, site, "3. 메뉴", null, 3L, null, MenuOpenType.CURRENT, false, true);
 
         menuRepository.save(menu3);
 
