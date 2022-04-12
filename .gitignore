@@ -125,7 +125,9 @@ sw.*
 # Vim swap files
 *.swp
 
-generated
-generated_tests
 
+/build/generated/
+/build/generated_tests/
+
+.jpb
 package-lock.json
