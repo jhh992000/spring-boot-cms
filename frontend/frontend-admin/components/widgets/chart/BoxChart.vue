@@ -2,51 +2,66 @@
   <v-card :color="cardColor" :dark="computeCardDark">
     <v-card-title>
       <div class="layout row ma-0">
-        <div class="subheading">{{title}}</div>
+        <div class="subheading">{{ title }}</div>
         <v-spacer></v-spacer>
-        <div class="caption"> <v-icon>trending_up</v-icon>  {{subTitle}}</div>
+        <div class="caption">
+          <v-icon>trending_up</v-icon>
+          {{ subTitle }}
+        </div>
       </div>
     </v-card-title>
     <v-responsive class="white--text">
-      <e-chart 
-      :path-option="computeChartOption"
-      height="308px"
-      width="100%"
-      >
-      </e-chart>
-    </v-responsive>    
-  </v-card>    
+      <e-chart :path-option="computeChartOption" height="308px" width="100%"></e-chart>
+    </v-responsive>
+  </v-card>
 </template>
 
 <script>
 import EChart from '@/components/chart/echart';
-import Material from 'vuetify/es5/util/colors';
 
 export default {
   components: {
-    EChart
+    EChart,
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: '',
+    },
     gradient: {
       type: Boolean,
       default: false,
     },
-    subTitle: String,
-    icon: String,
+    subTitle: {
+      type: String,
+      default: '',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
     cardColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     iconColor: {
       type: String,
       default: 'success',
     },
-    type: String,
-    chartColor: Array,
-    data: Array,
+    type: {
+      type: String,
+      default: '',
+    },
+    chartColor: {
+      type: Array,
+      default: () => [],
+    },
+    data: {
+      type: Array,
+      default: () => [],
+    },
   },
-  data () {
+  data() {
     return {
       defaultOption: [
         ['dataset.source', this.data],
@@ -55,17 +70,20 @@ export default {
         ['grid.top', '15%'],
         ['grid.left', '0'],
         ['grid.bottom', '0'],
-        ['grid.right', '0'],        
+        ['grid.right', '0'],
         ['color', this.chartColor],
-      ]
+      ],
     };
   },
 
   computed: {
-    computeCardDark () {
-      return this.cardColor !== 'white';  
+    computeCardDark() {
+      return this.cardColor !== 'white';
     },
-    computeChartOption () {
+  },
+
+  watch: {
+    computeChartOption() {
       switch (this.type) {
         case 'bar':
           this.defaultOption.push(['series[0].type', 'bar']);
@@ -82,27 +100,30 @@ export default {
           // set main series
           // this.defaultOption.push(['series[1].data', StackData]);
           this.defaultOption.push(['series[1].type', 'bar']);
-          break;  
+          break;
         case 'area':
           this.defaultOption.push(['series[0].type', 'line']);
           this.defaultOption.push(['series[0].smooth', true]);
-          this.defaultOption.push(['xAxis.boundaryGap', false]);          
-          this.defaultOption.push(['series[0].areaStyle', {}]); 
+          this.defaultOption.push(['xAxis.boundaryGap', false]);
+          this.defaultOption.push(['series[0].areaStyle', {}]);
           if (this.gradient) {
-            this.defaultOption.push(['series[0].areaStyle', {
-              normal: {
-                color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  {
-                    offset: 0,
-                    color: this.chartColor[0],
-                  }, 
-                  {
-                    offset: 1,
-                    color: this.chartColor[1],
-                  }
-                ])
-              }            
-            }]);
+            this.defaultOption.push([
+              'series[0].areaStyle',
+              {
+                normal: {
+                  color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    {
+                      offset: 0,
+                      color: this.chartColor[0],
+                    },
+                    {
+                      offset: 1,
+                      color: this.chartColor[1],
+                    },
+                  ]),
+                },
+              },
+            ]);
           }
 
           break;
@@ -113,12 +134,9 @@ export default {
           break;
       }
       return this.defaultOption;
-    }
-  }
-
+    },
+  },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

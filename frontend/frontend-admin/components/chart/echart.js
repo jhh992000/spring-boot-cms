@@ -1,4 +1,3 @@
-
 /**
  * ECharts Vue Wrapper
  * Michael Wang
@@ -12,13 +11,12 @@ if (ECharts === undefined) {
 }
 // set color palette
 const colorPalette = [];
-Object.entries(colors).forEach((item) => {
+Object.entries(colors).forEach(item => {
   if (item[1].base) {
     colorPalette.push(item[1].base);
-    
   }
 });
-// default 
+// default
 // const colorPalette = ['#d87c7c', '#919e8b', '#d7ab82', '#6e7074', '#61a0a8', '#efa18d', '#787464', '#cc7e63', '#724e58', '#4b565b'];
 // ECharts.registerTheme('material', {
 //   color: colorPalette,
@@ -33,8 +31,10 @@ Object.entries(colors).forEach((item) => {
   const throttle = function (type, name, obj) {
     obj = obj || window;
     let running = false;
-    let func = function () {
-      if (running) { return }
+    const func = function () {
+      if (running) {
+        return;
+      }
       running = true;
       requestAnimationFrame(function () {
         obj.dispatchEvent(new CustomEvent(name));
@@ -49,12 +49,12 @@ Object.entries(colors).forEach((item) => {
 export default {
   name: 'v-echart',
 
-  render (h) {
+  render(h) {
     const data = {
       staticClass: 'v-chart',
       style: this.canvasStyle,
       ref: 'canvas',
-      on: this.$listeners
+      on: this.$listeners,
     };
     return h('div', data);
   },
@@ -67,9 +67,9 @@ export default {
       type: Boolean,
       default: true,
     },
-    // instace.setOption 
+    // instace.setOption
     pathOption: [Object, Array],
-    option: Object, 
+    option: Object,
     // general config
     textStyle: Object,
     title: Object,
@@ -79,24 +79,38 @@ export default {
     xAxis: [Object, Array],
     yAxis: [Object, Array],
     series: [Object, Array],
-    axisPointer: Object,        
-    dataset: { type: [Object, Array], default () { return {} } }, // option.dataSet
+    axisPointer: Object,
+    dataset: {
+      type: [Object, Array],
+      default() {
+        return {};
+      },
+    }, // option.dataSet
     colors: Array, // echarts.option.color
     backgroundColor: [Object, String],
     toolbox: { type: [Object, Array] },
     // resize delay
     widthChangeDelay: {
       type: Number,
-      default: 450
-    }
+      default: 450,
+    },
   },
   data: () => ({
     chartInstance: null,
     clientWidth: null,
     allowedOptions: [
-      'textStyle', 'title', 'legend', 'xAxis', 
-      'yAxis', 'series', 'tooltip', 'axisPointer', 
-      'grid', 'dataset', 'colors', 'backgroundColor'
+      'textStyle',
+      'title',
+      'legend',
+      'xAxis',
+      'yAxis',
+      'series',
+      'tooltip',
+      'axisPointer',
+      'grid',
+      'dataset',
+      'colors',
+      'backgroundColor',
     ],
     _defaultOption: {
       tooltip: {
@@ -106,8 +120,8 @@ export default {
         show: true,
         textStyle: {
           color: 'rgba(0, 0, 0 , .87)',
-          fontFamily: 'sans-serif'
-        }
+          fontFamily: 'sans-serif',
+        },
       },
       grid: {
         containLabel: true,
@@ -119,7 +133,7 @@ export default {
           lineStyle: {
             color: 'rgba(0, 0, 0 , .54)',
             type: 'dashed',
-          }
+          },
         },
         axisTick: {
           show: true,
@@ -127,12 +141,12 @@ export default {
           lineStyle: {
             show: true,
             color: 'rgba(0, 0, 0 , .54)',
-            type: 'dashed'
-          }
+            type: 'dashed',
+          },
         },
         axisLabel: {
-          show: false
-        }          
+          show: false,
+        },
       },
       yAxis: {
         show: true,
@@ -141,73 +155,72 @@ export default {
           lineStyle: {
             color: 'rgba(0, 0, 0 , .54)',
             type: 'dashed',
-          }
+          },
         },
         axisLabel: {
           show: false,
           // color: 'rgba(0, 0, 0 , .54)'
-        },        
+        },
         splitLine: {
           lineStyle: {
-            type: 'dashed'
-          }
+            type: 'dashed',
+          },
         },
         axisTick: {
           show: true,
           lineStyle: {
             show: true,
             color: 'rgba(0, 0, 0 , .54)',
-            type: 'dashed'
-          }
-        }        
+            type: 'dashed',
+          },
+        },
       },
-      series: [{
-        type: 'line'
-      }]
-
-    }
+      series: [
+        {
+          type: 'line',
+        },
+      ],
+    },
   }),
   computed: {
-    canvasStyle () {
+    canvasStyle() {
       return {
         width: this.width,
         height: this.height,
       };
     },
-
   },
   methods: {
-    init () {
-      const { widthChangeDelay } = this;
-      // set 
+    init() {
+      // const { widthChangeDelay } = this;
+      // set
       if (this.pathOption) {
-        this.pathOption.forEach((p) => {
+        this.pathOption.forEach(p => {
           _object.set(this.$data._defaultOption, p[0], p[1]);
         });
       }
       this.chartInstance = ECharts.init(this.$refs.canvas, 'material');
       this.chartInstance.setOption(_object.merge(this.option, this.$data._defaultOption));
-      window.addEventListener('optimizedResize', (e) => {
+      window.addEventListener('optimizedResize', e => {
         setTimeout(_ => {
           this.chartInstance.resize();
         }, this.widthChangeDelay);
-      });      
+      });
     },
 
-
-    resize () {
+    resize() {
       this.chartInstance.resize();
     },
-    clean () {
+    clean() {
       window.removeEventListener('resize', this.chartInstance.resize);
       this.chartInstance.clear();
-    }    
+    },
   },
-  mounted () {
+  mounted() {
     this.init();
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     this.clean();
-  }
+  },
 };

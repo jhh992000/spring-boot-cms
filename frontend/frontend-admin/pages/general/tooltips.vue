@@ -73,18 +73,18 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        show: false,
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      show: false,
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

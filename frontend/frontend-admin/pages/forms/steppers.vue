@@ -34,9 +34,7 @@
         <v-flex sm12>
           <v-subheader>Vertical Step</v-subheader>
           <v-stepper v-model="e13" vertical>
-            <v-stepper-step step="1" complete>
-              Name of step 1
-            </v-stepper-step>
+            <v-stepper-step step="1" complete> Name of step 1</v-stepper-step>
             <v-stepper-content step="1">
               <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
               <v-btn color="primary" @click.native="e13 = 2">Continue</v-btn>
@@ -71,19 +69,14 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
-
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        step: 1,
-        e13: 1,
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  data() {
+    return {
+      step: 1,
+      e13: 1,
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

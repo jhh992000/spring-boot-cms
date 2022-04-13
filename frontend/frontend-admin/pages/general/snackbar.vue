@@ -43,7 +43,6 @@
                     <v-text-field v-model.number="timeout" type="number" label="Timeout"></v-text-field>
                   </v-flex>
                 </v-layout>
-
               </v-container>
               <v-btn block color="primary" @click.native="snackbar = true" dark>Show Snackbar</v-btn>
             </section>
@@ -71,24 +70,24 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        snackbar: false,
-        y: 'top',
-        x: null,
-        mode: '',
-        timeout: 6000,
-        color: '',
-        text: 'Hello, I\'m a snackbar'
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      snackbar: false,
+      y: 'top',
+      x: null,
+      mode: '',
+      timeout: 6000,
+      color: '',
+      text: "Hello, I'm a snackbar",
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

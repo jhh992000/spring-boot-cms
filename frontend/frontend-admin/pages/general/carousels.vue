@@ -6,7 +6,7 @@
           <v-widget title="Basic Usage">
             <div slot="widget-content">
               <v-carousel>
-                <v-carousel-item v-for="(item,i) in items" :src="item.src" :key="i"></v-carousel-item>
+                <v-carousel-item v-for="(item, i) in items" :src="item.src" :key="i"></v-carousel-item>
               </v-carousel>
             </div>
           </v-widget>
@@ -15,8 +15,7 @@
           <v-widget title="Hide Controls">
             <div slot="widget-content">
               <v-carousel hide-controls hide-delimiters>
-                <v-carousel-item v-for="(item,i) in items" :src="item.src" :key="i">
-                </v-carousel-item>
+                <v-carousel-item v-for="(item, i) in items" :src="item.src" :key="i"></v-carousel-item>
               </v-carousel>
             </div>
           </v-widget>
@@ -27,32 +26,31 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
-  export default {
-    components: {
-      VWidget
-    },
-    data () {
-      return {
-        items: [
-          {
-            src: require('@/static/nature/n1.jpeg')
-          },
-          {
-            src: require('@/static/nature/n2.jpeg')
-          },
-          {
-            src: require('@/static/nature/n3.jpeg')
-          },
-          {
-            src: require('@/static/nature/n4.jpeg')
-          }
-        ]
-      };
-    },
-    computed: {
-    },
-    methods: {
-    }
-  };
+import VWidget from '@/components/VWidget';
+
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      items: [
+        {
+          src: require('@/static/nature/n1.jpeg'),
+        },
+        {
+          src: require('@/static/nature/n2.jpeg'),
+        },
+        {
+          src: require('@/static/nature/n3.jpeg'),
+        },
+        {
+          src: require('@/static/nature/n4.jpeg'),
+        },
+      ],
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

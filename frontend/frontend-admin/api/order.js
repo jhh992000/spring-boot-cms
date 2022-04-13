@@ -29,6 +29,4 @@ export default [
     price: '$699',
     status: 'delivered',
   },
-
-
 ];

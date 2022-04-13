@@ -32,43 +32,19 @@
           </v-widget>
           <v-widget title="Rotate" class="mt-3">
             <div slot="widget-content" class="text-xs-center">
-              <v-progress-circular
-                :size="100"
-                :width="15"
-                :rotate="360"
-                :value="value"
-                color="teal"
-              >
+              <v-progress-circular :size="100" :width="15" :rotate="360" :value="value" color="teal">
                 {{ value }}
               </v-progress-circular>
 
-              <v-progress-circular
-                :size="100"
-                :width="15"
-                :rotate="-90"
-                :value="value"
-                color="primary"
-              >
+              <v-progress-circular :size="100" :width="15" :rotate="-90" :value="value" color="primary">
                 {{ value }}
               </v-progress-circular>
 
-              <v-progress-circular
-                :size="100"
-                :width="15"
-                :rotate="90"
-                :value="value"
-                color="red"
-              >
+              <v-progress-circular :size="100" :width="15" :rotate="90" :value="value" color="red">
                 {{ value }}
               </v-progress-circular>
 
-              <v-progress-circular
-                :size="100"
-                :width="15"
-                :rotate="180"
-                :value="value"
-                color="pink"
-              >
+              <v-progress-circular :size="100" :width="15" :rotate="180" :value="value" color="pink">
                 {{ value }}
               </v-progress-circular>
             </div>
@@ -106,31 +82,30 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        interval: {},
-        value: 0
-      };
-    },
-    computed: {},
-    beforeDestroy() {
-      clearInterval(this.interval);
-    },
-    mounted() {
-      this.interval = setInterval(() => {
-        if (this.value === 100) {
-          return (this.value === 0);
-        }
-        this.value += 10;
-      }, 1000);
-    },
-    methods: {},
-
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      interval: {},
+      value: 0,
+    };
+  },
+  computed: {},
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  mounted() {
+    this.interval = setInterval(() => {
+      if (this.value === 100) {
+        return this.value === 0;
+      }
+      this.value += 10;
+    }, 1000);
+  },
+  methods: {},
+};
 </script>

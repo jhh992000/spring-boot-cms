@@ -3,8 +3,7 @@
     <template v-if="!$vuetify.breakpoint.smAndDown">
       <v-layout row>
         <v-flex lg3 class="white">
-          <chat-history>
-          </chat-history>
+          <chat-history></chat-history>
         </v-flex>
         <v-flex lg9>
           <chat-window></chat-window>
@@ -14,8 +13,7 @@
     <template v-else>
       <v-layout column>
         <v-flex sm12 class="white" v-if="showSidebar">
-          <chat-history>
-          </chat-history>
+          <chat-history></chat-history>
         </v-flex>
         <v-flex sm12 v-if="showWindow">
           <chat-window></chat-window>
@@ -25,24 +23,24 @@
   </v-container>
 </template>
 <script>
-  import ChatHistory from '../../../components/chat/ChatHistory';
-  import ChatWindow from '../../../components/chat/ChatWindow';
-  export default {
-    components: {
-      ChatHistory,
-      ChatWindow
+import ChatHistory from '../../../components/chat/ChatHistory';
+import ChatWindow from '../../../components/chat/ChatWindow';
+
+export default {
+  components: {
+    ChatHistory,
+    ChatWindow,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    showSidebar() {
+      return this.$route.params.uuid === undefined;
     },
-    data () {
-      return {
-      };
+    showWindow() {
+      return this.$route.params.uuid !== undefined;
     },
-    computed: {
-      showSidebar () {
-        return this.$route.params.uuid === undefined;
-      },
-      showWindow () {
-        return this.$route.params.uuid !== undefined;
-      },
-    },
-  };
+  },
+};
 </script>

@@ -34,13 +34,7 @@
                       min-width="290px"
                       :return-value.sync="date"
                     >
-                      <v-text-field
-                        slot="activator"
-                        label="Picker in menu"
-                        v-model="date"
-                        prepend-icon="event"
-                        readonly
-                      ></v-text-field>
+                      <v-text-field slot="activator" label="Picker in menu" v-model="date" prepend-icon="event" readonly></v-text-field>
                       <v-time-picker v-model="date" no-title scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -50,22 +44,8 @@
                   </v-flex>
                   <v-spacer></v-spacer>
                   <v-flex xs11 sm5>
-                    <v-dialog
-                      ref="dialog"
-                      persistent
-                      v-model="modal"
-                      lazy
-                      full-width
-                      width="290px"
-                      :return-value.sync="date"
-                    >
-                      <v-text-field
-                        slot="activator"
-                        label="Picker in dialog"
-                        v-model="date"
-                        prepend-icon="event"
-                        readonly
-                      ></v-text-field>
+                    <v-dialog ref="dialog" persistent v-model="modal" lazy full-width width="290px" :return-value.sync="date">
+                      <v-text-field slot="activator" label="Picker in dialog" v-model="date" prepend-icon="event" readonly></v-text-field>
                       <v-time-picker v-model="date" scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
@@ -84,27 +64,27 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        picker: null,
-        picker2: null,
-        //
-        arrayEvents: null,
-        date1: null,
-        date2: null,
-        //
-        date: null,
-        menu: false,
-        modal: false
-      };
-    },
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      picker: null,
+      picker2: null,
+      //
+      arrayEvents: null,
+      date1: null,
+      date2: null,
+      //
+      date: null,
+      menu: false,
+      modal: false,
+    };
+  },
 
-    methods: {}
-  };
+  methods: {},
+};
 </script>

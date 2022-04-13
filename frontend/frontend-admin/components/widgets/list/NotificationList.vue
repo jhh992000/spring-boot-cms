@@ -11,13 +11,13 @@
           <v-divider v-else-if="item.divider" :key="index"></v-divider>
           <v-list-tile avatar v-else :key="item.title" @click="handleClick">
             <v-list-tile-avatar :color="item.color">
-              <v-icon dark>{{item.icon}}</v-icon>
+              <v-icon dark>{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-sub-title v-html="item.title"></v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action class="caption">
-              {{item.timeLabel}}
+              {{ item.timeLabel }}
             </v-list-tile-action>
           </v-list-tile>
         </template>
@@ -31,15 +31,15 @@
 
 <script>
 import notes from '@/api/notification';
+
 export default {
   data: () => ({
-    items: notes
+    items: notes,
   }),
   methods: {
-    handleClick: (e) => {
+    handleClick: e => {
       console.log(e);
-    }
+    },
   },
-
 };
 </script>

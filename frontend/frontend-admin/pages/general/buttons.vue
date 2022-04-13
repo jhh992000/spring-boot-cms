@@ -71,42 +71,19 @@
           <v-widget title="Loading button" class="mt-3">
             <div slot="widget-content">
               <div>
-                <v-btn
-                  color="secondary"
-                  :loading="loading"
-                  @click.native="loader = 'loading'"
-                  :disabled="loading"
-                >
-                  Accept Terms
-                </v-btn>
+                <v-btn color="secondary" :loading="loading" @click.native="loader = 'loading'" :disabled="loading"> Accept Terms</v-btn>
 
-                <v-btn
-                  :loading="loading3"
-                  @click.native="loader = 'loading3'"
-                  :disabled="loading3"
-                  color="blue-grey"
-                  class="white--text"
-                >
+                <v-btn :loading="loading3" @click.native="loader = 'loading3'" :disabled="loading3" color="blue-grey" class="white--text">
                   Upload
                   <v-icon right dark>cloud_upload</v-icon>
                 </v-btn>
 
-                <v-btn
-                  color="success"
-                  :loading="loading2"
-                  @click.native="loader = 'loading2'"
-                  :disabled="loading2"
-                >
+                <v-btn color="success" :loading="loading2" @click.native="loader = 'loading2'" :disabled="loading2">
                   Custom Loader
                   <span slot="loader">Loading...</span>
                 </v-btn>
 
-                <v-btn
-                  color="info"
-                  :loading="loading4"
-                  @click.native="loader = 'loading4'"
-                  :disabled="loading4"
-                >
+                <v-btn color="info" :loading="loading4" @click.native="loader = 'loading4'" :disabled="loading4">
                   Icon Loader
                   <span slot="loader" class="custom-loader">
                     <v-icon light>cached</v-icon>
@@ -300,18 +277,10 @@
                   <v-flex xs12 sm6 class="py-2">
                     <p>Text Options</p>
                     <v-btn-toggle v-model="text">
-                      <v-btn flat value="left">
-                        Left
-                      </v-btn>
-                      <v-btn flat value="center">
-                        Center
-                      </v-btn>
-                      <v-btn flat value="right">
-                        Right
-                      </v-btn>
-                      <v-btn flat value="justify">
-                        Justify
-                      </v-btn>
+                      <v-btn flat value="left"> Left</v-btn>
+                      <v-btn flat value="center"> Center</v-btn>
+                      <v-btn flat value="right"> Right</v-btn>
+                      <v-btn flat value="justify"> Justify</v-btn>
                     </v-btn-toggle>
                   </v-flex>
                   <v-flex xs12 sm6 class="py-2">
@@ -346,79 +315,82 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
-  export default {
-    components: {
-      VWidget
-    },
-    data () {
-      return {
-        text: 'center',
-        icon: 'justify',
-        toggle_none: null,
-        toggle_one: 0,
-        toggle_exclusive: 2,
-        toggle_multiple: [0, 1, 2],
-        loader: null,
-        loading: false,
-        loading2: false,
-        loading3: false,
-        loading4: false
-      };
-    },
-    computed: {
-    },
-    watch: {
-      loader () {
-        const l = this.loader;
-        this[l] = !this[l];
+import VWidget from '@/components/VWidget';
 
-        setTimeout(() => {
-          this[l] = false;
-        }, 3000);
-        this.loader = null;
-      }
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      text: 'center',
+      icon: 'justify',
+      toggle_none: null,
+      toggle_one: 0,
+      toggle_exclusive: 2,
+      toggle_multiple: [0, 1, 2],
+      loader: null,
+      loading: false,
+      loading2: false,
+      loading3: false,
+      loading4: false,
+    };
+  },
+  computed: {},
+  watch: {
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
+
+      setTimeout(() => {
+        this[l] = false;
+      }, 3000);
+      this.loader = null;
     },
-    methods: {
-    }
-  };
+  },
+  methods: {},
+};
 </script>
 
 <style>
-  .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 </style>

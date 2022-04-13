@@ -42,16 +42,12 @@
               <div class="text-xs-center">
                 <v-badge left color="purple">
                   <v-icon slot="badge" dark small>layers</v-icon>
-                  <span>
-                    MDI icon
-                  </span>
+                  <span> MDI icon </span>
                 </v-badge>
                 &nbsp;&nbsp;
                 <v-badge color="orange">
                   <v-icon slot="badge" dark small>fa fa-apple</v-icon>
-                  <span>
-                    Font Awesome icon
-                  </span>
+                  <span> Font Awesome icon </span>
                 </v-badge>
               </div>
             </div>
@@ -63,16 +59,16 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget,
-    },
-    data() {
-      return {};
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
+};
 </script>

@@ -42,13 +42,7 @@
                       min-width="290px"
                       :return-value.sync="date"
                     >
-                      <v-text-field
-                        slot="activator"
-                        label="Picker in menu"
-                        v-model="date"
-                        prepend-icon="event"
-                        readonly
-                      ></v-text-field>
+                      <v-text-field slot="activator" label="Picker in menu" v-model="date" prepend-icon="event" readonly></v-text-field>
                       <v-date-picker v-model="date" no-title scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -58,22 +52,8 @@
                   </v-flex>
                   <v-spacer></v-spacer>
                   <v-flex xs11 sm5>
-                    <v-dialog
-                      ref="dialog"
-                      persistent
-                      v-model="modal"
-                      lazy
-                      full-width
-                      width="290px"
-                      :return-value.sync="date"
-                    >
-                      <v-text-field
-                        slot="activator"
-                        label="Picker in dialog"
-                        v-model="date"
-                        prepend-icon="event"
-                        readonly
-                      ></v-text-field>
+                    <v-dialog ref="dialog" persistent v-model="modal" lazy full-width width="290px" :return-value.sync="date">
+                      <v-text-field slot="activator" label="Picker in dialog" v-model="date" prepend-icon="event" readonly></v-text-field>
                       <v-date-picker v-model="date" scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
@@ -90,12 +70,7 @@
               <v-container>
                 <v-layout wrap>
                   <v-flex xs12 sm12 class="my-3">
-                    <v-date-picker
-                      full-width
-                      v-model="date1"
-                      event-color="green lighten-1"
-                      :events="arrayEvents"
-                    ></v-date-picker>
+                    <v-date-picker full-width v-model="date1" event-color="green lighten-1" :events="arrayEvents"></v-date-picker>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -108,40 +83,40 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        picker: null,
-        picker2: null,
-        //
-        arrayEvents: null,
-        date1: null,
-        date2: null,
-        //
-        date: null,
-        menu: false,
-        modal: false
-      };
-    },
-    mounted() {
-      this.arrayEvents = [...Array(6)].map(() => {
-        const day = Math.floor(Math.random() * 30);
-        const d = new Date();
-        d.setDate(day);
-        return d.toISOString().substr(0, 10);
-      });
-    },
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      picker: null,
+      picker2: null,
+      //
+      arrayEvents: null,
+      date1: null,
+      date2: null,
+      //
+      date: null,
+      menu: false,
+      modal: false,
+    };
+  },
+  mounted() {
+    this.arrayEvents = [...Array(6)].map(() => {
+      const day = Math.floor(Math.random() * 30);
+      const d = new Date();
+      d.setDate(day);
+      return d.toISOString().substr(0, 10);
+    });
+  },
 
-    methods: {
-      functionEvents(date) {
-        const [, , day] = date.split('-');
-        return parseInt(day, 10) % 3 === 0;
-      }
-    }
-  };
+  methods: {
+    functionEvents(date) {
+      const [, , day] = date.split('-');
+      return parseInt(day, 10) % 3 === 0;
+    },
+  },
+};
 </script>

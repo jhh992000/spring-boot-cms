@@ -19,16 +19,10 @@
                           <v-text-field label="Legal first name" required></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
-                          <v-text-field label="Legal middle name"
-                                        hint="example of helper text only on focus"></v-text-field>
+                          <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
-                          <v-text-field
-                            label="Legal last name"
-                            hint="example of persistent helper text"
-                            persistent-hint
-                            required
-                          ></v-text-field>
+                          <v-text-field label="Legal last name" hint="example of persistent helper text" persistent-hint required></v-text-field>
                         </v-flex>
                         <v-flex xs12>
                           <v-text-field label="Email" required></v-text-field>
@@ -37,11 +31,7 @@
                           <v-text-field label="Password" type="password" required></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6>
-                          <v-select
-                            label="Age"
-                            required
-                            :items="['0-17', '18-29', '30-54', '54+']"
-                          ></v-select>
+                          <v-select label="Age" required :items="['0-17', '18-29', '30-54', '54+']"></v-select>
                         </v-flex>
                         <v-flex xs12 sm6>
                           <v-select
@@ -87,15 +77,13 @@
                     <v-list-tile avatar>
                       <v-list-tile-content>
                         <v-list-tile-title>Content filtering</v-list-tile-title>
-                        <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded
-                        </v-list-tile-sub-title>
+                        <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile avatar>
                       <v-list-tile-content>
                         <v-list-tile-title>Password</v-list-tile-title>
-                        <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase
-                        </v-list-tile-sub-title>
+                        <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                   </v-list>
@@ -108,8 +96,7 @@
                       </v-list-tile-action>
                       <v-list-tile-content>
                         <v-list-tile-title>Notifications</v-list-tile-title>
-                        <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded
-                        </v-list-tile-sub-title>
+                        <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile avatar>
@@ -118,8 +105,7 @@
                       </v-list-tile-action>
                       <v-list-tile-content>
                         <v-list-tile-title>Sound</v-list-tile-title>
-                        <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply
-                        </v-list-tile-sub-title>
+                        <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile avatar>
@@ -183,30 +169,30 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        basic: {
-          dialog: false
-        },
-        fullscreen: {
-          dialog: false,
-          notifications: false,
-          sound: true,
-          widgets: false
-        },
-        scrollable: {
-          name: '',
-          dialog: false
-        }
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      basic: {
+        dialog: false,
+      },
+      fullscreen: {
+        dialog: false,
+        notifications: false,
+        sound: true,
+        widgets: false,
+      },
+      scrollable: {
+        name: '',
+        dialog: false,
+      },
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

@@ -1,10 +1,9 @@
 <template>
-  <nuxt-child/>
+  <nuxt-child />
 </template>
 
 <script>
-
 export default {
-  layout: 'chat'
-}
+  layout: 'chat',
+};
 </script>

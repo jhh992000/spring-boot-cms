@@ -1,13 +1,11 @@
 <template>
-    <nuxt-child/>
+  <nuxt-child />
 </template>
 
 <script>
-    export default {
-        layout: "mail"
-    }
+export default {
+  layout: 'mail',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

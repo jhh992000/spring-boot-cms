@@ -1,18 +1,20 @@
-const G2 = window.G2;
 import colors from 'vuetify/es5/util/colors';
+
+const G2 = window.G2;
+
 const chartColors = [];
-Object.entries(colors).forEach((item) => {
+Object.entries(colors).forEach(item => {
   chartColors.push(item[1].base);
 });
 
 export default {
   name: 'v-chart',
 
-  render (h) {
+  render(h) {
     const data = {
       staticClass: 'v-chart',
       ref: 'canvas',
-      on: this.$listeners
+      on: this.$listeners,
     };
     return h('div', data);
   },
@@ -26,29 +28,28 @@ export default {
   }),
 
   methods: {
-    init () {
+    init() {
       this.chartInstance = new G2.Chart({
         container: this.$refs.canvas,
         forceFit: true,
-        height: window.innerWidth
+        height: window.innerWidth,
       });
-
     },
-    resize () {
+    resize() {
       this.chartInstance.resize();
     },
-    clean () {
+    clean() {
       window.removeEventListener('resize', this.chartInstance.resize);
       this.chartInstance.dispose();
-    }    
+    },
   },
-  mounted () {
+  mounted() {
     this.init();
     window.addEventListener('resize', () => {
       this.resize();
     });
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.clean();
-  }
+  },
 };

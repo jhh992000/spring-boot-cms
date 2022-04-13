@@ -25,43 +25,28 @@
     <div class="layout row media-layout">
       <div class="media-content flex transparent">
         <vue-perfect-scrollbar class="media-content--warp">
-          <v-container fluid v-if="view ==='grid'">
+          <v-container fluid v-if="view === 'grid'">
             <v-layout row wrap class="x-grid-lg">
-              <v-flex
-                lg4
-                sm12
-                xs12
-                class="pa-2"
-                v-for="(item,index) in folders"
-                :key="'folder'+ index"
-              >
+              <v-flex lg4 sm12 xs12 class="pa-2" v-for="(item, index) in folders" :key="'folder' + index">
                 <v-card flat tile>
                   <v-card-media height="150px">
                     <v-icon size="135" class="mx-auto" color="indigo">folder</v-icon>
                   </v-card-media>
                   <v-divider></v-divider>
                   <v-card-title>
-                    {{item.name}}
+                    {{ item.name }}
                   </v-card-title>
                 </v-card>
               </v-flex>
-              <v-flex
-                lg4
-                sm12
-                xs12
-                class="pa-2"
-                v-for="(item,index) in files"
-                :key="index"
-              >
+              <v-flex lg4 sm12 xs12 class="pa-2" v-for="(item, index) in files" :key="index">
                 <a @click="showDetail(item)" class="d-flex">
                   <v-card flat tile>
-
-                      <img style="height: 150px; width: 100%" :src="item.path" alt="" v-if="isImage(item)">
-                      <v-icon class="mx-auto" size="135" v-else>insert_drive_file</v-icon>
+                    <img style="height: 150px; width: 100%" :src="item.path" alt="" v-if="isImage(item)" />
+                    <v-icon class="mx-auto" size="135" v-else>insert_drive_file</v-icon>
 
                     <v-divider></v-divider>
                     <v-card-title>
-                      {{item.fileName}}
+                      {{ item.fileName }}
                     </v-card-title>
                   </v-card>
                 </a>
@@ -70,19 +55,16 @@
           </v-container>
           <v-layout column v-else>
             <v-list dense class="transparent">
-              <v-list-tile avatar @click="showDetail(item)"
-                           v-for="(item,index) in files"
-                           :key="'list-file-'+index"
-              >
+              <v-list-tile avatar @click="showDetail(item)" v-for="(item, index) in files" :key="'list-file-' + index">
                 <v-list-tile-avatar>
                   <v-icon>{{ mimeIcons(item) }}</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <div class="container pl-0" >
+                  <div class="container pl-0">
                     <div class="layout row">
-                      <div class="flex"> {{item.fileName}}</div>
+                      <div class="flex">{{ item.fileName }}</div>
                       <v-spacer></v-spacer>
-                      <div class="caption">{{item ? formateDate(item.ctime) : ''}}</div>
+                      <div class="caption">{{ item ? formateDate(item.ctime) : '' }}</div>
                     </div>
                   </div>
                 </v-list-tile-content>
@@ -96,89 +78,84 @@
 </template>
 
 <script>
-  import Bytes from 'bytes';
-  import { getFileMenu, getFile } from '@/api/file';
-  import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-  export default {
-    layout: 'dashboard',
-    components: {
-      VuePerfectScrollbar
-    },
-    props: {
-      type: {
-        type: String,
-        default: 'image'
-      },
-    },
-    data: () => ({
-      size: 'lg',
-      view: 'grid',
-      selectedFile: {
-        path: '/static/icon/empty_file.svg'
-      },
-      imageMime: [
-        'image/jpeg',
-        'image/png',
-        'image/svg+xml'
-      ],
+import Bytes from 'bytes';
+import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import { getFile, getFileMenu } from '@/api/file';
 
-      folders: [
-        {
-          name: 'bg',
-          lastModified: '2018-03-03'
-        },
-        {
-          name: 'cards',
-          lastModified: '2018-03-03'
-        },
-        {
-          name: 'avatar',
-          lastModified: '2018-03-03'
-        }
-      ],
-    }),
-    computed: {
-      mediaMenu () {
-        return getFileMenu;
-      },
-      files () {
-        return getFile();
-      }
+export default {
+  components: {
+    VuePerfectScrollbar,
+  },
+  layout: 'dashboard',
+  props: {
+    type: {
+      type: String,
+      default: 'image',
     },
-
-
-
-    methods: {
-      isImage (file) {
-        return this.imageMime.includes(file.fileType);
-      },
-      mimeIcons (file) {
-        return this.imageMime.includes(file.fileType) ? 'image' : 'insert_drive_file';
-      },
-      showDetail (file) {
-        this.selectedFile = file;
-      },
-      fileSize (number) {
-        return Bytes.format(number);
-      },
-      formateDate (string) {
-        return (string) ? new Date(string).toLocaleDateString() : '';
-      },
-      computeFileImage (file) {
-        return this.isImage(file) ? file.path : '/static/icon/file_empty.svg'
-      }
+  },
+  data: () => ({
+    size: 'lg',
+    view: 'grid',
+    selectedFile: {
+      path: '/static/icon/empty_file.svg',
     },
-  };
+    imageMime: ['image/jpeg', 'image/png', 'image/svg+xml'],
+
+    folders: [
+      {
+        name: 'bg',
+        lastModified: '2018-03-03',
+      },
+      {
+        name: 'cards',
+        lastModified: '2018-03-03',
+      },
+      {
+        name: 'avatar',
+        lastModified: '2018-03-03',
+      },
+    ],
+  }),
+  computed: {
+    mediaMenu() {
+      return getFileMenu;
+    },
+    files() {
+      return getFile();
+    },
+  },
+
+  methods: {
+    isImage(file) {
+      return this.imageMime.includes(file.fileType);
+    },
+    mimeIcons(file) {
+      return this.imageMime.includes(file.fileType) ? 'image' : 'insert_drive_file';
+    },
+    showDetail(file) {
+      this.selectedFile = file;
+    },
+    fileSize(number) {
+      return Bytes.format(number);
+    },
+    formateDate(string) {
+      return string ? new Date(string).toLocaleDateString() : '';
+    },
+    computeFileImage(file) {
+      return this.isImage(file) ? file.path : '/static/icon/file_empty.svg';
+    },
+  },
+};
 </script>
 <style lang="stylus" scoped>
-  .media
-    &-cotent--wrap
+.media
+  &-cotent--wrap
+  &-menu
+    min-width: 260px
+    border-right: 1px solid #eee
+    min-height: calc(100vh - 50px - 64px);
 
-    &-menu
-      min-width: 260px
-      border-right: 1px solid #eee
-      min-height: calc(100vh - 50px - 64px);
-    &-detail
-      min-width:300px
-      border-left:1px solid #eee
+  &-detail
+    min-width: 300px
+    border-left: 1px solid #eee
 </style>

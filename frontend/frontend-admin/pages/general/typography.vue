@@ -20,8 +20,7 @@
                 </dd>
                 <dd>
                   <div class="display-3 grey--text text--darken-1">Regular 56sp</div>
-                  <strong>.display-3</strong
-                  ><span>font-weight 400</span>
+                  <strong>.display-3</strong><span>font-weight 400</span>
                 </dd>
                 <dd>
                   <div class="display-2 grey--text text--darken-1">Regular 45sp</div>
@@ -64,39 +63,39 @@
       </v-card>
     </v-container>
   </div>
-
 </template>
 
 <script>
-  export default {
-    components: {},
-    data() {
-      return {};
-    }
-  };
+export default {
+  components: {},
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="stylus">
-  #typography-page
-    .component-example__container
-      > div, dl
-        width: 100%
-        &:after
-          content: ""
-          display: table
-          clear: both
+#typography-page
+  .component-example__container
+    > div, dl
+      width: 100%
 
-      .headings
-        dt, dd
-          float: left
+      &:after
+        content: ""
+        display: table
+        clear: both
 
-        dd
-          margin: 0 0 2rem
-          clear: both
+    .headings
+      dt, dd
+        float: left
 
-          > div
-            margin-bottom: 16px
+      dd
+        margin: 0 0 2rem
+        clear: both
 
-          strong
-            margin-right: 16px
+        > div
+          margin-bottom: 16px
+
+        strong
+          margin-right: 16px
 </style>

@@ -58,7 +58,8 @@
               <div class="text-xs-center">
                 <v-chip label>Label</v-chip>
                 <v-chip label color="pink" text-color="white">
-                  <v-icon left>label</v-icon>Tags
+                  <v-icon left>label</v-icon>
+                  Tags
                 </v-chip>
                 <v-chip label outline color="red">Outline</v-chip>
               </div>
@@ -82,7 +83,7 @@
                     <div class="text-xs-center">
                       <v-chip close>
                         <v-avatar>
-                          <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor">
+                          <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor" />
                         </v-avatar>
                         Trevor Hansen
                       </v-chip>
@@ -100,23 +101,11 @@
           </v-widget>
           <v-widget title="Complex usage" class="mt-3">
             <div slot="widget-content">
-              <v-combobox multiple
-                label="Your favorite hobbies"
-                chips
-                tags
-                solo
-                prepend-icon="filter_list"
-                append-icon=""
-                clearable
-                v-model="chips"
-              >
+              <v-combobox multiple label="Your favorite hobbies" chips tags solo prepend-icon="filter_list" append-icon="" clearable v-model="chips">
                 <template slot="selection" slot-scope="data">
-                  <v-chip
-                    close
-                    @input="remove(data.item)"
-                    :selected="data.selected"
-                  >
-                    <strong>{{ data.item }}</strong>&nbsp;
+                  <v-chip close @input="remove(data.item)" :selected="data.selected">
+                    <strong>{{ data.item }}</strong
+                    >&nbsp;
                     <span>(interest)</span>
                   </v-chip>
                 </template>
@@ -130,23 +119,24 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
-  export default {
-    components: {
-      VWidget
+import VWidget from '@/components/VWidget';
+
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      chips: ['Programming', 'Watching', 'Sleeping'],
+      chip1: true,
+      chip2: true,
+    };
+  },
+  methods: {
+    remove(item) {
+      this.chips.splice(this.chips.indexOf(item), 1);
+      this.chips = [...this.chips];
     },
-    data () {
-      return {
-        chips: ['Programming', 'Watching', 'Sleeping'],
-        chip1: true,
-        chip2: true,
-      };
-    },
-    methods: {
-      remove (item) {
-        this.chips.splice(this.chips.indexOf(item), 1);
-        this.chips = [...this.chips];
-      }
-    }
-  };
+  },
+};
 </script>

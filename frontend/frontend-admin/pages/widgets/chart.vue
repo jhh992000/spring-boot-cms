@@ -7,25 +7,11 @@
           <h4>Mini Chart</h4>
         </v-flex>
         <v-flex lg3 sm6>
-          <mini-chart
-            title="Monthly Sales"
-            sub-title="10%"
-            icon="trending_up"
-            :data="dataset.monthVisit"
-            :chart-color="color.blue.base"
-            type="bar"
-          >
+          <mini-chart title="Monthly Sales" sub-title="10%" icon="trending_up" :data="dataset.monthVisit" :chart-color="color.blue.base" type="bar">
           </mini-chart>
         </v-flex>
         <v-flex lg3 sm6>
-          <mini-chart
-            title="Daily Visit"
-            sub-title="20%"
-            icon="trending_up"
-            :data="dataset.monthVisit"
-            :chart-color="color.green.base"
-            type="area"
-          >
+          <mini-chart title="Daily Visit" sub-title="20%" icon="trending_up" :data="dataset.monthVisit" :chart-color="color.green.base" type="area">
           </mini-chart>
         </v-flex>
         <v-flex lg3 sm6>
@@ -37,29 +23,14 @@
                   <span class="grey--text">-10% <v-icon small color="green">trending_down</v-icon> </span>
                 </div>
                 <div class="chart">
-                  <v-progress-circular
-                    :size="60"
-                    :width="5"
-                    :rotate="360"
-                    :value="10"
-                    color="success"
-                  >
-                    10
-                  </v-progress-circular>
+                  <v-progress-circular :size="60" :width="5" :rotate="360" :value="10" color="success"> 10</v-progress-circular>
                 </div>
               </div>
             </v-card-text>
           </v-card>
         </v-flex>
         <v-flex lg3 sm6>
-          <mini-chart
-            title="Sales Trend"
-            sub-title="10%"
-            icon="trending_down"
-            :data="dataset.monthVisit"
-            :chart-color="color.red.base"
-            type="line"
-          >
+          <mini-chart title="Sales Trend" sub-title="10%" icon="trending_down" :data="dataset.monthVisit" :chart-color="color.red.base" type="line">
           </mini-chart>
         </v-flex>
       </v-layout>
@@ -69,14 +40,7 @@
           <h4>Box Chart</h4>
         </v-flex>
         <v-flex lg4 sm6 xs12>
-          <box-chart
-            title="Page views"
-            sub-title="10%"
-            icon="trending_up"
-            :data="dataset.monthVisit"
-            :chart-color="[color.blue.darken1]"
-            type="area"
-          >
+          <box-chart title="Page views" sub-title="10%" icon="trending_up" :data="dataset.monthVisit" :chart-color="[color.blue.darken1]" type="area">
           </box-chart>
         </v-flex>
         <v-flex lg4 sm6 xs12>
@@ -125,18 +89,18 @@
               <e-chart
                 ref="chart"
                 :path-option="[
-                ['dataset.source', dataset.stackData],
-                ['grid.bottom', '10%'],
-                ['grid.top', '5%'],
-                ['xAxis.show', false],
-                ['yAxis.show', false],
-                ['series[0].type', 'bar'],
-                ['series[0].barGap', '-100%'],
-                ['series[0].itemStyle.normal.color', 'rgba(0,0,0,0.1)'],
-                ['series[0].barWidth', '50%'],
-                ['series[1].barWidth', '50%'],
-                ['series[1].type', 'bar'],
-                ['series[1].itemStyle.normal.color', color.shades.white],
+                  ['dataset.source', dataset.stackData],
+                  ['grid.bottom', '10%'],
+                  ['grid.top', '5%'],
+                  ['xAxis.show', false],
+                  ['yAxis.show', false],
+                  ['series[0].type', 'bar'],
+                  ['series[0].barGap', '-100%'],
+                  ['series[0].itemStyle.normal.color', 'rgba(0,0,0,0.1)'],
+                  ['series[0].barWidth', '50%'],
+                  ['series[1].barWidth', '50%'],
+                  ['series[1].type', 'bar'],
+                  ['series[1].itemStyle.normal.color', color.shades.white],
                 ]"
                 height="200px"
                 width="100%"
@@ -151,15 +115,7 @@
                 </div>
                 <v-spacer></v-spacer>
                 <div class="">
-                  <v-progress-circular
-                    :size="100"
-                    :width="15"
-                    :rotate="360"
-                    :value="10"
-                    color="blue"
-                  >
-                    10
-                  </v-progress-circular>
+                  <v-progress-circular :size="100" :width="15" :rotate="360" :value="10" color="blue"> 10</v-progress-circular>
                 </div>
               </div>
             </v-card-text>
@@ -177,9 +133,7 @@
                 </div>
               </div>
             </v-card-title>
-            <v-responsive
-              class="white--text"
-            >
+            <v-responsive class="white--text">
               <e-chart
                 :path-option="[
                   ['dataset.source', dataset.monthVisit],
@@ -203,15 +157,7 @@
                 </div>
                 <v-spacer></v-spacer>
                 <div class="">
-                  <v-progress-circular
-                    :size="100"
-                    :width="15"
-                    :rotate="360"
-                    :value="10"
-                    color="blue"
-                  >
-                    10
-                  </v-progress-circular>
+                  <v-progress-circular :size="100" :width="15" :rotate="360" :value="10" color="blue"> 10</v-progress-circular>
                 </div>
               </div>
             </v-card-text>
@@ -229,21 +175,20 @@
                 </div>
               </div>
             </v-card-title>
-            <v-responsive
-            >
+            <v-responsive>
               <e-chart
                 :path-option="[
-                ['dataset.source', dataset.monthVisit],
-                ['color', [color.blue.base]],
-                ['xAxis.show', false],
-                ['xAxis.boundaryGap', false],
-                ['grid.left', '0'],
-                ['grid.bottom', '0'],
-                ['grid.right', '0'],
-                ['yAxis.show', false],
-                ['series[0].areaStyle', {} ],
-                ['series[0].smooth', true ],
-              ]"
+                  ['dataset.source', dataset.monthVisit],
+                  ['color', [color.blue.base]],
+                  ['xAxis.show', false],
+                  ['xAxis.boundaryGap', false],
+                  ['grid.left', '0'],
+                  ['grid.bottom', '0'],
+                  ['grid.right', '0'],
+                  ['yAxis.show', false],
+                  ['series[0].areaStyle', {}],
+                  ['series[0].smooth', true],
+                ]"
                 height="200px"
                 width="100%"
               >
@@ -257,15 +202,7 @@
                 </div>
                 <v-spacer></v-spacer>
                 <div class="">
-                  <v-progress-circular
-                    :size="100"
-                    :width="15"
-                    :rotate="360"
-                    :value="10"
-                    color="blue"
-                  >
-                    10
-                  </v-progress-circular>
+                  <v-progress-circular :size="100" :width="15" :rotate="360" :value="10" color="blue"> 10</v-progress-circular>
                 </div>
               </div>
             </v-card-text>
@@ -315,22 +252,18 @@
         </v-flex>
         <v-flex lg12 sm12>
           <v-tabs v-model="selectedTab" @change="handleTabChange">
-            <v-tab ripple href="#tab-1">
-              Sales
-            </v-tab>
-            <v-tab ripple href="#tab-2">
-              Visit
-            </v-tab>
+            <v-tab ripple href="#tab-1"> Sales</v-tab>
+            <v-tab ripple href="#tab-2"> Visit</v-tab>
             <v-tabs-items v-model="selectedTab">
               <v-tab-item value="tab-1" class="d-block">
                 <v-card>
                   <e-chart
                     :path-option="[
-                    ['color',[color.lightBlue.base, color.purple.base]],
-                    ['dataset.source', dataset.monthVisit],
-                    ['series[0].type', 'bar'],
-                    ['series[1].type', 'bar']
-                  ]"
+                      ['color', [color.lightBlue.base, color.purple.base]],
+                      ['dataset.source', dataset.monthVisit],
+                      ['series[0].type', 'bar'],
+                      ['series[1].type', 'bar'],
+                    ]"
                     height="350px"
                     width="100%"
                   >
@@ -341,9 +274,9 @@
                 <v-card>
                   <e-chart
                     :path-option="[
-                    ['dataset.source', dataset.monthVisit],
-                    ['series[0].type', 'line']
-                  ]"
+                      ['dataset.source', dataset.monthVisit],
+                      ['series[0].type', 'line'],
+                    ]"
                     height="350px"
                     width="100%"
                   >
@@ -359,50 +292,42 @@
 </template>
 
 <script>
-  import EChart from '@/components/chart/echart';
-  import {
-    StackData,
-    SinData,
-    monthVisitData,
-    campaignData,
-    locationData,
-  } from '@/api/chart';
-  import Material from 'vuetify/es5/util/colors';
-  import MiniChart from '@/components/widgets/chart/MiniChart';
-  import BoxChart from '@/components/widgets/chart/BoxChart';
-  import VWidget from '@/components/VWidget';
+import Material from 'vuetify/es5/util/colors';
+import EChart from '@/components/chart/echart';
+import { campaignData, locationData, monthVisitData, SinData, StackData } from '@/api/chart';
+import MiniChart from '@/components/widgets/chart/MiniChart';
+import BoxChart from '@/components/widgets/chart/BoxChart';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      BoxChart,
-      MiniChart,
-      EChart,
-      VWidget
+export default {
+  components: {
+    BoxChart,
+    MiniChart,
+    EChart,
+    VWidget,
+  },
+  data() {
+    return {
+      selectedTab: 'tab-1',
+      option: null,
+      dataset: {
+        sinData: SinData,
+        monthVisit: monthVisitData,
+        campaign: campaignData,
+        location: locationData,
+        stackData: StackData,
+      },
+      color: Material,
+    };
+  },
+  created() {
+    console.log(this.$refs.chart);
+  },
+  methods: {
+    handleTabChange(val, e) {
+      // make sure the chart resized while parent from hidden to show
+      window.dispatchEvent(new Event('resize'));
     },
-    data() {
-      return {
-        selectedTab: 'tab-1',
-        option: null,
-        dataset: {
-          sinData: SinData,
-          monthVisit: monthVisitData,
-          campaign: campaignData,
-          location: locationData,
-          stackData: StackData,
-        },
-        color: Material,
-
-      };
-    },
-    created() {
-      console.log(this.$refs.chart);
-    },
-    methods: {
-      handleTabChange(val, e) {
-        // make sure the chart resized while parent from hidden to show
-        window.dispatchEvent(new Event('resize'));
-      }
-    },
-
-  };
+  },
+};
 </script>

@@ -22,6 +22,13 @@ module.exports = {
     'vue/name-property-casing': 'off',
     'vue/no-v-html': 'off',
     'vue/comment-directive': 'off',
+    'vue/no-lone-template': [
+      'warn',
+      {
+        ignoreAccessible: true,
+      },
+    ],
+    'nuxt/no-globals-in-created': 'off',
     'dot-notation': 'error',
     'linebreak-style': 'off',
     'no-console': process.env.NODE_ENV === 'release' ? 'warn' : 'off',

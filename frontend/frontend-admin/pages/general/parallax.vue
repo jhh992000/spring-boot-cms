@@ -5,8 +5,7 @@
         <v-flex lg12>
           <v-widget title="Default">
             <div slot="widget-content" class="text-xs-center">
-              <v-parallax :src="require('@/static/bg/12.jpg')">
-              </v-parallax>
+              <v-parallax :src="require('@/static/bg/12.jpg')"></v-parallax>
             </div>
           </v-widget>
           <v-widget title="Content inside" class="mt-3">
@@ -21,11 +20,7 @@
           </v-widget>
           <v-widget title="Jumbotron inside" class="mt-3">
             <div slot="widget-content" class="text-xs-center">
-              <v-parallax
-                :src="require('@/static/bg/21.jpg')"
-                height="700"
-                jumbotron
-              ></v-parallax>
+              <v-parallax :src="require('@/static/bg/21.jpg')" height="700" jumbotron></v-parallax>
             </div>
           </v-widget>
         </v-flex>
@@ -35,18 +30,18 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        page: 1
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      page: 1,
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

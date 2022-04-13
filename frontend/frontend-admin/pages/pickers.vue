@@ -1,13 +1,11 @@
 <template>
-    <nuxt-child/>
+  <nuxt-child />
 </template>
 
 <script>
-    export default {
-        layout: "dashboard"
-    }
+export default {
+  layout: 'dashboard',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

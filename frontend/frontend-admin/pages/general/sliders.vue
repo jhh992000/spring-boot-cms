@@ -25,8 +25,7 @@
               <div class="container">
                 <div class="layout column">
                   <div class="flex">
-                    <v-slider placeholder="step" color="pink" :max="255" thumb-label step="10" ticks
-                              v-model="slider3"></v-slider>
+                    <v-slider placeholder="step" color="pink" :max="255" thumb-label step="10" ticks v-model="slider3"></v-slider>
                   </div>
                 </div>
               </div>
@@ -58,25 +57,25 @@
 </template>
 
 <script>
-  import VWidget from '@/components/VWidget';
+import VWidget from '@/components/VWidget';
 
-  export default {
-    components: {
-      VWidget
-    },
-    data() {
-      return {
-        slider1: 0,
-        slider2: 0,
-        slider3: 0,
-        media1: 0,
-        media2: 0,
-        ex1: {label: 'color', val: 25, color: 'orange darken-3'},
-        ex2: {label: 'track-color', val: 75, color: 'green lighten-1'},
-        ex3: {label: 'thumb-color', val: 50, color: 'red'}
-      };
-    },
-    computed: {},
-    methods: {}
-  };
+export default {
+  components: {
+    VWidget,
+  },
+  data() {
+    return {
+      slider1: 0,
+      slider2: 0,
+      slider3: 0,
+      media1: 0,
+      media2: 0,
+      ex1: { label: 'color', val: 25, color: 'orange darken-3' },
+      ex2: { label: 'track-color', val: 75, color: 'green lighten-1' },
+      ex3: { label: 'thumb-color', val: 50, color: 'red' },
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>

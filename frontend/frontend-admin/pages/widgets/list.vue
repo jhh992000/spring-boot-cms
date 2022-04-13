@@ -23,34 +23,33 @@
 </template>
 
 <script>
-  import {getPost} from '@/api/post';
-  import MessageList from '@/components/widgets/list/MessageList';
-  import NotificationList from '@/components/widgets/list/NotificationList';
-  import PlainTable from '@/components/widgets/list/PlainTable';
-  import PlainTableOrder from '@/components/widgets/list/PlainTableOrder';
-  import PostListCard from '@/components/widgets/card/PostListCard';
+import { getPost } from '@/api/post';
+import MessageList from '@/components/widgets/list/MessageList';
+import NotificationList from '@/components/widgets/list/NotificationList';
+import PlainTable from '@/components/widgets/list/PlainTable';
+import PlainTableOrder from '@/components/widgets/list/PlainTableOrder';
+import PostListCard from '@/components/widgets/card/PostListCard';
 
-  export default {
-    components: {
-      PostListCard,
-      MessageList,
-      NotificationList,
-      PlainTable,
-      PlainTableOrder
+export default {
+  components: {
+    PostListCard,
+    MessageList,
+    NotificationList,
+    PlainTable,
+    PlainTableOrder,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    posts() {
+      return getPost();
     },
-    data() {
-      return {};
+  },
+  methods: {
+    handleClick: e => {
+      console.log(e);
     },
-    computed: {
-      posts() {
-        return getPost();
-      }
-    },
-    methods: {
-      handleClick: (e) => {
-        console.log(e);
-      }
-    },
-
-  };
+  },
+};
 </script>

@@ -16,13 +16,13 @@
         <v-flex xs10 class="text-xs-right">
           <v-chip>
             <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/92.jpg" >
+              <img src="https://randomuser.me/api/portraits/men/92.jpg" />
             </v-avatar>
             Trevor Hansen
           </v-chip>
           <v-chip>
             <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/91.jpg" >
+              <img src="https://randomuser.me/api/portraits/men/91.jpg" />
             </v-avatar>
             Alex Nelson
           </v-chip>
@@ -34,33 +34,19 @@
         <v-flex xs10 class="text-xs-right">
           <v-chip>
             <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/92.jpg" >
+              <img src="https://randomuser.me/api/portraits/men/92.jpg" />
             </v-avatar>
             John Doe
           </v-chip>
-        </v-flex>              
-        <v-flex xs12>
-          <v-divider></v-divider>
-          <v-text-field
-            label="Subject"
-            value="Plans for the weekend"
-            single-line
-            full-width
-            hide-details
-          ></v-text-field>
         </v-flex>
         <v-flex xs12>
           <v-divider></v-divider>
-          <v-text-field
-            label="Message"
-            v-model="title"
-            counter
-            max="120"
-            full-width
-            multi-line
-            single-line
-          ></v-text-field>
-        </v-flex>             
+          <v-text-field label="Subject" value="Plans for the weekend" single-line full-width hide-details></v-text-field>
+        </v-flex>
+        <v-flex xs12>
+          <v-divider></v-divider>
+          <v-text-field label="Message" v-model="title" counter max="120" full-width multi-line single-line></v-text-field>
+        </v-flex>
       </v-layout>
     </v-container>
   </v-card>
@@ -68,9 +54,9 @@
 
 <script>
 export default {
+  name: 'ComposeComp',
   data: () => ({
-    title: 'Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa', 
-    
-  })
+    title: 'Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa',
+  }),
 };
 </script>
