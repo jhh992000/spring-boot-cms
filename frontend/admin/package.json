@@ -18,7 +18,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.7",
     "lodash-es": "^4.17.11",
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.3",
     "font-awesome": "^4.7.0",
     "lodash.truncate": "^4.4.2",
     "nuxt": "^2.15.8",
