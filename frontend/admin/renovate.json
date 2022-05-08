@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "packageNames": [
+        "@nuxt/kit",
+        "@nuxt/nitro",
+        "@nuxt/schema"
+      ],
+      "groupName": "Nuxt TypeScript core packages"
+    }
+  ]
+}
