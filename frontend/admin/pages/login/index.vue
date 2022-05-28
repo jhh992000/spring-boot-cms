@@ -76,8 +76,11 @@ export default {
       console.log('userId : ' + this.userId);
       console.log('password : ' + this.password);
       const result = await loginApi.findUser(this.userId, this.password);
-      console.log('result:' + JSON.stringify(result));
-      // this.$router.push('/');
+      if (result) {
+        this.$router.push('/');
+      } else {
+        alert('로그인 실패');
+      }
     },
   },
 };

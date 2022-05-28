@@ -26,7 +26,7 @@ public class BaseConstants {
 
     private static boolean hasProfile(String[] activeProfiles, RunEnv runEnv) {
         return Arrays.stream(activeProfiles)
-            .anyMatch(s -> s.equals(runEnv.getEnv()));
+                .anyMatch(s -> s.equals(runEnv.getEnv()));
     }
 
 }

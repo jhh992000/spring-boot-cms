@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.menu.application;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.hhjeong.springbootcms.menu.domain.RoleMenu;
@@ -23,8 +24,8 @@ public class RoleMenuService {
         List<RoleMenu> roleMenus = roleMenuRepository.findByRoleIdAndSiteId(roleId, siteId);
 
         List<RoleMenu> requestRoleMenus = requests.stream()
-            .map(req -> req.toRoleMenu(roleId, siteId))
-            .collect(Collectors.toList());
+                .map(req -> req.toRoleMenu(roleId, siteId))
+                .collect(Collectors.toList());
 
         mergeRoleMenus(roleMenus, requestRoleMenus);
 

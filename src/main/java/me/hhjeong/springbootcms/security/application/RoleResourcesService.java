@@ -5,6 +5,7 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.security.domain.RoleResources;
 import me.hhjeong.springbootcms.security.domain.RoleResourcesRepository;
@@ -34,21 +35,21 @@ public class RoleResourcesService {
 
         if (lastRoleResourcesId == null) {
             lastRoleResourcesId = roleResourcesRepository.findFirstByOrderByIdDesc()
-                .map(RoleResources::getId)
-                .orElse(0L);
+                    .map(RoleResources::getId)
+                    .orElse(0L);
         }
 
         List<RoleResources> roleResourcess = roleResourcesRepository.findLatest(lastRoleResourcesId, pageable);
 
         return roleResourcess.stream()
-            .map(roleResources -> RoleResourcesResponse.of(roleResources))
-            .collect(Collectors.toList());
+                .map(roleResources -> RoleResourcesResponse.of(roleResources))
+                .collect(Collectors.toList());
     }
 
 
     public RoleResources findById(Long id) {
         return roleResourcesRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public void deleteRoleResources(Long id) {

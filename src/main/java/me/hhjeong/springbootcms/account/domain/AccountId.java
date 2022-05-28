@@ -13,6 +13,8 @@ import javax.validation.Payload;
 public @interface AccountId {
 
     String message() default "아이디가 유효하지 않습니다.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

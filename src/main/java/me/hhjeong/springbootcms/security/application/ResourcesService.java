@@ -5,6 +5,7 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.security.domain.Resources;
 import me.hhjeong.springbootcms.security.domain.ResourcesRepository;
@@ -35,33 +36,33 @@ public class ResourcesService {
 
         if (lastResourcesId == null) {
             lastResourcesId = resourcesRepository.findFirstByOrderByIdDesc()
-                .map(Resources::getId)
-                .orElse(0L);
+                    .map(Resources::getId)
+                    .orElse(0L);
         }
 
         List<Resources> resourcess = resourcesRepository.findLatest(lastResourcesId, pageable);
 
         return resourcess.stream()
-            .map(resources -> ResourcesResponse.of(resources))
-            .collect(Collectors.toList());
+                .map(resources -> ResourcesResponse.of(resources))
+                .collect(Collectors.toList());
     }
 
 
     public Resources findById(Long id) {
         return resourcesRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public Resources replace(Long id, UpdateResourcesRequest request) {
         return resourcesRepository.findById(id)
-            .map(resources -> {
-                resources.update(request.toResources());
-                return resources;
-            })
-            .orElseGet(() -> {
-                Resources newResources = request.toResources(id);
-                return resourcesRepository.save(newResources);
-            });
+                .map(resources -> {
+                    resources.update(request.toResources());
+                    return resources;
+                })
+                .orElseGet(() -> {
+                    Resources newResources = request.toResources(id);
+                    return resourcesRepository.save(newResources);
+                });
     }
 
     public void deleteResources(Long id) {

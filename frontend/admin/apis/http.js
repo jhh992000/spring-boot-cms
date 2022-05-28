@@ -31,16 +31,22 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   res => {
-    if (res.headers['content-type'].includes('text/html')) {
-      /* eslint-disable no-undef */
-      if (process.client) {
-        $nuxt.error({ statusCode: 999, contents: res.data });
+    consola.info("res.headers['content-type'] : " + res.headers['content-type']);
+    /*
+    if (res.headers['content-type']) {
+      if (res.headers['content-type'].includes('text/html')) {
+        /!* eslint-disable no-undef *!/
+        if (process.client) {
+          $nuxt.error({ statusCode: 999, contents: res.data });
+        }
+
+        return Promise.reject(res);
       }
-
-      return Promise.reject(res);
     }
-
+*/
     const response = res.data;
+    consola.info('response.header : ' + response.header);
+    /*
     if (!response.header.isSuccessful) {
       const statusCode = response.header.resultCode;
       if (statusCode === 403 || statusCode === 404) {
@@ -55,7 +61,7 @@ http.interceptors.response.use(
       }
       return Promise.reject(response.header);
     }
-
+    */
     return response.body;
   },
   error => {

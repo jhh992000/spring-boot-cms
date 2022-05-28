@@ -4,11 +4,13 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.PAGE_SIZE;
 import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.json.JsonPatch;
 import javax.json.JsonStructure;
 import javax.json.JsonValue;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.hhjeong.springbootcms.site.domain.Site;
@@ -37,15 +39,15 @@ public class SiteService {
 
         if (lastSiteId == null) {
             lastSiteId = siteRepository.findFirstByOrderByIdDesc()
-                .map(Site::getId)
-                .orElse(0L);
+                    .map(Site::getId)
+                    .orElse(0L);
         }
 
         List<Site> sites = siteRepository.findLatest(lastSiteId, pageable);
 
         return sites.stream()
-            .map(SiteResponse::of)
-            .collect(Collectors.toList());
+                .map(SiteResponse::of)
+                .collect(Collectors.toList());
     }
 
     public SiteResponse createSite(CreateSiteRequest request) {
@@ -55,19 +57,19 @@ public class SiteService {
 
     public Site findSite(Long id) {
         return siteRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public Site replace(Long id, UpdateSiteRequest request) {
         return siteRepository.findById(id)
-            .map(site -> {
-                site.update(request.toSite());
-                return site;
-            })
-            .orElseGet(() -> {
-                Site newSite = request.toSite(id);
-                return siteRepository.save(newSite);
-            });
+                .map(site -> {
+                    site.update(request.toSite());
+                    return site;
+                })
+                .orElseGet(() -> {
+                    Site newSite = request.toSite(id);
+                    return siteRepository.save(newSite);
+                });
     }
 
     public void deleteSite(Long id) {

@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.menu.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,16 +26,16 @@ public class RoleMenuResponse extends BaseEntity {
 
     public static RoleMenuResponse of(RoleMenu roleMenu) {
         return RoleMenuResponse.builder()
-            .id(roleMenu.getId())
-            .roleId(roleMenu.getRole().getId())
-            .siteId(roleMenu.getSite().getId())
-            .menuId(roleMenu.getMenu().getId())
-            .build();
+                .id(roleMenu.getId())
+                .roleId(roleMenu.getRole().getId())
+                .siteId(roleMenu.getSite().getId())
+                .menuId(roleMenu.getMenu().getId())
+                .build();
     }
 
     public static List<RoleMenuResponse> ofList(List<RoleMenu> roleMenus) {
         return roleMenus.stream()
-            .map(RoleMenuResponse::of)
-            .collect(Collectors.toList());
+                .map(RoleMenuResponse::of)
+                .collect(Collectors.toList());
     }
 }

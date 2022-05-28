@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -72,10 +73,10 @@ public class RoleMenu extends BaseEntity {
     @Override
     public String toString() {
         return "RoleMenu{" +
-            "id=" + id +
-            ", role=" + role.getId() +
-            ", site=" + site.getId() +
-            ", menu=" + menu.getId() +
-            '}';
+                "id=" + id +
+                ", role=" + role.getId() +
+                ", site=" + site.getId() +
+                ", menu=" + menu.getId() +
+                '}';
     }
 }

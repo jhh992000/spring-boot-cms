@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import lombok.Getter;
 import me.hhjeong.springbootcms.common.domain.BaseEntity;
 

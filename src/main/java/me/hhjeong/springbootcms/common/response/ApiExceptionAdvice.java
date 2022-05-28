@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.common.response;
 
 import java.nio.file.AccessDeniedException;
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,12 @@ public class ApiExceptionAdvice {
         pringStackTrace(e);
 
         return ResponseEntity
-            .status(e.getError().getStatus())
-            .body(ApiExceptionEntity.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .errorCode(e.getError().getCode())
-                .errorMessage(e.getError().getMessage())
-                .build());
+                .status(e.getError().getStatus())
+                .body(ApiExceptionEntity.builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .errorCode(e.getError().getCode())
+                        .errorMessage(e.getError().getMessage())
+                        .build());
     }
 
     @ExceptionHandler({RuntimeException.class})
@@ -35,12 +36,12 @@ public class ApiExceptionAdvice {
         pringStackTrace(e);
 
         return ResponseEntity
-            .status(ExceptionEnum.RUNTIME_EXCEPTION.getStatus())
-            .body(ApiExceptionEntity.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .errorCode(ExceptionEnum.RUNTIME_EXCEPTION.getCode())
-                .errorMessage(e.getMessage())
-                .build());
+                .status(ExceptionEnum.RUNTIME_EXCEPTION.getStatus())
+                .body(ApiExceptionEntity.builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .errorCode(ExceptionEnum.RUNTIME_EXCEPTION.getCode())
+                        .errorMessage(e.getMessage())
+                        .build());
     }
 
     @ExceptionHandler({AccessDeniedException.class})
@@ -49,12 +50,12 @@ public class ApiExceptionAdvice {
         pringStackTrace(e);
 
         return ResponseEntity
-            .status(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getStatus())
-            .body(ApiExceptionEntity.builder()
-                .status(HttpStatus.FORBIDDEN)
-                .errorCode(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getCode())
-                .errorMessage(e.getMessage())
-                .build());
+                .status(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getStatus())
+                .body(ApiExceptionEntity.builder()
+                        .status(HttpStatus.FORBIDDEN)
+                        .errorCode(ExceptionEnum.ACCESS_DENIED_EXCEPTION.getCode())
+                        .errorMessage(e.getMessage())
+                        .build());
     }
 
     @ExceptionHandler({Exception.class})
@@ -63,12 +64,12 @@ public class ApiExceptionAdvice {
         pringStackTrace(e);
 
         return ResponseEntity
-            .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
-            .body(ApiExceptionEntity.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
-                .errorMessage(e.getMessage())
-                .build());
+                .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
+                .body(ApiExceptionEntity.builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
+                        .errorMessage(e.getMessage())
+                        .build());
     }
 
 
@@ -78,12 +79,12 @@ public class ApiExceptionAdvice {
         pringStackTrace(e);
 
         return ResponseEntity
-            .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
-            .body(ApiExceptionEntity.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
-                .errorMessage(e.getAllErrors().get(0).getDefaultMessage())
-                .build());
+                .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
+                .body(ApiExceptionEntity.builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
+                        .errorMessage(e.getAllErrors().get(0).getDefaultMessage())
+                        .build());
     }
 
     private void pringStackTrace(Exception e) {

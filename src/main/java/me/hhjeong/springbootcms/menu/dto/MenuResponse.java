@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,19 +53,19 @@ public class MenuResponse {
 
     public static MenuResponse of(Menu menu) {
         return MenuResponse.builder()
-            .id(menu.getId())
-            .siteId(menu.getSite().getId())
-            .parentId(menu.getParentId())
-            .listOrder(menu.getListOrder())
-            .name(menu.getName())
-            .description(menu.getDescription())
-            .openType(menu.getOpenType())
-            .hide(menu.getHide())
-            .enable(menu.getEnable())
-            .createdDatetime(menu.getCreatedDatetime())
-            .modifiedDatetime(menu.getModifiedDatetime())
-            .children(findChildrens(menu))
-            .build();
+                .id(menu.getId())
+                .siteId(menu.getSite().getId())
+                .parentId(menu.getParentId())
+                .listOrder(menu.getListOrder())
+                .name(menu.getName())
+                .description(menu.getDescription())
+                .openType(menu.getOpenType())
+                .hide(menu.getHide())
+                .enable(menu.getEnable())
+                .createdDatetime(menu.getCreatedDatetime())
+                .modifiedDatetime(menu.getModifiedDatetime())
+                .children(findChildrens(menu))
+                .build();
     }
 
     private static List<MenuResponse> findChildrens(Menu menu) {
@@ -72,8 +74,8 @@ public class MenuResponse {
             return new ArrayList<>();
         }
         return children.stream()
-            .map(MenuResponse::of)
-            .collect(Collectors.toList());
+                .map(MenuResponse::of)
+                .collect(Collectors.toList());
     }
 
 }

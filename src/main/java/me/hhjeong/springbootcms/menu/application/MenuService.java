@@ -1,11 +1,13 @@
 package me.hhjeong.springbootcms.menu.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.json.JsonPatch;
 import javax.json.JsonStructure;
 import javax.json.JsonValue;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.hhjeong.springbootcms.menu.domain.Menu;
@@ -37,25 +39,25 @@ public class MenuService {
     public List<MenuResponse> findMenus(Long siteId) {
         final List<Menu> menus = menuQueryRepository.findMenus(siteId);
         return menus.stream()
-            .map(MenuResponse::of)
-            .collect(Collectors.toList());
+                .map(MenuResponse::of)
+                .collect(Collectors.toList());
     }
 
     public Menu findMenu(Long id) {
         return menuRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public Menu replaceMenu(Long id, UpdateMenuRequest request) {
         return menuRepository.findById(id)
-            .map(menu -> {
-                menu.update(request.toMenu());
-                return menu;
-            })
-            .orElseGet(() -> {
-                Menu newMenu = request.toMenu(id);
-                return menuRepository.save(newMenu);
-            });
+                .map(menu -> {
+                    menu.update(request.toMenu());
+                    return menu;
+                })
+                .orElseGet(() -> {
+                    Menu newMenu = request.toMenu(id);
+                    return menuRepository.save(newMenu);
+                });
     }
 
     public Menu patchMenu(Long id, JsonPatch jsonPatch) {

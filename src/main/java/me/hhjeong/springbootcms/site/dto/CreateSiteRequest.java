@@ -2,6 +2,7 @@ package me.hhjeong.springbootcms.site.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,11 +26,11 @@ public class CreateSiteRequest {
 
     public Site toSite() {
         return Site.builder()
-            .name(name)
-            .enabled(enabled)
-            .alias(alias)
-            .useLoginLock(useLoginLock)
-            .countOfLoginFail(countOfLoginFail)
-            .build();
+                .name(name)
+                .enabled(enabled)
+                .alias(alias)
+                .useLoginLock(useLoginLock)
+                .countOfLoginFail(countOfLoginFail)
+                .build();
     }
 }

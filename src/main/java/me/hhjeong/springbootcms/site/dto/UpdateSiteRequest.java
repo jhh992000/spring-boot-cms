@@ -18,22 +18,22 @@ public class UpdateSiteRequest {
 
     public Site toSite() {
         return Site.builder()
-            .name(name)
-            .enabled(enabled)
-            .alias(alias)
-            .useLoginLock(useLoginLock)
-            .countOfLoginFail(countOfLoginFail)
-            .build();
+                .name(name)
+                .enabled(enabled)
+                .alias(alias)
+                .useLoginLock(useLoginLock)
+                .countOfLoginFail(countOfLoginFail)
+                .build();
     }
 
     public Site toSite(Long id) {
         return Site.builder()
-            .id(id)
-            .name(name)
-            .enabled(enabled)
-            .alias(alias)
-            .useLoginLock(useLoginLock)
-            .countOfLoginFail(countOfLoginFail)
-            .build();
+                .id(id)
+                .name(name)
+                .enabled(enabled)
+                .alias(alias)
+                .useLoginLock(useLoginLock)
+                .countOfLoginFail(countOfLoginFail)
+                .build();
     }
 }

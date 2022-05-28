@@ -5,6 +5,7 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.security.domain.Role;
 import me.hhjeong.springbootcms.security.domain.RoleRepository;
@@ -39,33 +40,33 @@ public class RoleService {
 
         if (lastRoleId == null) {
             lastRoleId = roleRepository.findFirstByOrderByIdDesc()
-                .map(Role::getId)
-                .orElse(0L);
+                    .map(Role::getId)
+                    .orElse(0L);
         }
 
         List<Role> roles = roleRepository.findLatest(lastRoleId, pageable);
 
         return roles.stream()
-            .map(role -> RoleResponse.of(role))
-            .collect(Collectors.toList());
+                .map(role -> RoleResponse.of(role))
+                .collect(Collectors.toList());
     }
 
 
     public Role findById(Long id) {
         return roleRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public Role replace(Long id, UpdateRoleRequest request) {
         return roleRepository.findById(id)
-            .map(role -> {
-                role.update(request.toRole());
-                return role;
-            })
-            .orElseGet(() -> {
-                Role newRole = request.toRole(id);
-                return roleRepository.save(newRole);
-            });
+                .map(role -> {
+                    role.update(request.toRole());
+                    return role;
+                })
+                .orElseGet(() -> {
+                    Role newRole = request.toRole(id);
+                    return roleRepository.save(newRole);
+                });
     }
 
     public void deleteRole(Long id) {

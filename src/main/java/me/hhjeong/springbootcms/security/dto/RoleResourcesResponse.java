@@ -18,10 +18,10 @@ public class RoleResourcesResponse {
 
     public static RoleResourcesResponse of(RoleResources roleResources) {
         return RoleResourcesResponse.builder()
-            .id(roleResources.getId())
-            .roleId(roleResources.getRole().getId())
-            .resourceId(roleResources.getResources().getId())
-            .build();
+                .id(roleResources.getId())
+                .roleId(roleResources.getRole().getId())
+                .resourceId(roleResources.getResources().getId())
+                .build();
     }
 
 }

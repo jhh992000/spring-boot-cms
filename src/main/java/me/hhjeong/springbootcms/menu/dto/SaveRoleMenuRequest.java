@@ -1,6 +1,7 @@
 package me.hhjeong.springbootcms.menu.dto;
 
 import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,10 +22,10 @@ public class SaveRoleMenuRequest {
 
     public RoleMenu toRoleMenu(Long roleId, Long siteId) {
         return RoleMenu.builder()
-            .role(new Role(roleId))
-            .site(new Site(siteId))
-            .menu(new Menu(menuId))
-            .build();
+                .role(new Role(roleId))
+                .site(new Site(siteId))
+                .menu(new Menu(menuId))
+                .build();
     }
 
 }

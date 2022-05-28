@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -31,7 +32,7 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
         HttpServletRequest request = ((FilterInvocation) object).getRequest();
 
         boolean permitAll = permitAllRequestMatchers.stream()
-            .anyMatch(requestMatcher -> requestMatcher.matches(request));
+                .anyMatch(requestMatcher -> requestMatcher.matches(request));
 
         if (permitAll) {
             return null;
@@ -59,6 +60,6 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
 
     private boolean isApplied(FilterInvocation filterInvocation) {
         return (filterInvocation.getRequest() != null)
-            && (filterInvocation.getRequest().getAttribute(FILTER_APPLIED) != null);
+                && (filterInvocation.getRequest().getAttribute(FILTER_APPLIED) != null);
     }
 }

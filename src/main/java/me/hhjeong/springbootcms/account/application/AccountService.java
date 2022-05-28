@@ -5,6 +5,7 @@ import static me.hhjeong.springbootcms.common.base.BaseConstants.START_PAGE_NO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.domain.AccountRepository;
@@ -42,32 +43,32 @@ public class AccountService {
 
         if (lastAccountId == null) {
             lastAccountId = accountRepository.findFirstByOrderByIdDesc()
-                .map(Account::getId)
-                .orElse(0L);
+                    .map(Account::getId)
+                    .orElse(0L);
         }
 
         List<Account> accounts = accountRepository.findLatest(lastAccountId, pageable);
 
         return accounts.stream()
-            .map(AccountResponse::of)
-            .collect(Collectors.toList());
+                .map(AccountResponse::of)
+                .collect(Collectors.toList());
     }
 
     public Account findAccount(Long id) {
         return accountRepository.findById(id)
-            .orElseThrow(RuntimeException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     public Account replaceAccount(Long id, UpdateAccountRequest request) {
         return accountRepository.findById(id)
-            .map(account -> {
-                account.update(request.toAccount());
-                return account;
-            })
-            .orElseGet(() -> {
-                Account newAccount = request.toAccount(id);
-                return accountRepository.save(newAccount);
-            });
+                .map(account -> {
+                    account.update(request.toAccount());
+                    return account;
+                })
+                .orElseGet(() -> {
+                    Account newAccount = request.toAccount(id);
+                    return accountRepository.save(newAccount);
+                });
     }
 
     public void deleteAccount(Long id) {
