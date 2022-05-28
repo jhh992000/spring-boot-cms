@@ -160,3 +160,15 @@
     </section>
   </div>
 </template>
+
+
+<script>
+export default {
+  name: "Alert",
+  layout: 'vertical'
+}
+</script>
+
+<style scoped>
+
+</style>

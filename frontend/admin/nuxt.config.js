@@ -14,9 +14,9 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'mazer-nuxt',
+    title: 'spring-boot-cms',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ko',
     },
     meta: [
       { charset: 'utf-8' },
@@ -24,14 +24,14 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Mazer Nuxt - Nuxt Version of Mazer',
+        content: 'Spring Boot CMS',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/scss/bootstrap.scss', '~/assets/scss/app.scss', '~/assets/scss/icons.scss'],
+  css: ['~/static/css/global.css', '~/assets/scss/bootstrap.scss', '~/assets/scss/app.scss', '~/assets/scss/icons.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -111,5 +111,12 @@ export default {
 
   router: {
     middleware: ['auth'],
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'main',
+        path: '/main',
+        component: resolve(__dirname, 'pages/index.vue'),
+      });
+    },
   },
 };

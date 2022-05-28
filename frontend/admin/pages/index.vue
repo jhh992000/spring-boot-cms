@@ -84,11 +84,7 @@
                 </div>
                 <div class="card-body">
                   <client-only>
-                    <VueApexCharts
-                        height="300"
-                        :options="optionsProfileVisit"
-                        :series="optionsProfileVisit.series"
-                    ></VueApexCharts>
+                    <VueApexCharts height="300" :options="optionsProfileVisit" :series="optionsProfileVisit.series"></VueApexCharts>
                   </client-only>
                 </div>
               </div>
@@ -104,10 +100,8 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="d-flex align-items-center">
-                        <svg class="bi text-primary" width="32" height="32" fill="blue"
-                             style="width:10px">
-                          <use
-                              xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill"/>
+                        <svg class="bi text-primary" width="32" height="32" fill="blue" style="width: 10px">
+                          <use xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
                         </svg>
                         <h5 class="mb-0 ms-3">Europe</h5>
                       </div>
@@ -117,21 +111,15 @@
                     </div>
                     <div class="col-12">
                       <client-only>
-                        <VueApexCharts
-                            height="80"
-                            :options="optionsEurope"
-                            :series="optionsEurope.series"
-                        ></VueApexCharts>
+                        <VueApexCharts height="80" :options="optionsEurope" :series="optionsEurope.series"></VueApexCharts>
                       </client-only>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-6">
                       <div class="d-flex align-items-center">
-                        <svg class="bi text-success" width="32" height="32" fill="blue"
-                             style="width:10px">
-                          <use
-                              xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill"/>
+                        <svg class="bi text-success" width="32" height="32" fill="blue" style="width: 10px">
+                          <use xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
                         </svg>
                         <h5 class="mb-0 ms-3">America</h5>
                       </div>
@@ -141,21 +129,15 @@
                     </div>
                     <div class="col-12">
                       <client-only>
-                        <VueApexCharts
-                            height="80"
-                            :options="optionsAmerica"
-                            :series="optionsAmerica.series"
-                        ></VueApexCharts>
+                        <VueApexCharts height="80" :options="optionsAmerica" :series="optionsAmerica.series"></VueApexCharts>
                       </client-only>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-6">
                       <div class="d-flex align-items-center">
-                        <svg class="bi text-danger" width="32" height="32" fill="blue"
-                             style="width:10px">
-                          <use
-                              xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill"/>
+                        <svg class="bi text-danger" width="32" height="32" fill="blue" style="width: 10px">
+                          <use xlink:href="~assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
                         </svg>
                         <h5 class="mb-0 ms-3">Indonesia</h5>
                       </div>
@@ -165,11 +147,7 @@
                     </div>
                     <div class="col-12">
                       <client-only>
-                        <VueApexCharts
-                            height="80"
-                            :options="optionsIndonesia"
-                            :series="optionsIndonesia.series"
-                        ></VueApexCharts>
+                        <VueApexCharts height="80" :options="optionsIndonesia" :series="optionsIndonesia.series"></VueApexCharts>
                       </client-only>
                     </div>
                   </div>
@@ -185,39 +163,38 @@
                   <div class="table-responsive">
                     <table class="table table-hover table-lg">
                       <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Comment</th>
-                      </tr>
+                        <tr>
+                          <th>Name</th>
+                          <th>Comment</th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td class="col-3">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar avatar-md">
-                              <img data-src="~assets/images/faces/5.jpg" v-lazy-load alt="...">
+                        <tr>
+                          <td class="col-3">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar avatar-md">
+                                <img data-src="~assets/images/faces/5.jpg" v-lazy-load alt="..." />
+                              </div>
+                              <p class="font-bold ms-3 mb-0">Si Cantik</p>
                             </div>
-                            <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                          </div>
-                        </td>
-                        <td class="col-auto">
-                          <p class=" mb-0">Congratulations on your graduation!</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-3">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar avatar-md">
-                              <img data-src="~assets/images/faces/2.jpg" v-lazy-load alt="...">
+                          </td>
+                          <td class="col-auto">
+                            <p class="mb-0">Congratulations on your graduation!</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="col-3">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar avatar-md">
+                                <img data-src="~assets/images/faces/2.jpg" v-lazy-load alt="..." />
+                              </div>
+                              <p class="font-bold ms-3 mb-0">Si Ganteng</p>
                             </div>
-                            <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                          </div>
-                        </td>
-                        <td class="col-auto">
-                          <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                            this design?</p>
-                        </td>
-                      </tr>
+                          </td>
+                          <td class="col-auto">
+                            <p class="mb-0">Wow amazing design! Can you make another tutorial for this design?</p>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -229,14 +206,38 @@
         <div class="col-12 col-lg-3">
           <div class="card">
             <div class="card-body py-4 px-5">
-              <div class="d-flex align-items-center">
-                <div class="avatar avatar-xl">
-                  <img data-src="~assets/images/faces/1.jpg" v-lazy-load alt="Face 1">
-                </div>
-                <div class="ms-3 name">
-                  <h5 class="font-bold">John Duck</h5>
-                  <h6 class="text-muted mb-0">@johnducky</h6>
-                </div>
+              <div class="dropdown">
+                <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-xl">
+                      <img data-src="~assets/images/faces/1.jpg" v-lazy-load alt="Face 1" />
+                    </div>
+                    <div class="ms-3 name">
+                      <h5 class="font-bold">John Duck</h5>
+                      <h6 class="text-muted mb-0">@johnducky</h6>
+                    </div>
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <h6 class="dropdown-header">Hello, John!</h6>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> Settings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i> Wallet</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" @click="logout()"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -247,7 +248,7 @@
             <div class="card-content pb-4">
               <div class="recent-message d-flex px-4 py-3">
                 <div class="avatar avatar-lg">
-                  <img data-src="~assets/images/faces/4.jpg" v-lazy-load alt="Face 2">
+                  <img data-src="~assets/images/faces/4.jpg" v-lazy-load alt="Face 2" />
                 </div>
                 <div class="name ms-4">
                   <h5 class="mb-1">Hank Schrader</h5>
@@ -256,7 +257,7 @@
               </div>
               <div class="recent-message d-flex px-4 py-3">
                 <div class="avatar avatar-lg">
-                  <img data-src="~assets/images/faces/5.jpg" v-lazy-load alt="Face 3">
+                  <img data-src="~assets/images/faces/5.jpg" v-lazy-load alt="Face 3" />
                 </div>
                 <div class="name ms-4">
                   <h5 class="mb-1">Dean Winchester</h5>
@@ -265,7 +266,7 @@
               </div>
               <div class="recent-message d-flex px-4 py-3">
                 <div class="avatar avatar-lg">
-                  <img data-src="~assets/images/faces/1.jpg" v-lazy-load alt="Face 4">
+                  <img data-src="~assets/images/faces/1.jpg" v-lazy-load alt="Face 4" />
                 </div>
                 <div class="name ms-4">
                   <h5 class="mb-1">John Dodol</h5>
@@ -273,9 +274,7 @@
                 </div>
               </div>
               <div class="px-4">
-                <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                  Conversation
-                </button>
+                <button class="btn btn-block btn-xl btn-light-primary font-bold mt-3">Start Conversation</button>
               </div>
             </div>
           </div>
@@ -285,11 +284,7 @@
             </div>
             <div class="card-body">
               <client-only>
-                <VueApexCharts
-                    height="350"
-                    :options="optionsVisitorsProfile"
-                    :series="optionsVisitorsProfile.series"
-                ></VueApexCharts>
+                <VueApexCharts height="350" :options="optionsVisitorsProfile" :series="optionsVisitorsProfile.series"></VueApexCharts>
               </client-only>
             </div>
           </div>
@@ -301,6 +296,7 @@
 
 <script>
 export default {
+  name: 'MainPage',
   data() {
     return {
       optionsVisitorsProfile: {
@@ -308,49 +304,53 @@ export default {
         labels: ['Male', 'Female'],
         colors: ['#435ebe', '#55c6e8'],
         chart: {
-          type: 'donut'
+          type: 'donut',
         },
         legend: {
-          position: 'bottom'
+          position: 'bottom',
         },
         plotOptions: {
           pie: {
             donut: {
-              size: '30%'
-            }
-          }
-        }
+              size: '30%',
+            },
+          },
+        },
       },
 
       optionsProfileVisit: {
         annotations: {
-          position: 'back'
+          position: 'back',
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         chart: {
-          type: 'bar'
+          type: 'bar',
         },
         fill: {
-          opacity: 1
+          opacity: 1,
         },
         plotOptions: {},
-        series: [{
-          name: 'sales',
-          data: [9, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 20]
-        }],
+        series: [
+          {
+            name: 'sales',
+            data: [9, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 20],
+          },
+        ],
         colors: '#435ebe',
         xaxis: {
-          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         },
       },
 
       optionsEurope: {
-        series: [{
-          name: 'series1',
-          data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605]
-        }],
+        series: [
+          {
+            name: 'series1',
+            data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605],
+          },
+        ],
         chart: {
           type: 'area',
           toolbar: {
@@ -364,20 +364,33 @@ export default {
           show: false,
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         xaxis: {
           type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z", "2018-09-19T07:30:00.000Z", "2018-09-19T08:30:00.000Z", "2018-09-19T09:30:00.000Z", "2018-09-19T10:30:00.000Z", "2018-09-19T11:30:00.000Z"],
+          categories: [
+            '2018-09-19T00:00:00.000Z',
+            '2018-09-19T01:30:00.000Z',
+            '2018-09-19T02:30:00.000Z',
+            '2018-09-19T03:30:00.000Z',
+            '2018-09-19T04:30:00.000Z',
+            '2018-09-19T05:30:00.000Z',
+            '2018-09-19T06:30:00.000Z',
+            '2018-09-19T07:30:00.000Z',
+            '2018-09-19T08:30:00.000Z',
+            '2018-09-19T09:30:00.000Z',
+            '2018-09-19T10:30:00.000Z',
+            '2018-09-19T11:30:00.000Z',
+          ],
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             show: false,
-          }
+          },
         },
         show: false,
         yaxis: {
@@ -387,17 +400,19 @@ export default {
         },
         tooltip: {
           x: {
-            format: 'dd/MM/yy HH:mm'
+            format: 'dd/MM/yy HH:mm',
           },
         },
         colors: ['#5350e9'],
       },
 
       optionsAmerica: {
-        series: [{
-          name: 'series1',
-          data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605]
-        }],
+        series: [
+          {
+            name: 'series1',
+            data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605],
+          },
+        ],
         chart: {
           type: 'area',
           toolbar: {
@@ -411,20 +426,33 @@ export default {
           show: false,
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         xaxis: {
           type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z", "2018-09-19T07:30:00.000Z", "2018-09-19T08:30:00.000Z", "2018-09-19T09:30:00.000Z", "2018-09-19T10:30:00.000Z", "2018-09-19T11:30:00.000Z"],
+          categories: [
+            '2018-09-19T00:00:00.000Z',
+            '2018-09-19T01:30:00.000Z',
+            '2018-09-19T02:30:00.000Z',
+            '2018-09-19T03:30:00.000Z',
+            '2018-09-19T04:30:00.000Z',
+            '2018-09-19T05:30:00.000Z',
+            '2018-09-19T06:30:00.000Z',
+            '2018-09-19T07:30:00.000Z',
+            '2018-09-19T08:30:00.000Z',
+            '2018-09-19T09:30:00.000Z',
+            '2018-09-19T10:30:00.000Z',
+            '2018-09-19T11:30:00.000Z',
+          ],
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             show: false,
-          }
+          },
         },
         show: false,
         yaxis: {
@@ -434,17 +462,19 @@ export default {
         },
         tooltip: {
           x: {
-            format: 'dd/MM/yy HH:mm'
+            format: 'dd/MM/yy HH:mm',
           },
         },
         colors: ['#008b75'],
       },
 
       optionsIndonesia: {
-        series: [{
-          name: 'series1',
-          data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605]
-        }],
+        series: [
+          {
+            name: 'series1',
+            data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605],
+          },
+        ],
         chart: {
           type: 'area',
           toolbar: {
@@ -458,20 +488,33 @@ export default {
           show: false,
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         xaxis: {
           type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z", "2018-09-19T07:30:00.000Z", "2018-09-19T08:30:00.000Z", "2018-09-19T09:30:00.000Z", "2018-09-19T10:30:00.000Z", "2018-09-19T11:30:00.000Z"],
+          categories: [
+            '2018-09-19T00:00:00.000Z',
+            '2018-09-19T01:30:00.000Z',
+            '2018-09-19T02:30:00.000Z',
+            '2018-09-19T03:30:00.000Z',
+            '2018-09-19T04:30:00.000Z',
+            '2018-09-19T05:30:00.000Z',
+            '2018-09-19T06:30:00.000Z',
+            '2018-09-19T07:30:00.000Z',
+            '2018-09-19T08:30:00.000Z',
+            '2018-09-19T09:30:00.000Z',
+            '2018-09-19T10:30:00.000Z',
+            '2018-09-19T11:30:00.000Z',
+          ],
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             show: false,
-          }
+          },
         },
         show: false,
         yaxis: {
@@ -481,12 +524,17 @@ export default {
         },
         tooltip: {
           x: {
-            format: 'dd/MM/yy HH:mm'
+            format: 'dd/MM/yy HH:mm',
           },
         },
         colors: ['#dc3545'],
-      }
-    }
-  }
-}
+      },
+    };
+  }, // end of data
+  methods: {
+    logout() {
+      this.$router.push('/login');
+    },
+  },
+};
 </script>
