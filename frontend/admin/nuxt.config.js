@@ -40,6 +40,7 @@ export default {
     { src: '~/plugins/toastify.js', ssr: false },
     { src: '~/plugins/rater.js', ssr: false },
     { src: '~/plugins/perfect-scrollbar.js', ssr: false },
+    { src: '~/plugins/vee-validate.js', ssr: true },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -103,6 +104,7 @@ export default {
      */
     extractCSS: true,
     extend(config, ctx) {},
+    transpile: ['vee-validate/dist/rules'],
   },
 
   render: {
@@ -112,11 +114,13 @@ export default {
   router: {
     middleware: ['auth'],
     extendRoutes(routes, resolve) {
+      /*
       routes.push({
         name: 'main',
         path: '/main',
         component: resolve(__dirname, 'pages/index.vue'),
       });
+      */
     },
   },
 };
