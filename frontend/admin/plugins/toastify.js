@@ -1,6 +1,6 @@
-import "toastify-js/src/toastify.css"
+import 'toastify-js/src/toastify.css';
 
-// Include Toastify JS only 
+// Include Toastify JS only
 if (process.browser) {
-    window.Toastify = require('toastify-js')
+  window.Toastify = require('toastify-js');
 }

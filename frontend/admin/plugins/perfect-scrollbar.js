@@ -1,6 +1,6 @@
-import "perfect-scrollbar/css/perfect-scrollbar.css"
+import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
-// Include Perfect Scrollbar JS only 
+// Include Perfect Scrollbar JS only
 if (process.browser) {
-    window.PerfectScrollbar = require('perfect-scrollbar')
+  window.PerfectScrollbar = require('perfect-scrollbar');
 }

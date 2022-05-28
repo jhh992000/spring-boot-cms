@@ -1,4 +1,4 @@
-// Include Rater JS only 
+// Include Rater JS only
 if (process.browser) {
-    window.raterJs = require('rater-js')
+  window.raterJs = require('rater-js');
 }

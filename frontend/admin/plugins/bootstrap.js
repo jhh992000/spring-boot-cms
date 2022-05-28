@@ -1,4 +1,4 @@
-// Include bootstrap JS only 
+// Include bootstrap JS only
 if (process.browser) {
-    window.bootstrap = require('bootstrap')
+  window.bootstrap = require('bootstrap');
 }
