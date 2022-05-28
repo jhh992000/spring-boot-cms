@@ -31,38 +31,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   res => {
-    consola.info("res.headers['content-type'] : " + res.headers['content-type']);
-    /*
-    if (res.headers['content-type']) {
-      if (res.headers['content-type'].includes('text/html')) {
-        /!* eslint-disable no-undef *!/
-        if (process.client) {
-          $nuxt.error({ statusCode: 999, contents: res.data });
-        }
-
-        return Promise.reject(res);
-      }
-    }
-*/
-    const response = res.data;
-    consola.info('response.header : ' + response.header);
-    /*
-    if (!response.header.isSuccessful) {
-      const statusCode = response.header.resultCode;
-      if (statusCode === 403 || statusCode === 404) {
-        if (process.client) {
-          $nuxt.error({ statusCode });
-        }
-      }
-      if (statusCode === 401) {
-        if (process.client) {
-          $nuxt.$member.logout();
-        }
-      }
-      return Promise.reject(response.header);
-    }
-    */
-    return response.body;
+    return res;
   },
   error => {
     consola.error(error);

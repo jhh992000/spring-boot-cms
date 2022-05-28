@@ -65,6 +65,7 @@ export default {
     return {
       userId: '',
       password: '',
+      accessToken: '',
     };
   },
   mounted() {
@@ -73,10 +74,14 @@ export default {
   },
   methods: {
     async login() {
-      console.log('userId : ' + this.userId);
-      console.log('password : ' + this.password);
-      const result = await loginApi.findUser(this.userId, this.password);
-      if (result) {
+      this.accessToken = await loginApi.findUser(this.userId, this.password);
+
+      console.log('accessToken:' + JSON.stringify(this.accessToken));
+
+      if (this.accessToken) {
+        // TODO - accessToken 저장
+
+        // go to main page
         this.$router.push('/');
       } else {
         alert('로그인 실패');
