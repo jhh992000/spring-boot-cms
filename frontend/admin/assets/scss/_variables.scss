@@ -290,8 +290,8 @@ $gradient: linear-gradient(180deg, rgba($white, .15), rgba($white, 0)) ;
 $spacer: 1rem ;
 $spacers: (
   0: 0,
-  1: $spacer / 4,
-  2: $spacer / 2,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
   3: $spacer,
   4: $spacer * 1.5,
   5: $spacer * 3,
@@ -388,7 +388,7 @@ $gutters: $spacers ;
 
 // Container padding
 
-$container-padding-x: $grid-gutter-width / 2 ;
+$container-padding-x: $grid-gutter-width * 0.5 ;
 
 
 // Components
@@ -487,7 +487,7 @@ $font-sizes: (
 ) ;
 // scss-docs-end font-sizes
 
-$headings-margin-bottom:      $spacer / 2 ;
+$headings-margin-bottom:      $spacer * 0.5 ;
 $headings-font-family:        null ;
 $headings-font-style:         null ;
 $headings-font-weight:        700 ;
@@ -720,7 +720,7 @@ $input-height-border:                   $input-border-width * 2 ;
 
 $input-height-inner:                    add($input-line-height * 1em, $input-padding-y * 2) ;
 $input-height-inner-half:               add($input-line-height * .5em, $input-padding-y) ;
-$input-height-inner-quarter:            add($input-line-height * .25em, $input-padding-y / 2) ;
+$input-height-inner-quarter:            add($input-line-height * .25em, $input-padding-y * 0.5) ;
 
 $input-height:                          add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false)) ;
 $input-height-sm:                       add($input-line-height * 1em, add($input-padding-y-sm * 2, $input-height-border, false)) ;
@@ -925,7 +925,7 @@ $nav-pills-link-active-bg:          $component-active-bg ;
 
 // Navbar
 
-$navbar-padding-y:                  $spacer / 2 ;
+$navbar-padding-y:                  $spacer * 0.5 ;
 $navbar-padding-x:                  null ;
 
 $navbar-nav-link-padding-x:         .5rem ;
@@ -934,7 +934,7 @@ $navbar-brand-font-size:            $font-size-lg ;
 // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
 $nav-link-height:                   $font-size-base * $line-height-base + $nav-link-padding-y * 2 ;
 $navbar-brand-height:               $navbar-brand-font-size * $line-height-base ;
-$navbar-brand-padding-y:            ($nav-link-height - $navbar-brand-height) / 2 ;
+$navbar-brand-padding-y:            ($nav-link-height - $navbar-brand-height) * 0.5 ;
 $navbar-brand-margin-end:           1rem ;
 
 $navbar-toggler-padding-y:          .25rem ;
@@ -980,7 +980,7 @@ $dropdown-border-radius:            $border-radius ;
 $dropdown-border-width:             0 ;
 $dropdown-inner-border-radius:      subtract($dropdown-border-radius, $dropdown-border-width) ;
 $dropdown-divider-bg:               rgb(189, 199, 209) ;
-$dropdown-divider-margin-y:         $spacer / 2 ;
+$dropdown-divider-margin-y:         $spacer * 0.5 ;
 $dropdown-box-shadow:               1px 4px 15px #f4f5f9 ;
 
 $dropdown-link-color:               $gray-900 ;
@@ -1052,7 +1052,7 @@ $pagination-transition:              color .15s ease-in-out, background-color .1
 
 $card-spacer-y:                     $spacer ;
 $card-spacer-x:                     $spacer ;
-$card-title-spacer-y:               $spacer / 2 ;
+$card-title-spacer-y:               $spacer * 0.5 ;
 $card-border-width:                 $border-width ;
 $card-border-radius:                .7rem ;
 $card-border-color:                 rgba($black, .125) ;
@@ -1067,7 +1067,7 @@ $card-bg:                           $white ;
 
 $card-img-overlay-padding:          $spacer ;
 
-$card-group-margin:                 $grid-gutter-width / 2 ;
+$card-group-margin:                 $grid-gutter-width * 0.5 ;
 
 // Accordion
 $accordion-padding-y:                     1rem ;
@@ -1109,8 +1109,8 @@ $tooltip-color:                     $white ;
 $tooltip-bg:                        $black ;
 $tooltip-border-radius:             $border-radius ;
 $tooltip-opacity:                   .9 ;
-$tooltip-padding-y:                 $spacer / 4 ;
-$tooltip-padding-x:                 $spacer / 2 ;
+$tooltip-padding-y:                 $spacer * 0.25 ;
+$tooltip-padding-x:                 $spacer * 0.5 ;
 $tooltip-margin:                    0 ;
 
 $tooltip-arrow-width:               .8rem ;
@@ -1264,7 +1264,7 @@ $list-group-border-color:           rgba($black, .125) ;
 $list-group-border-width:           $border-width ;
 $list-group-border-radius:          $border-radius ;
 
-$list-group-item-padding-y:         $spacer / 2 ;
+$list-group-item-padding-y:         $spacer * 0.5 ;
 $list-group-item-padding-x:         $spacer ;
 $list-group-item-bg-scale:          -80% ;
 $list-group-item-color-scale:       40% ;
