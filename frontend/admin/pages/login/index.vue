@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="form-group position-relative has-icon-left mb-4">
-              <validation-provider v-slot="{ errors }" rules="required|limit:8,20">
+              <validation-provider v-slot="{ errors }" rules="required|limit:4,20">
                 <input type="password" class="form-control form-control-xl" placeholder="Password" name="비밀번호" v-model="password" />
                 <span>{{ errors[0] }}</span>
               </validation-provider>
@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import { loginApi } from '~/apis';
+
 export default {
   name: 'LoginPage',
   layout: 'none',
@@ -65,10 +67,16 @@ export default {
       password: '',
     };
   },
+  mounted() {
+    console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV);
+    console.log('process.env.BASE_URL : ' + process.env.BASE_URL);
+  },
   methods: {
-    login() {
+    async login() {
       console.log('userId : ' + this.userId);
       console.log('password : ' + this.password);
+      const result = await loginApi.findUser(this.userId, this.password);
+      console.log('result:' + JSON.stringify(result));
       // this.$router.push('/');
     },
   },

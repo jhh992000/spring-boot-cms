@@ -55,6 +55,10 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
+    '@nuxtjs/component-cache',
+    'vue-sweetalert2/nuxt',
     [
       'nuxt-lazy-load',
       {
@@ -79,9 +83,6 @@ export default {
         },
       },
     ],
-    '@nuxtjs/axios',
-    '@nuxtjs/component-cache',
-    'vue-sweetalert2/nuxt',
   ],
 
   axios: {

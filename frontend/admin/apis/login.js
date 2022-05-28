@@ -1,7 +1,7 @@
 import http from './http';
 
 export const loginApi = {
-  findUser() {
-    return http.get('/api/league/maintenance');
+  findUser(username, password) {
+    return http.post('/login', { username, password });
   },
 };

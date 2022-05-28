@@ -6,7 +6,7 @@ const isLocal = () => {
 };
 
 const http = axios.create({
-  baseURL: isLocal() ? 'http://local-poker.hangame.com:8080/' : `${process.env.BASE_URL}/`,
+  baseURL: isLocal() ? 'http://localhost:8080/' : `${process.env.BASE_URL}/`,
   timeout: 3000,
   headers: {
     'Cache-Control': 'no-store, no-cache, must-revalidate',
