@@ -3,7 +3,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-          <router-link to="/"><img data-src="~assets/images/logo/logo.png" v-lazy-load alt="Logo" srcset=""></router-link>
+          <router-link to="/"><img src="~assets/images/logo/logo.png" v-lazy-load alt="Logo" srcset=""></router-link>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -121,7 +121,10 @@ export default {
     }
 
     // Scroll into active sidebar
-    document.querySelector('.sidebar-item.active').scrollIntoView(false)
+    const activeSidebarItem = document.querySelector('.sidebar-item.active');
+    if (activeSidebarItem) {
+      activeSidebarItem.scrollIntoView(false);
+    }
   },
   methods: {
     subIsActive(item) {
