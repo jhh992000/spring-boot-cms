@@ -1,13 +1,12 @@
 package me.hhjeong.springbootcms.site.domain;
 
-import static me.hhjeong.springbootcms.site.domain.QSite.site;
-
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import static me.hhjeong.springbootcms.site.domain.QSite.site;
 
 @RequiredArgsConstructor
 @Repository

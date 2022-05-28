@@ -1,24 +1,13 @@
 package me.hhjeong.springbootcms.menu.domain;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import me.hhjeong.springbootcms.common.domain.BaseEntity;
 import me.hhjeong.springbootcms.security.domain.Role;
 import me.hhjeong.springbootcms.site.domain.Site;
 import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter

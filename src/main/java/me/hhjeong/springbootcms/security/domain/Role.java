@@ -1,18 +1,12 @@
 package me.hhjeong.springbootcms.security.domain;
 
+import lombok.Getter;
+import me.hhjeong.springbootcms.common.domain.BaseEntity;
+
+import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import lombok.Getter;
-import me.hhjeong.springbootcms.common.domain.BaseEntity;
 
 @Entity
 @Getter

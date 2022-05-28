@@ -1,7 +1,5 @@
 package me.hhjeong.springbootcms.menu.dto;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +8,8 @@ import me.hhjeong.springbootcms.menu.domain.Menu;
 import me.hhjeong.springbootcms.menu.domain.RoleMenu;
 import me.hhjeong.springbootcms.security.domain.Role;
 import me.hhjeong.springbootcms.site.domain.Site;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor

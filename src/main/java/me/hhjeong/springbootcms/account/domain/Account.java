@@ -1,21 +1,10 @@
 package me.hhjeong.springbootcms.account.domain;
 
-import java.util.Set;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
 import lombok.Getter;
 import me.hhjeong.springbootcms.common.domain.BaseEntity;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter

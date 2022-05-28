@@ -1,13 +1,13 @@
 package me.hhjeong.springbootcms.account.dto;
 
-import javax.validation.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.domain.AccountId;
 import me.hhjeong.springbootcms.account.domain.AccountPassword;
+
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor

@@ -1,9 +1,9 @@
 package me.hhjeong.springbootcms.security.provider;
 
+import lombok.RequiredArgsConstructor;
 import me.hhjeong.springbootcms.account.domain.Account;
 import me.hhjeong.springbootcms.account.domain.AccountRepository;
 import me.hhjeong.springbootcms.account.domain.AccountRole;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +16,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

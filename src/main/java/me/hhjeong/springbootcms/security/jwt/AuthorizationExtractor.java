@@ -1,7 +1,7 @@
 package me.hhjeong.springbootcms.security.jwt;
 
-import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 public class AuthorizationExtractor {
     public static final String AUTHORIZATION = "Authorization";
