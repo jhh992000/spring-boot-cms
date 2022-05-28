@@ -1,6 +1,6 @@
 /*
 * Mazer Nuxt, Nuxt Version of Mazer
-* 
+*
 * File: app.scss
 *
 * If you want to edit the components, just go to _variables.scss
@@ -10,7 +10,7 @@
 
 ====== TABLE OF CONTENTS =======
 1. Bootstrap & Variables Inside
-2. Bootstrap Components Override 
+2. Bootstrap Components Override
     2.1 Alert
     2.2 Avatar
     2.3 Badge
@@ -105,10 +105,10 @@
 @import "./layouts/main.scss";
 
 // // - 3.1 Auth
-// @import "./pages/auth.scss";
+@import "./pages/auth.scss";
 
 // // - 3.2 Error
-// @import "./pages/error.scss";
+@import "./pages/error.scss";
 
 // // - 3.3 Chat
 // @import "./pages/chat.scss";
@@ -117,4 +117,4 @@
 // @import "./pages/email.scss";
 
 // 4. Utilities
-@import "./utilities"
+@import "./utilities";

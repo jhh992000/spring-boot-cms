@@ -28,7 +28,7 @@ $alert-colors: (
     ),
     success: (
         text-color: #fff,
-        background-color: #4fbe87   
+        background-color: #4fbe87
     ),
     warning: (
         text-color: #fff,
@@ -1389,3 +1389,9 @@ $kbd-color:                         $white ;
 $kbd-bg:                            $gray-900 ;
 
 $pre-color:                         null ;
+
+
+// Pages
+$page-auth-bg:   $white !default;
+$page-auth-right-bg:   linear-gradient(90deg, #2d499d,#3f5491) !default;
+$page-error-bg:  #ebf3ff !default;
