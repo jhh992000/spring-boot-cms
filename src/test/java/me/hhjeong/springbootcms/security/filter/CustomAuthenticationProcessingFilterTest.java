@@ -10,7 +10,7 @@ class CustomAuthenticationProcessingFilterTest {
     @DisplayName("인증요청 메서드가 POST인지 확인")
     @Test
     void isPost() {
-        CustomAuthenticationProcessingFilter filter = new CustomAuthenticationProcessingFilter("/login");
+        CustomAuthenticationProcessingFilter filter = new CustomAuthenticationProcessingFilter("/api/login");
 
         assertThat(filter.isPost("POST")).isTrue();
         assertThat(filter.isPost("GET")).isFalse();

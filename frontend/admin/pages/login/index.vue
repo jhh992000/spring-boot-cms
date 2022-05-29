@@ -12,10 +12,10 @@
 
           <!-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> -->
 
-          <ValidationObserver tag="form" @submit.prevent="login" v-slot="{ invalid }">
+          <ValidationObserver tag="form" @submit.prevent="userLogin" v-slot="{ invalid }">
             <div class="form-group position-relative has-icon-left mb-4">
               <validation-provider v-slot="{ errors }" rules="required|limit:4,20">
-                <input type="text" class="form-control form-control-xl" placeholder="Id" name="아이디" v-model="userId" />
+                <input type="text" class="form-control form-control-xl" placeholder="Id" name="아이디" v-model="login.username" />
                 <span>{{ errors[0] }}</span>
               </validation-provider>
               <div class="form-control-icon">
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group position-relative has-icon-left mb-4">
               <validation-provider v-slot="{ errors }" rules="required|limit:4,20">
-                <input type="password" class="form-control form-control-xl" placeholder="Password" name="비밀번호" v-model="password" />
+                <input type="password" class="form-control form-control-xl" placeholder="Password" name="비밀번호" v-model="login.password" />
                 <span>{{ errors[0] }}</span>
               </validation-provider>
               <div class="form-control-icon">
@@ -56,16 +56,16 @@
 </template>
 
 <script>
-import { loginApi } from '~/apis';
 
 export default {
   name: 'LoginPage',
   layout: 'none',
   data() {
     return {
-      userId: '',
-      password: '',
-      accessToken: '',
+      login: {
+        username: '',
+        password: '',
+      },
     };
   },
   mounted() {
@@ -73,9 +73,17 @@ export default {
     console.log('process.env.BASE_URL : ' + process.env.BASE_URL);
   },
   methods: {
-    async login() {
-      this.accessToken = await loginApi.findUser(this.userId, this.password);
+    async userLogin() {
+      try {
+        const response = await this.$auth.loginWith('local', { data: this.login });
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
 
+      /*
+
+      this.accessToken = await loginApi.findUser(this.login.username, this.login.password);
       console.log('accessToken:' + JSON.stringify(this.accessToken));
 
       if (this.accessToken) {
@@ -86,6 +94,7 @@ export default {
       } else {
         alert('로그인 실패');
       }
+      */
     },
   },
 };

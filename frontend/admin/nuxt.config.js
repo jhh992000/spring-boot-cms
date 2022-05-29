@@ -56,6 +56,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy',
     ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
     '@nuxtjs/component-cache',
     'vue-sweetalert2/nuxt',
@@ -86,8 +88,42 @@ export default {
   ],
 
   axios: {
-    // extra config e.g
-    // BaseURL: 'https://link-to-API'
+    proxy: true,
+  },
+
+  proxy: {
+    '/api/': 'http://localhost:8080',
+  },
+
+  auth: {
+    // https://auth.nuxtjs.org/guide/setup/
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'accessToken',
+          maxAge: 1800,
+          global: true,
+          // type: 'Bearer'
+        },
+        refreshToken: {
+          property: 'refreshToken',
+          data: 'refreshToken',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/login', method: 'post' },
+          refresh: { url: '/api/refreshToken', method: 'post' },
+          user: { url: '/api/account/myinfo', method: 'get' },
+          logout: { url: '/api/logout', method: 'post' },
+        },
+        // autoLogout: false
+      },
+    },
   },
   // ...axiosConfig
 

@@ -1,12 +1,8 @@
 import axios from 'axios';
 import consola from 'consola';
 
-const isLocal = () => {
-  return process.env.NODE_ENV === 'local';
-};
-
 const http = axios.create({
-  baseURL: isLocal() ? 'http://localhost:8080/' : `${process.env.BASE_URL}/`,
+  baseURL: `${process.env.BASE_URL}/`,
   timeout: 3000,
   headers: {
     'Cache-Control': 'no-store, no-cache, must-revalidate',
