@@ -102,14 +102,14 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'accessToken',
-          maxAge: 1800,
+          maxAge: 60 * 30,
           global: true,
           // type: 'Bearer'
         },
         refreshToken: {
           property: 'refreshToken',
           data: 'refreshToken',
-          maxAge: 60 * 60 * 24 * 30,
+          maxAge: 60 * 60 * 24,
         },
         user: {
           property: 'user',
