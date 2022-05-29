@@ -1,0 +1,12 @@
+stages:
+  - build
+
+build:
+  stage: build
+  only:
+    - main
+  script:
+    - echo '--spring-boot-cms (main) build start--'
+    - whoami
+  tags:
+    - deploy
