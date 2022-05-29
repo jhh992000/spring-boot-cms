@@ -8,13 +8,13 @@ module.exports = {
       autorestart: true,
       watch: false,
       // max_memory_restart: '1G',
-      // pm2 start ecosystem.config.js
+      // pm2 start ecosystem.config.js --env development
       env: {
         HOST: '0.0.0.0',
         PORT: 3000,
         NODE_ENV: 'development',
       },
-      // pm2 start ecosystem.config.js --env release
+      // pm2 start ecosystem.config.js --env production
       env_release: {
         HOST: '0.0.0.0',
         PORT: 3000,
