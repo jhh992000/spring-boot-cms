@@ -96,7 +96,7 @@ export default {
   },
 
   auth: {
-    // https://auth.nuxtjs.org/guide/setup/
+    // https://auth.nuxtjs.org/
     strategies: {
       local: {
         scheme: 'refresh',
