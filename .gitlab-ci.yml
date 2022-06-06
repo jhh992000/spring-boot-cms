@@ -8,5 +8,6 @@ build:
   script:
     - echo '--spring-boot-cms (main) build start--'
     - whoami
+    - pwd
   tags:
     - production
