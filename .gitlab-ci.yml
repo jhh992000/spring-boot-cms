@@ -10,6 +10,7 @@ build:
     - whoami
     - pwd
     - cd frontend/admin
-    - docker build --tag spring-boot-cms/front-admin .
+    - docker build -t spring-boot-cms/front-admin .
+    - docker run -d -p 8080:3000 --name front-admin spring-boot-cms/front-admin:latest
   tags:
     - production
