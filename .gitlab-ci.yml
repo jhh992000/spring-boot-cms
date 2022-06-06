@@ -9,5 +9,7 @@ build:
     - echo '--spring-boot-cms (main) build start--'
     - whoami
     - pwd
+    - cd frontend/admin
+    - docker build --tag spring-boot-cms/front-admin .
   tags:
     - production
